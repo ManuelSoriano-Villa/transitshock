@@ -197,9 +197,9 @@ Active service on candidate weekdays, computed with the rule above:
 | Feed | stops | stop_times rows | Weekday trips (2026-11-04) |
 |---|---|---|---|
 | LBT | 1,873 | 821,208 | 1,914 |
-| Metro bus | 11,891 | 2,106,179 | 13,335 |
+| Metro bus | 11,892 | 2,106,179 | 13,335 |
 
-- Counts exclude the header row. Metro bus `stop_times.txt` has no trailing newline, so `wc -l` already reports the true row count for that file.
+- Counts exclude the header row. Metro bus files have no trailing newline, so for them `wc -l` already equals the true row count; for LBT subtract 1.
 - Metro bus has about 6× the stops and 2.6× the `stop_times` rows of LBT, so building and testing on LBT first keeps iteration fast.
 
 ## Data quirks found

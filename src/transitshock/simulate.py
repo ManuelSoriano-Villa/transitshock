@@ -180,3 +180,109 @@ def single_removal_damage(
         "reachable_loss": baseline["reachable_share"] - df["reachable_share"],
         "added_min": df["mean_time_min"] - baseline["mean_time_min"],
     })
+
+
+def timetable_removal_damage(
+    tt,
+    mode: str = "blocked",
+    start: str = "07:00",
+    end: str = "09:00",
+    every_min: int = 30,
+) -> pd.DataFrame:
+    """Single-stop damage on the TIMETABLE (waiting counts), one row per stop.
+
+    mode: "blocked" (nothing passes, like the static graph's node removal) or
+          "closed" (buses skip the stop).
+    Each removal re-routes every stop at every departure in [start, end); the CSA
+    queries run in parallel via numba, so all 1,853 LBT stops take a few minutes.
+
+    Columns (prefixed tt_ to sit next to the static labels):
+        tt_efficiency_loss, tt_reachable_loss, tt_added_min
+    """
+    from transitshock import csa
+    from transitshock.timetable import disrupt
+
+    key = {"blocked": "blocked_stops", "closed": "closed_stops"}[mode]
+    sources, t0s = csa.departure_grid(np.arange(tt.n_stops), start, end, every_min)
+    base = csa.summarize(csa.travel_times(tt, sources, t0s), sources, tt.n_stops)
+
+    rows = []
+    for i, node in enumerate(tt.stops):
+        removed = np.zeros(tt.n_stops, dtype=bool)
+        removed[i] = True
+        after = csa.summarize(csa.travel_times(disrupt(tt, **{key: [node]}), sources, t0s),
+                              sources, tt.n_stops, removed=removed)
+        rows.append({
+            "tt_efficiency_loss": 1 - after["efficiency"] / base["efficiency"],
+            "tt_reachable_loss": base["reachable_share"] - after["reachable_share"],
+            "tt_added_min": after["mean_time_min"] - base["mean_time_min"],
+        })
+    return pd.DataFrame(rows, index=pd.Index(tt.stops, name="node"))
+
+
+def greedy_blocking(
+    tt,
+    k: int,
+    candidates: list,
+    start: str = "07:00",
+    end: str = "09:00",
+    every_min: int = 30,
+    lazy: bool = True,
+    progress=None,
+) -> pd.DataFrame:
+    """Pick k stops to block, one at a time, each time taking the stop that hurts MOST given those already blocked.
+
+    Ranking stops one at a time (the model, or single-stop labels) ignores how
+    blockages interact: two stops on the same corridor protect the same riders.
+    Greedy search re-measures after every pick, so it finds a more damaging set.
+
+    candidates: stops to choose from (e.g. the model's top 40), to keep this fast.
+    lazy: CELF trick. A candidate's damage from the previous round is used as an
+          estimate; only the current leader is re-measured, and it's picked if it
+          stays on top. Usually 3-5x fewer evaluations. Exact for "diminishing
+          returns" damage; a heuristic otherwise (set lazy=False for plain greedy).
+    progress: optional callback(fraction_done, message) for a progress bar.
+
+    Returns one row per pick: stop, its extra damage, and the cumulative damage.
+    """
+    from transitshock import csa
+    from transitshock.timetable import disrupt
+
+    sources, t0s = csa.departure_grid(np.arange(tt.n_stops), start, end, every_min)
+    index = {s: i for i, s in enumerate(tt.stops)}
+
+    def efficiency(blocked: list) -> float:
+        removed = np.zeros(tt.n_stops, dtype=bool)
+        removed[[index[s] for s in blocked]] = True
+        minutes = csa.travel_times(disrupt(tt, blocked_stops=blocked), sources, t0s)
+        return csa.summarize(minutes, sources, tt.n_stops, removed=removed)["efficiency"]
+
+    base = efficiency([])
+    current = base
+    chosen: list = []
+    gain = {c: np.inf for c in candidates}  # estimated extra damage of adding c
+    fresh = {c: -1 for c in candidates}     # which round each estimate was measured in
+    evaluations, rows = 0, []
+    for step in range(min(k, len(candidates))):
+        while True:
+            best = max((c for c in candidates if c not in chosen), key=lambda c: gain[c])
+            if fresh[best] == step:
+                break
+            gain[best] = current - efficiency(chosen + [best])
+            fresh[best] = step
+            evaluations += 1
+            if not lazy:  # plain greedy: measure every candidate each round
+                for c in candidates:
+                    if c not in chosen and fresh[c] != step:
+                        gain[c] = current - efficiency(chosen + [c])
+                        fresh[c] = step
+                        evaluations += 1
+            if progress:
+                progress(min(1.0, (step + 0.5) / k), f"Picking stop {step + 1} of {k} ({evaluations} scenarios tested)")
+        chosen.append(best)
+        current -= gain[best]
+        rows.append({"step": step + 1, "stop": best, "extra_loss": gain[best] / base,
+                     "total_loss": 1 - current / base, "evaluations": evaluations})
+    if progress:
+        progress(1.0, f"Done: {evaluations} scenarios tested")
+    return pd.DataFrame(rows)

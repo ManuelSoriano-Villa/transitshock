@@ -1,14 +1,23 @@
 {
  "scores": {
-  "r2": 0.7604393951259591,
-  "spearman": 0.8789803200038161,
-  "top5_overlap": 0.6451612903225806
+  "static": {
+   "r2": 0.7604393951259594,
+   "spearman": 0.8789803200038161,
+   "top5_overlap": 0.6451612903225806
+  },
+  "tt": {
+   "r2": 0.5806020460657808,
+   "spearman": 0.7246953601845344,
+   "top5_overlap": 0.6021505376344086
+  }
  },
  "timings": {
-  "features_wall_s": 9.828836791995856,
-  "features_cpu_s": 9.793632,
-  "labels_wall_s": 63.41152716600482,
-  "labels_cpu_s": 572.714979
+  "features_wall_s": 9.088080958004866,
+  "features_cpu_s": 9.080153,
+  "labels_wall_s": 73.00180629199895,
+  "labels_cpu_s": 582.079065,
+  "tt_labels_wall_s": 267.7696850409993,
+  "tt_labels_cpu_s": 1155.882693
  },
  "source_graph": "lbt_20261104.gpickle"
 }

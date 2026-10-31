@@ -121,8 +121,20 @@ Numbers are converted only where needed.
 | `route_edges(G)` | For each route, the transit edges **only that route** serves. |
 | `route_outages(G)` | Removes each route's exclusive edges, one route at a time. Stops stay open. |
 | `single_removal_damage(G, workers)` | Removes **each stop on its own** and measures the loss. These are the Week 4 labels. |
+| `timetable_removal_damage(tt, mode)` | The same, measured on the timetable with waiting counted. These are the notebook 06 labels. |
+| `greedy_blocking(tt, k, candidates)` | Finds the **worst combination** of k stops to block (see below). |
 
 **Parallelism in `single_removal_damage`:** each removal is independent, so the work is spread across CPU cores with `ProcessPoolExecutor`. The `_init_worker` initializer sends the matrix to each worker **once**, instead of once per task. On 10 cores, 9.5 CPU-minutes of work finishes in about 1 minute. A test checks that the parallel and one-core results are identical.
+
+**`greedy_blocking`: the worst set of stops.**
+- **Why not just take the top 10?** Damage isn't additive. Two stops on the same corridor protect the same riders, while a stop can matter *more* once its neighbors are blocked.
+- **How greedy works:** pick one stop at a time, each time taking the candidate that adds the most damage given the ones already chosen.
+- **The lazy (CELF) trick:**
+  - Keep each candidate's damage from the last round as an estimate.
+  - Re-measure only the current leader. If it's still on top, take it; otherwise re-sort and repeat.
+  - That cuts about 500 evaluations down to about 100.
+  - It's exact when damage has diminishing returns, and a heuristic when it doesn't. `lazy=False` runs plain greedy, and a test checks that both agree on a small case.
+- **In the app:** a `progress` callback drives the progress bar, results are cached per (window, k), and the chosen stops are applied on the next rerun through `pending_blocked`. Streamlit doesn't allow changing a widget's value after it's been drawn.
 
 **Interview angle:** "Static attacks underestimated vulnerability: the top betweenness stops were clustered on one corridor, so removing more of them was redundant. Adaptive attacks, which re-rank after each round, showed the true worst case."
 
@@ -167,6 +179,12 @@ Numbers are converted only where needed.
 | `out_of_fold_predictions(df, model, groups, features)` | K-fold cross-validation, so **every stop is predicted by a model that never saw it**. With `groups`, whole neighborhoods are held out. Pass `features` (a subset) to measure what one feature adds. |
 | `compare(df, groups)` | Scores single-feature heuristics vs. trained models on the same stops. |
 | `fit(df)` | Final model (random forest by default, the best on held-out neighborhoods) trained on all stops. |
+
+**Two sets of labels** (both from `simulate.py`):
+- `efficiency_loss` is the static graph's single-stop damage (`single_removal_damage`).
+- `tt_efficiency_loss` is the same, measured on the timetable with waiting counted (`timetable_removal_damage`, about 4.5 minutes for all stops).
+
+Every function takes a `target=` argument, so the same code trains both. Notebook 06 compares them. Timetable-aware features (`features.timetable_features`) were tested there too and *didn't* help, so the final model keeps the 14 graph features.
 
 **Three ideas worth understanding:**
 1. **Log target:** damage is skewed (a few stops matter a lot). Training on `log(damage)` stops those few from dominating the fit, and `np.exp` converts predictions back.
@@ -252,9 +270,37 @@ for each connection c, in departure order (starting at t0):
 
 ## 9. `animation.py` + `app/live_buses.html`: the live map
 
-- **`trip_paths(tt, lat, lon, start, end)`:** every trip active in the hour becomes `{path: [[lon, lat], ...], timestamps: [...], color, bus}`, with timestamps in seconds since the start of the hour. Late routes are drawn red.
-- **`live_buses.html`:** a small standalone page. **deck.gl's `TripsLayer`** draws each bus as a fading trail, interpolating its position between stops from the timestamps. A `requestAnimationFrame` loop advances the clock **in the browser**, so the animation is smooth and doesn't trigger Streamlit reruns. The basemap is MapLibre with Carto's free dark style.
-- **How the app fills it in:** it replaces `__TRIPS__`, `__START__` and the other placeholders with JSON and renders the page with `st.components.v1.html`.
+**Following the streets.** GTFS `shapes.txt` gives each route's street geometry as points with a `shape_dist_traveled` (how far along the line each point is). `stop_times.txt` gives the same distance for every stop, so both share one ruler.
+- **`shape_arrays`** (in `timetable.py`) loads each shape and simplifies it with **Douglas-Peucker**: it keeps only points that move the line by more than 4 m. That takes LBT's shapes from 89K points to 5.8K.
+- **`street_path(stop_dist, stop_times, ..., shape)`** merges the stop distances with the shape points between the first and last stop.
+  - Each point's **position** is interpolated along the shape by distance (`np.interp(dist, shape_dist, shape_lat)`).
+  - Each point's **time** is interpolated between the scheduled stop times by distance traveled.
+  - So the bus drives along the real street at the speed the schedule implies.
+  - It falls back to straight lines if distances are missing or go backwards; a test covers this.
+
+**`trip_paths(...)`** turns every trip active in the hour into:
+`{bus, route, name, headsign, path, timestamps, stops: [[stop_index, t], ...], color, late}`.
+- `stops` lists the trip's stops with their times. That's what the click panels use.
+- `bus` is the original trip ID, so a blocked trip's two pieces still count as one bus.
+
+**`live_buses.html`** (deck.gl, all in the browser):
+- **`TripsLayer`** draws fading trails behind each bus.
+- **A bus-marker layer:** each frame, `position(p, t)` binary-searches the trip's timestamps and interpolates between the two surrounding path points. Those positions feed a `ScatterplotLayer` of bus markers.
+- **A stops layer:** all 1,853 stops. Blocked stops are drawn black and closed ones gray.
+- **Clicking:** `onClick` sets `selected`.
+  - **A bus** shows its route, destination, next stop and upcoming stops, and dims every other route.
+  - **A stop** shows the next buses due there, found by scanning every trip's `stops` list.
+- **Making it usable:** `pickingRadius: 6` makes tiny stops clickable, and the info panel only refreshes about 3 times a second so it stays readable.
+- **Safety:** the app embeds the data with `json.dumps(...).replace("</", "<\\/")`, so a name can never close the `<script>` tag early. Names are HTML-escaped before display. The page is rendered with `st.iframe`.
+
+**Impact on the live map:**
+- **`scenario.route_impacts(...)`** gives each route its stops' status counts, the average extra minutes, buses in the window before and after, and the delay. The bus panel shows these, so clicking a bus shows *its route's* damage.
+- **The stop panel** shows that stop's status, extra minutes and destinations lost.
+- **Stops are colored by impact:** red for cut off, orange for slower.
+- **Ghost buses:** the app animates the *normal* schedule too, and any bus that's missing from the disrupted one becomes a gray hollow ring (canceled). For late routes, an orange ring shows where the bus *should* be.
+- **The same metric cards** as the what-if tab appear above the map, because both tabs share one scenario computation (`summary`, `per_stop`, `routes_impact`) per rerun.
+
+**Click a stop in the what-if map:** `st.pydeck_chart(..., on_select="rerun")` returns the clicked stop. **Every layer needs an `id`** for Streamlit to track selections; that was the bug when clicks first did nothing. The card it shows has "Block / Close this stop" buttons that edit the scenario through `on_click` callbacks.
 
 ---
 
@@ -276,3 +322,4 @@ The notebooks *use* the package and don't define logic of their own. If you find
 | `03_robustness` | How does it fail? |
 | `04_model` | Can a model predict which stops matter? |
 | `05_timetable` | What changes when waiting for buses counts? |
+| `06_timetable_model` | Which stops are critical when waiting counts, and can the model learn it? |

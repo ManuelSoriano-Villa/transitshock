@@ -13,7 +13,7 @@ Disruptions are applied to the underlying stop events and the connections are
 rebuilt, so e.g. a closed stop is skipped (the bus drives past) rather than
 breaking the trip in two.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 import networkx as nx
 import numpy as np
@@ -35,6 +35,9 @@ class Timetable:
     foot_ptr: np.ndarray      # walking transfers in CSR form: stop s walks to
     foot_to: np.ndarray       #   foot_to[foot_ptr[s]:foot_ptr[s+1]]
     foot_time: np.ndarray     #   taking foot_time[...] seconds
+    # Only needed for drawing buses on a map (animation.py); routing ignores them.
+    trip_info: pd.DataFrame | None = None  # index = original trip code: shape_id, headsign
+    shapes: dict | None = None              # shape_id -> (dist, lat, lon) arrays along the street
 
     @property
     def n_stops(self) -> int:
@@ -84,18 +87,62 @@ def build_timetable(
 
     st = data["stop_times"]
     node = st["stop_id"].map(node_ids(data["stops"], feed))
-    trips = data["trips"].set_index("trip_id")["route_id"]
-    trip_codes, _ = pd.factorize(st["trip_id"])
+    trips = data["trips"].set_index("trip_id")
+    trip_codes, trip_ids = pd.factorize(st["trip_id"])
     events = pd.DataFrame({
         "trip": trip_codes.astype(np.int32),
         "stop": node.map(index),
         "seq": st["stop_sequence"].to_numpy(),
         "arr_s": st["arrival_s"].to_numpy(),
         "dep_s": st["departure_s"].to_numpy(),
-        "route": st["trip_id"].map(trips).to_numpy(),
+        "route": st["trip_id"].map(trips["route_id"]).to_numpy(),
+        "dist": st["shape_dist_traveled"].to_numpy(),  # how far along the street shape each stop is
     }).dropna(subset=["stop"])
     events = events.astype({"stop": np.int32, "seq": np.int32, "arr_s": np.int32, "dep_s": np.int32})
-    return timetable_from_events(events, G, walk_radius_m, walk_speed_m_s)
+
+    trip_info = trips.reindex(trip_ids)[["shape_id", "trip_headsign"]].rename(columns={"trip_headsign": "headsign"})
+    trip_info.index = pd.RangeIndex(len(trip_ids), name="trip")
+    return timetable_from_events(events, G, walk_radius_m, walk_speed_m_s,
+                                 trip_info=trip_info, shapes=shape_arrays(data.get("shapes")))
+
+
+def shape_arrays(shapes: pd.DataFrame | None, tolerance_m: float = 4.0) -> dict | None:
+    """shapes.txt -> {shape_id: (dist, lat, lon)}, simplified to drop points that don't change the drawing.
+
+    Simplification keeps each kept point's original shape_dist_traveled, so stops
+    (which are located by that same distance) still land in the right place.
+    """
+    if shapes is None or shapes.empty or shapes["shape_dist_traveled"].isna().all():
+        return None
+    out = {}
+    for shape_id, g in shapes.dropna(subset=["shape_dist_traveled"]).groupby("shape_id", sort=False):
+        lat, lon = g["shape_pt_lat"].to_numpy(), g["shape_pt_lon"].to_numpy()
+        keep = simplify_mask(lat, lon, tolerance_m)
+        out[shape_id] = (g["shape_dist_traveled"].to_numpy()[keep], lat[keep], lon[keep])
+    return out
+
+
+def simplify_mask(lat: np.ndarray, lon: np.ndarray, tolerance_m: float) -> np.ndarray:
+    """Douglas-Peucker: which points to keep so the line moves at most `tolerance_m`."""
+    x = np.radians(lon) * np.cos(np.radians(lat.mean())) * 6_371_000
+    y = np.radians(lat) * 6_371_000
+    keep = np.zeros(len(x), dtype=bool)
+    keep[[0, -1]] = True
+    stack = [(0, len(x) - 1)]
+    while stack:
+        a, b = stack.pop()
+        if b - a < 2:
+            continue
+        dx, dy = x[b] - x[a], y[b] - y[a]
+        length = np.hypot(dx, dy)
+        px, py = x[a + 1:b] - x[a], y[a + 1:b] - y[a]
+        # Distance from each in-between point to the segment a-b (or to point a if a == b).
+        dist = np.abs(dx * py - dy * px) / length if length > 0 else np.hypot(px, py)
+        i = int(np.argmax(dist))
+        if dist[i] > tolerance_m:
+            keep[a + 1 + i] = True
+            stack += [(a, a + 1 + i), (a + 1 + i, b)]
+    return keep
 
 
 def timetable_from_events(
@@ -103,6 +150,8 @@ def timetable_from_events(
     G: nx.DiGraph,
     walk_radius_m: float = WALK_RADIUS_M,
     walk_speed_m_s: float = WALK_SPEED_M_S,
+    trip_info: pd.DataFrame | None = None,
+    shapes: dict | None = None,
 ) -> Timetable:
     """Timetable from stop events (stop = index into list(G.nodes)); walking transfers come from G's coordinates.
 
@@ -115,7 +164,7 @@ def timetable_from_events(
     pairs["seconds"] = np.ceil(pairs["distance_m"] / walk_speed_m_s)
     ptr, to, secs = footpaths_csr(pairs, len(stops))
     return Timetable(stops, events, **connections_from_events(events), n_trips=int(events["trip"].max()) + 1,
-                     foot_ptr=ptr, foot_to=to, foot_time=secs)
+                     foot_ptr=ptr, foot_to=to, foot_time=secs, trip_info=trip_info, shapes=shapes)
 
 
 def disrupt(
@@ -175,5 +224,5 @@ def disrupt(
         pairs = pd.DataFrame({"u": src[keep], "v": to[keep], "seconds": secs[keep]})
         ptr, to, secs = footpaths_csr(pairs, tt.n_stops)
 
-    return Timetable(tt.stops, ev, **connections_from_events(ev), n_trips=n_trips,
-                     foot_ptr=ptr, foot_to=to, foot_time=secs)
+    return replace(tt, events=ev, **connections_from_events(ev), n_trips=n_trips,
+                   foot_ptr=ptr, foot_to=to, foot_time=secs)

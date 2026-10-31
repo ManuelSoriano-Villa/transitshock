@@ -35,18 +35,19 @@ def main() -> None:
     t = step(f"1/3 Build graph ({args.feed}, {args.date})")
     data = load_feed(ROOT / "data" / "raw" / args.feed, args.date)
     G = build_graph({args.feed: data})
+    tt = build_timetable(data, args.feed, G)
     save_graph(G, graph_path)
     print(graph_summary(G).to_string())
     print(f"({time.perf_counter() - t:.1f}s) -> {graph_path.relative_to(ROOT)}")
 
-    t = step("2/3 Features + exhaustive single-stop damage (the slow part)")
-    dataset, timings = build_dataset(G, workers=args.workers)
+    t = step("2/3 Features + exhaustive single-stop damage, static and timetable (the slow part)")
+    dataset, timings = build_dataset(G, workers=args.workers, tt=tt)
     dataset.to_csv(graph_path.with_name(graph_path.stem + "_dataset.csv"))
     pd.Series(timings).to_csv(graph_path.with_name(graph_path.stem + "_timings.csv"), header=["seconds"])
     print(f"({time.perf_counter() - t:.1f}s) {len(dataset)} stops")
 
     t = step("3/3 Export app data (timetable + model predictions with spatial CV)")
-    export_app_data(graph_path, prefix=args.feed, tt=build_timetable(data, args.feed, G))
+    export_app_data(graph_path, prefix=args.feed, tt=tt)
     print(f"({time.perf_counter() - t:.1f}s) -> app/data/{args.feed}_*")
 
 

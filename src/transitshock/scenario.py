@@ -120,13 +120,16 @@ class TimetableBaseline:
     t0s: np.ndarray
     minutes: np.ndarray  # (queries, stops), NaN = unreachable
     metrics: dict
+    window_s: tuple[int, int] = (0, 0)  # [start, end) in seconds after midnight
 
 
 def timetable_baseline(tt: Timetable, start: str = "07:00", end: str = "09:00", every_min: int = 15) -> TimetableBaseline:
     """Route from every stop at every departure time in [start, end). Compute once per window."""
     sources, t0s = csa.departure_grid(np.arange(tt.n_stops), start, end, every_min)
     minutes = csa.travel_times(tt, sources, t0s)
-    return TimetableBaseline(tt, sources, t0s, minutes, csa.summarize(minutes, sources, tt.n_stops))
+    to_s = lambda hhmm: int(hhmm[:2]) * 3600 + int(hhmm[3:5]) * 60
+    return TimetableBaseline(tt, sources, t0s, minutes, csa.summarize(minutes, sources, tt.n_stops),
+                             window_s=(to_s(start), to_s(end)))
 
 
 def timetable_impact(
@@ -184,3 +187,54 @@ def timetable_impact(
         "stops_slower": int((per_stop["status"] == "slower").sum()),
     }
     return summary, per_stop
+
+
+def route_impacts(
+    base: TimetableBaseline,
+    per_stop: pd.DataFrame,
+    stops: list = (),
+    canceled_routes: list[str] = (),
+    reduced_routes: list[str] = (),
+    delays_min: dict[str, float] | None = None,
+    blocked_stops: list = (),
+) -> pd.DataFrame:
+    """How a scenario hits each route: its stops' status (from timetable_impact) and its service in the window.
+
+    One row per route:
+        stops, closed, cut_off, slower   counts of the route's stops by status
+        added_min                        average extra minutes for trips starting at the route's open stops
+        trips_before, trips_after        buses on the route that run during the window
+        delay_min                        minutes late (if the scenario delays it)
+        change                           "canceled", "halved", "late", "affected", or "normal"
+    """
+    tt = base.tt
+    disrupted = disrupt(tt, stops, canceled_routes, reduced_routes, delays_min, blocked_stops)
+    start, end = base.window_s
+
+    def trips_in_window(events: pd.DataFrame) -> pd.Series:
+        bus = events["bus"] if "bus" in events else events["trip"]  # a blocked trip's pieces are one bus
+        running = events[(events["dep_s"] >= start) & (events["dep_s"] < end)]
+        return running.assign(bus=bus).groupby("route")["bus"].nunique()
+
+    status = per_stop["status"].to_numpy()
+    added = per_stop["added_min"].to_numpy()
+    rows = {}
+    for route, stop_idx in tt.events.groupby("route")["stop"].unique().items():
+        st = status[stop_idx]
+        open_ = st != "closed"
+        rows[route] = {
+            "stops": len(stop_idx),
+            "closed": int((st == "closed").sum()),
+            "cut_off": int((st == "cut off").sum()),
+            "slower": int((st == "slower").sum()),
+            "added_min": float(added[stop_idx][open_].mean()) if open_.any() else 0.0,
+        }
+    out = pd.DataFrame.from_dict(rows, orient="index")
+    out["trips_before"] = trips_in_window(tt.events).reindex(out.index, fill_value=0)
+    out["trips_after"] = trips_in_window(disrupted.events).reindex(out.index, fill_value=0)
+    out["delay_min"] = pd.Series(delays_min or {}, dtype=float).reindex(out.index, fill_value=0.0)
+    out["change"] = np.select(
+        [out.index.isin(canceled_routes), out.index.isin(reduced_routes), out["delay_min"] > 0,
+         (out[["closed", "cut_off", "slower"]].sum(axis=1) > 0)],
+        ["canceled", "halved", "late", "affected"], default="normal")
+    return out.rename_axis("route")

@@ -4,7 +4,7 @@ Every feature here is cheap compared with the exhaustive simulation
 (`simulate.single_removal_damage`), which is the point of the surrogate model.
 
 Run as a script to build the training dataset (features + labels) for a graph:
-    python -m transitshock.features data/processed/lbt_20261104.gpickle
+    python -m transitshock.features data/processed/lbt_20261104.gpickle --date 20261104
 """
 import argparse
 import resource
@@ -18,9 +18,9 @@ import pandas as pd
 from scipy.sparse.csgraph import dijkstra
 from scipy.spatial import cKDTree
 
-from transitshock.build_graph import EARTH_RADIUS_M, load_graph
+from transitshock.build_graph import EARTH_RADIUS_M, ROOT, load_graph
 from transitshock.metrics import to_matrix
-from transitshock.simulate import single_removal_damage
+from transitshock.simulate import single_removal_damage, timetable_removal_damage
 
 FEATURES = [
     # service
@@ -34,6 +34,38 @@ FEATURES = [
     # geography
     "dist_center_km",
 ]
+
+
+# Candidate extra features for the timetable labels (tt_efficiency_loss). Tested in notebook 06:
+# they did NOT improve the model, so the final model uses FEATURES only.
+TT_FEATURES = ["am_departures", "tt_harmonic_in", "tt_harmonic_out"]
+
+
+def timetable_features(tt, start: str = "07:00", end: str = "09:00", every_min: int = 15) -> pd.DataFrame:
+    """Per-stop features from the timetable, one CSA baseline (about 0.2 s for LBT).
+
+    am_departures:   buses leaving the stop in [start, end), i.e. how often riders get a chance to board
+    tt_harmonic_out: average of 1 / door-to-door minutes from this stop to every other (waits included)
+    tt_harmonic_in:  the same, to this stop from every other
+    """
+    from transitshock import csa
+
+    to_s = lambda hhmm: int(hhmm[:2]) * 3600 + int(hhmm[3:5]) * 60
+    ev = tt.events
+    in_window = ev[(ev["dep_s"] >= to_s(start)) & (ev["dep_s"] < to_s(end))]
+    departures = in_window.groupby("stop").size().reindex(range(tt.n_stops), fill_value=0)
+
+    sources, t0s = csa.departure_grid(np.arange(tt.n_stops), start, end, every_min)
+    with np.errstate(divide="ignore"):
+        inv = 1 / csa.travel_times(tt, sources, t0s)
+    inv[np.arange(len(inv)), sources] = np.nan  # a stop's trip to itself doesn't count
+    inv = np.nan_to_num(inv, nan=0.0, posinf=0.0)
+    per_source = pd.DataFrame(inv).groupby(sources).mean()
+    return pd.DataFrame({
+        "am_departures": departures.to_numpy(),
+        "tt_harmonic_out": per_source.mean(axis=1).to_numpy(),
+        "tt_harmonic_in": per_source.mean(axis=0).to_numpy(),
+    }, index=pd.Index(tt.stops, name="node"))
 
 
 def project_m(lat: np.ndarray, lon: np.ndarray) -> np.ndarray:
@@ -163,8 +195,11 @@ def cpu_seconds() -> float:
     return me.ru_utime + me.ru_stime + kids.ru_utime + kids.ru_stime
 
 
-def build_dataset(G: nx.DiGraph, workers: int | None = None) -> tuple[pd.DataFrame, dict[str, float]]:
+def build_dataset(G: nx.DiGraph, workers: int | None = None, tt=None) -> tuple[pd.DataFrame, dict[str, float]]:
     """Features + exhaustive labels for every stop, and how long each part took.
+
+    Pass `tt` (timetable.build_timetable output) to also compute timetable labels
+    (tt_efficiency_loss etc.: single-stop blockage damage with waiting counted).
 
     Wall time is what you wait; CPU time is the total work, i.e. roughly what it
     would take on a single core.
@@ -178,17 +213,30 @@ def build_dataset(G: nx.DiGraph, workers: int | None = None) -> tuple[pd.DataFra
         "features_wall_s": wall1 - wall0, "features_cpu_s": cpu1 - cpu0,
         "labels_wall_s": wall2 - wall1, "labels_cpu_s": cpu2 - cpu1,
     }
-    return features.join(labels), timings
+    dataset = features.join(labels)
+    if tt is not None:
+        dataset = dataset.join(timetable_features(tt)).join(timetable_removal_damage(tt))
+        wall3, cpu3 = time.perf_counter(), cpu_seconds()
+        timings.update({"tt_labels_wall_s": wall3 - wall2, "tt_labels_cpu_s": cpu3 - cpu2})
+    return dataset, timings
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build features + single-stop damage labels for a graph.")
     parser.add_argument("graph", help="path to a .gpickle from build_graph")
     parser.add_argument("--workers", type=int, default=None, help="processes for the simulation (default: all cores)")
+    parser.add_argument("--date", help="YYYYMMDD: also compute timetable labels from data/raw/<feed> (feed = graph name prefix)")
     args = parser.parse_args()
 
     path = Path(args.graph)
-    dataset, timings = build_dataset(load_graph(path), workers=args.workers)
+    G = load_graph(path)
+    tt = None
+    if args.date:
+        from transitshock.load_gtfs import load_feed
+        from transitshock.timetable import build_timetable
+        feed = path.stem.split("_")[0]
+        tt = build_timetable(load_feed(ROOT / "data" / "raw" / feed, args.date), feed, G)
+    dataset, timings = build_dataset(G, workers=args.workers, tt=tt)
     out = path.with_name(path.stem + "_dataset.csv")
     dataset.to_csv(out)
     pd.Series(timings).to_csv(path.with_name(path.stem + "_timings.csv"), header=["seconds"])

@@ -44,3 +44,25 @@ def test_frequency_cut_and_delay_scenarios():
     at.multiselect(key="delayed").set_value(["71"]).run()
     at.selectbox(key="window").set_value("Evening (8–10 PM)").run()
     assert not at.exception
+
+
+def test_critical_tab_switches_between_models():
+    from streamlit.testing.v1 import AppTest
+
+    at = AppTest.from_file(str(APP), default_timeout=120).run()
+    assert not at.exception
+    at.radio(key="crit_measure").set_value("Without waiting (static graph)").run()
+    assert not at.exception
+
+
+def test_greedy_search_toggle_blocks_k_stops():
+    from streamlit.testing.v1 import AppTest
+
+    at = AppTest.from_file(str(APP), default_timeout=300).run()
+    assert "greedy_run" not in [b.key for b in at.button]  # hidden until the toggle is on
+    at.toggle(key="greedy_on").set_value(True).run()
+    at.slider(key="greedy_k").set_value(3).run()
+    at.button(key="greedy_run").click().run()
+    assert not at.exception
+    assert len(at.multiselect(key="blocked").value) == 3
+    assert at.metric[0].value != "100.0%"

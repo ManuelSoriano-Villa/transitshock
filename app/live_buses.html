@@ -7,14 +7,30 @@
 <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
 <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet">
 <style>
-  html, body { margin: 0; height: 100%; background: #0e1117; font-family: system-ui, sans-serif; }
+  html, body { margin: 0; height: 100%; background: #0e1117; font-family: system-ui, sans-serif; color: #fafafa; }
   #map { position: absolute; inset: 0; border-radius: 8px; overflow: hidden; }
-  #hud {
-    position: absolute; top: 12px; left: 12px; z-index: 2; padding: 8px 12px; border-radius: 8px;
-    background: rgba(14, 17, 23, 0.85); color: #fafafa; font-size: 14px; line-height: 1.4;
+  .card {
+    position: absolute; z-index: 2; padding: 10px 12px; border-radius: 8px;
+    background: rgba(14, 17, 23, 0.9); font-size: 13px; line-height: 1.45; box-shadow: 0 2px 8px rgba(0,0,0,.4);
   }
+  #hud { top: 12px; left: 12px; }
   #clock { font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; }
-  button {
+  #hint { color: #a0a0a8; margin-top: 2px; }
+  #legend { margin-top: 6px; color: #cfd2d8; font-size: 12px; line-height: 1.6; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; box-sizing: border-box; }
+  #panel .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 10px; margin: 4px 0 6px; }
+  #panel .grid b { font-size: 15px; }
+  #panel .label { color: #a0a0a8; font-size: 11px; }
+  #panel { top: 12px; right: 12px; width: 270px; max-height: calc(100% - 48px); overflow-y: auto; display: none; }
+  #panel h3 { margin: 0 24px 2px 0; font-size: 15px; }
+  #panel .sub { color: #a0a0a8; margin-bottom: 6px; }
+  #panel .badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 12px; margin: 2px 0 6px; }
+  #panel table { width: 100%; border-collapse: collapse; }
+  #panel td { padding: 2px 0; vertical-align: top; }
+  #panel td.t { width: 46px; font-variant-numeric: tabular-nums; color: #cfd2d8; }
+  #panel .swatch { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; }
+  #close { position: absolute; top: 6px; right: 8px; cursor: pointer; color: #a0a0a8; font-size: 16px; border: 0; background: none; }
+  button.ctl {
     margin-top: 6px; padding: 4px 10px; border: 1px solid #555; border-radius: 6px;
     background: #262730; color: #fafafa; cursor: pointer;
   }
@@ -22,23 +38,49 @@
 </head>
 <body>
 <div id="map"></div>
-<div id="hud">
+<div id="hud" class="card">
   <div id="clock">--:--</div>
   <div id="count">0 buses running</div>
-  <button id="toggle">Pause</button>
+  <button id="toggle" class="ctl">Pause</button>
+  <div id="hint">Click a bus or a stop</div>
+  <div id="legend">
+    <div><span class="dot" style="background:#d62028"></span>stop cut off</div>
+    <div><span class="dot" style="background:#f5961e"></span>stop slower</div>
+    <div><span class="dot" style="background:#000;border:1.5px solid #fff"></span>blocked / <span class="dot" style="background:#787878;border:1.5px solid #fff"></span>closed</div>
+    <div><span class="dot" style="border:2px solid #9aa0a6"></span>canceled bus</div>
+    <div><span class="dot" style="border:2px solid #ff7a50"></span>where a late bus should be</div>
+  </div>
 </div>
+<div id="panel" class="card"><button id="close" title="Close">×</button><div id="panel-body"></div></div>
 <script>
-  const TRIPS = __TRIPS__;
-  const MARKED = __MARKED__;
-  const START = __START__;   // seconds after midnight at animation time 0
-  const SPEED = __SPEED__;   // simulated seconds per real second
+  const TRIPS = __TRIPS__;     // [{bus, route, name, headsign, path, timestamps, stops: [[stopIndex, t]], color, late}]
+  const STOPS = __STOPS__;     // [{i, name, position, routes, status, impact, lost, added}]
+  const GHOSTS = __GHOSTS__;   // normal-schedule buses removed ("canceled") or where late buses should be ("scheduled")
+  const ROUTES = __ROUTES__;   // {route: {stops, closed, cut_off, slower, added_min, trips_before, trips_after, delay_min, change}}
+  const WINDOW = __WINDOW__;   // the time-of-day window the impact numbers are for
+  const DELAYS = __DELAYS__;   // {route: minutes late}
+  const START = __START__;     // seconds after midnight at animation time 0
+  const SPEED = __SPEED__;     // simulated seconds per real second
   const CENTER = __CENTER__;
   const LOOP = 3600;
 
   const pad = n => String(n).padStart(2, "0");
   const clock = t => { const s = Math.floor(START + t) % 86400; return `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s % 3600 / 60))}`; };
-  const running = t => new Set(TRIPS.filter(p => p.timestamps[0] <= t && t <= p.timestamps[p.timestamps.length - 1])
-                                    .map(p => p.bus)).size;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+  const rgb = c => `rgb(${c[0]},${c[1]},${c[2]})`;
+  const onRoad = (p, t) => p.timestamps[0] <= t && t <= p.timestamps[p.timestamps.length - 1];
+
+  // Where is bus p at time t? Binary search the timestamps, then interpolate along the path.
+  function position(p, t) {
+    const ts = p.timestamps;
+    let lo = 0, hi = ts.length - 1;
+    while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (ts[mid] <= t) lo = mid; else hi = mid; }
+    const f = ts[hi] > ts[lo] ? (t - ts[lo]) / (ts[hi] - ts[lo]) : 0;
+    const a = p.path[lo], b = p.path[hi];
+    return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f];
+  }
+
+  let time = 0, playing = true, last = performance.now(), selected = null;
 
   const deckgl = new deck.DeckGL({
     container: "map",
@@ -46,45 +88,157 @@
     mapStyle: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
     initialViewState: { longitude: CENTER[0], latitude: CENTER[1], zoom: 11, pitch: 0, bearing: 0 },
     controller: true,
+    pickingRadius: 6,  // stops are tiny; let clicks within 6 px count
+    getTooltip: ({object, layer}) => {
+      if (!object || !layer) return null;
+      if (layer.id === "buses") return `${object.p.name}\n→ ${object.p.headsign || "—"}`;
+      if (layer.id === "ghosts") return object.p.kind === "canceled"
+        ? `Canceled: ${object.p.name}` : `Scheduled position: ${object.p.name} (running ${DELAYS[object.p.route]} min late)`;
+      if (layer.id === "trails" || layer.id === "stops") return object.name;
+      return null;
+    },
+    onClick: info => {
+      if (!info.object) selected = null;
+      else if (info.layer.id === "buses") selected = {kind: "bus", bus: info.object.p.bus, route: info.object.p.route};
+      else if (info.layer.id === "ghosts") selected = {kind: "route", route: info.object.p.route};
+      else if (info.layer.id === "trails") selected = {kind: "bus", bus: info.object.bus, route: info.object.route};
+      else if (info.layer.id === "stops") selected = {kind: "stop", i: info.object.i};
+      render(true);
+    },
   });
 
-  let time = 0, playing = true, last = performance.now();
   document.getElementById("toggle").onclick = e => {
     playing = !playing;
     e.target.textContent = playing ? "Pause" : "Play";
     last = performance.now();
   };
+  document.getElementById("close").onclick = () => { selected = null; render(true); };
 
-  function render() {
+  const CHANGE = {canceled: ["Canceled", "#5a1f7a"], halved: ["Every other trip dropped", "#1e4f8a"],
+                  late: ["Running late", "#7a2a17"], affected: ["Affected", "#6b4e16"], normal: ["No impact", "#2f3a2f"]};
+
+  function routeImpact(route) {
+    const r = ROUTES[route];
+    if (!r) return "";
+    const [label, color] = CHANGE[r.change] || CHANGE.normal;
+    const trips = r.trips_before === r.trips_after ? `${r.trips_after}` : `${r.trips_before} → <b>${r.trips_after}</b>`;
+    return `<div style="margin-top:8px;font-weight:600">Route impact <span class="label">(${esc(WINDOW)})</span></div>
+      <span class="badge" style="background:${color}">${label}${r.delay_min ? `: ${r.delay_min} min` : ""}</span>
+      <div class="grid">
+        <div><div class="label">buses in window</div>${trips}</div>
+        <div><div class="label">avg extra minutes</div><b>${r.added_min >= 0.05 ? "+" : ""}${r.added_min.toFixed(1)}</b></div>
+        <div><div class="label">stops cut off</div><b style="color:${r.cut_off ? "#ff6b6b" : "inherit"}">${r.cut_off}</b> / ${r.stops}</div>
+        <div><div class="label">stops slower</div><b style="color:${r.slower ? "#f5a623" : "inherit"}">${r.slower}</b> / ${r.stops}</div>
+        <div><div class="label">blocked or closed</div><b>${r.closed}</b> / ${r.stops}</div>
+      </div>`;
+  }
+
+  function routePanel(sel) {
+    const sample = TRIPS.find(p => p.route === sel.route) || GHOSTS.find(p => p.route === sel.route);
+    return `<h3>${esc(sample ? sample.name : sel.route)}</h3>${routeImpact(sel.route)}`;
+  }
+
+  function busPanel(sel) {
+    const pieces = TRIPS.filter(p => p.bus === sel.bus);
+    if (!pieces.length) return null;
+    const p = pieces.find(q => onRoad(q, time)) || pieces[0];
+    const next = p.stops.find(([, t]) => t >= time);
+    const lastStop = p.stops[p.stops.length - 1];
+    const status = !onRoad(p, time)
+      ? (time < p.timestamps[0] ? `Not started yet: leaves ${clock(p.timestamps[0])}` : "Finished this trip")
+      : next ? `Next stop: <b>${esc(STOPS[next[0]].name)}</b> at ${clock(next[1])}` : "Arriving at last stop";
+    const late = DELAYS[p.route] ? `<span class="badge" style="background:#7a2a17">Running ${DELAYS[p.route]} min late</span>` : "";
+    const upcoming = p.stops.filter(([, t]) => t >= time).slice(0, 8)
+      .map(([s, t]) => `<tr><td class="t">${clock(t)}</td><td>${esc(STOPS[s].name)}</td></tr>`).join("");
+    return `<h3><span class="swatch" style="background:${rgb(p.color)}"></span>${esc(p.name)}</h3>
+      <div class="sub">→ ${esc(p.headsign || "—")}</div>${late}
+      <div>${status}</div>
+      <div class="sub" style="margin-top:4px">Ends at ${esc(STOPS[lastStop[0]].name)}, ${clock(lastStop[1])}</div>
+      ${routeImpact(p.route)}
+      ${upcoming ? `<div style="margin-top:6px;font-weight:600">Upcoming stops</div><table>${upcoming}</table>` : ""}`;
+  }
+
+  function stopPanel(sel) {
+    const s = STOPS[sel.i];
+    const badge = s.status === "blocked" ? `<span class="badge" style="background:#333;border:1px solid #fff">Blocked: nothing passes</span>`
+                : s.status === "closed" ? `<span class="badge" style="background:#555">Closed: buses skip it</span>` : "";
+    const arrivals = [];
+    for (const p of TRIPS) for (const [i, t] of p.stops) if (i === sel.i && t >= time) arrivals.push({p, t});
+    arrivals.sort((a, b) => a.t - b.t);
+    const rows = arrivals.slice(0, 8).map(({p, t}) =>
+      `<tr><td class="t">${clock(t)}</td><td><span class="swatch" style="background:${rgb(p.color)}"></span>${esc(p.name)}
+       <span style="color:#a0a0a8">→ ${esc(p.headsign || "—")}</span>${p.late ? ' <span style="color:#ff7a50">late</span>' : ""}</td></tr>`).join("");
+    const none = s.status ? "No buses stop here in this scenario." : "No more buses this hour.";
+    const impactColor = {"cut off": "#ff6b6b", "slower": "#f5a623"}[s.impact] || "inherit";
+    const impact = s.status ? "" : `<div style="margin-top:2px;font-weight:600">Impact <span class="label">(${esc(WINDOW)})</span></div>
+      <div class="grid">
+        <div><div class="label">status</div><b style="color:${impactColor}">${esc(s.impact)}</b></div>
+        <div><div class="label">avg extra minutes</div><b>${s.added >= 0.05 ? "+" : ""}${s.added.toFixed(1)}</b></div>
+        <div><div class="label">destinations lost</div><b>${s.lost.toFixed(0)}</b></div>
+      </div>`;
+    return `<h3>${esc(s.name)}</h3><div class="sub">Routes: ${esc(s.routes || "—")}</div>${badge}${impact}
+      <div style="margin-top:4px;font-weight:600">Next buses</div>
+      ${rows ? `<table>${rows}</table>` : `<div class="sub">${none}</div>`}`;
+  }
+
+  let panelAt = 0;
+  function render(forcePanel = false) {
+    const now = TRIPS.filter(p => onRoad(p, time)).map(p => ({p, position: position(p, time)}));
+    const ghostsNow = GHOSTS.filter(p => onRoad(p, time)).map(p => ({p, position: position(p, time)}));
+    const focusRoute = selected && (selected.kind === "bus" || selected.kind === "route") ? selected.route : null;
+    const focusBus = selected && selected.kind === "bus" ? selected.bus : null;
+    const focusStop = selected && selected.kind === "stop" ? selected.i : null;
+    const dim = c => [c[0], c[1], c[2], 45];
     deckgl.setProps({
       layers: [
         new deck.TripsLayer({
-          id: "buses",
-          data: TRIPS,
-          getPath: d => d.path,
-          getTimestamps: d => d.timestamps,
-          getColor: d => d.color,
-          widthMinPixels: 3,
-          capRounded: true,
-          jointRounded: true,
-          trailLength: 240,
-          fadeTrail: true,
+          id: "trails", data: TRIPS, pickable: true,
+          getPath: d => d.path, getTimestamps: d => d.timestamps,
+          getColor: d => focusRoute && d.route !== focusRoute ? dim(d.color) : d.color,
+          updateTriggers: {getColor: [focusRoute]},
+          widthMinPixels: 3, capRounded: true, jointRounded: true, trailLength: 240, fadeTrail: true,
           currentTime: time,
         }),
         new deck.ScatterplotLayer({
-          id: "disrupted-stops",
-          data: MARKED,
+          id: "stops", data: STOPS, pickable: true, radiusUnits: "pixels", stroked: true,
           getPosition: d => d.position,
-          getFillColor: d => d.kind === "blocked" ? [0, 0, 0] : [130, 130, 130],
-          getLineColor: [255, 255, 255],
-          lineWidthMinPixels: 2,
-          stroked: true,
-          radiusMinPixels: 6,
+          getRadius: d => d.i === focusStop ? 7 : d.status ? 6 : d.impact === "cut off" ? 4 : d.impact === "slower" ? 3.5 : 2.5,
+          getFillColor: d => d.status === "blocked" ? [0, 0, 0] : d.status === "closed" ? [120, 120, 120]
+                           : d.i === focusStop ? [255, 255, 255]
+                           : d.impact === "cut off" ? [214, 32, 40] : d.impact === "slower" ? [245, 150, 30]
+                           : [190, 190, 200, 150],
+          getLineColor: d => d.status || d.i === focusStop ? [255, 255, 255] : [0, 0, 0, 0],
+          lineWidthMinPixels: 1.5,
+          updateTriggers: {getRadius: [focusStop], getFillColor: [focusStop], getLineColor: [focusStop]},
+        }),
+        new deck.ScatterplotLayer({
+          id: "ghosts", data: ghostsNow, pickable: true, radiusUnits: "pixels", stroked: true, filled: false,
+          getPosition: d => d.position, getRadius: 6, lineWidthMinPixels: 2,
+          getLineColor: d => d.p.kind === "canceled" ? [154, 160, 166, 220] : [255, 122, 80, 230],
+        }),
+        new deck.ScatterplotLayer({
+          id: "buses", data: now, pickable: true, radiusUnits: "pixels", stroked: true,
+          getPosition: d => d.position,
+          getRadius: d => d.p.bus === focusBus ? 8 : 4.5,
+          getFillColor: d => focusRoute && d.p.route !== focusRoute ? dim(d.p.color) : d.p.color,
+          getLineColor: d => d.p.bus === focusBus ? [255, 255, 255] : [20, 20, 20, 200],
+          lineWidthMinPixels: 1.2,
+          updateTriggers: {getRadius: [focusBus], getFillColor: [focusRoute], getLineColor: [focusBus]},
         }),
       ],
     });
     document.getElementById("clock").textContent = clock(time);
-    document.getElementById("count").textContent = `${running(time)} buses running`;
+    const canceled = ghostsNow.filter(d => d.p.kind === "canceled").length;
+    document.getElementById("count").textContent = `${new Set(now.map(d => d.p.bus)).size} buses running`
+      + (canceled ? ` · ${canceled} canceled` : "");
+    // Refresh the info panel a few times a second (not every frame), so it stays readable.
+    if (!forcePanel && performance.now() - panelAt < 300) return;
+    panelAt = performance.now();
+    const panel = document.getElementById("panel");
+    const html = !selected ? null : selected.kind === "bus" ? busPanel(selected)
+               : selected.kind === "route" ? routePanel(selected) : stopPanel(selected);
+    panel.style.display = html ? "block" : "none";
+    if (html) document.getElementById("panel-body").innerHTML = html;
   }
 
   function tick(now) {
@@ -95,7 +249,7 @@
     last = now;
     requestAnimationFrame(tick);
   }
-  render();
+  render(true);
   requestAnimationFrame(tick);
 </script>
 </body>

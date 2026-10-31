@@ -7,7 +7,8 @@ import pandas as pd
 COLUMNS = {
     "stops": ["stop_id", "stop_name", "stop_lat", "stop_lon", "location_type", "parent_station"],
     "routes": ["route_id", "route_short_name", "route_long_name", "route_type", "route_color"],
-    "trips": ["route_id", "service_id", "trip_id", "direction_id", "shape_id"],
+    "trips": ["route_id", "service_id", "trip_id", "direction_id", "shape_id", "trip_headsign"],
+    "shapes": ["shape_id", "shape_pt_lat", "shape_pt_lon", "shape_pt_sequence", "shape_dist_traveled"],
     "stop_times": [
         "trip_id", "arrival_time", "departure_time", "stop_id",
         "stop_sequence", "timepoint", "shape_dist_traveled",
@@ -95,6 +96,14 @@ def clean_stop_times(stop_times: pd.DataFrame) -> pd.DataFrame:
     return stop_times.sort_values(["trip_id", "stop_sequence"]).reset_index(drop=True)
 
 
+def clean_shapes(shapes: pd.DataFrame) -> pd.DataFrame:
+    """Street geometry: numeric coordinates and distances, in drawing order. Empty if the feed has none."""
+    shapes = shapes.copy()
+    for col in ["shape_pt_lat", "shape_pt_lon", "shape_pt_sequence", "shape_dist_traveled"]:
+        shapes[col] = pd.to_numeric(shapes[col], errors="coerce")
+    return shapes.sort_values(["shape_id", "shape_pt_sequence"]).reset_index(drop=True)
+
+
 def load_feed(feed_dir: str | Path, date: str) -> dict[str, pd.DataFrame]:
     """Return stops, routes, trips, and stop_times filtered to one service day.
 
@@ -120,4 +129,5 @@ def load_feed(feed_dir: str | Path, date: str) -> dict[str, pd.DataFrame]:
         "routes": read_table(feed_dir, "routes"),
         "trips": trips,
         "stop_times": stop_times,
+        "shapes": clean_shapes(read_table(feed_dir, "shapes")),
     }

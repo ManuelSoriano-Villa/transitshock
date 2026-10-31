@@ -49,9 +49,16 @@ def read_graph_csv(out_dir: Path, prefix: str) -> nx.DiGraph:
 
 
 def write_timetable(tt: Timetable, out_dir: Path, prefix: str) -> None:
-    """Stop events -> <prefix>_events.csv.gz (stops by node ID, so the file doesn't depend on node order)."""
+    """Timetable -> <prefix>_events.csv.gz (stops by node ID, so the file doesn't depend on node order),
+    plus <prefix>_trips.csv and <prefix>_shapes.csv.gz when the timetable has street shapes."""
     events = tt.events.assign(stop=[tt.stops[i] for i in tt.events["stop"]])
     events.to_csv(out_dir / f"{prefix}_events.csv.gz", index=False)
+    if tt.trip_info is not None:
+        tt.trip_info.to_csv(out_dir / f"{prefix}_trips.csv")
+    if tt.shapes:
+        rows = [pd.DataFrame({"shape_id": sid, "dist": d, "lat": la, "lon": lo})
+                for sid, (d, la, lo) in tt.shapes.items()]
+        pd.concat(rows).to_csv(out_dir / f"{prefix}_shapes.csv.gz", index=False, float_format="%.6f")
 
 
 def read_timetable(out_dir: Path, prefix: str, G: nx.DiGraph) -> Timetable:
@@ -59,24 +66,44 @@ def read_timetable(out_dir: Path, prefix: str, G: nx.DiGraph) -> Timetable:
     events = pd.read_csv(out_dir / f"{prefix}_events.csv.gz", dtype={"route": str})
     index = {node: i for i, node in enumerate(G.nodes)}
     events["stop"] = events["stop"].map(index).astype(np.int32)
+    trip_info = shapes = None
+    if (out_dir / f"{prefix}_trips.csv").exists():
+        trip_info = pd.read_csv(out_dir / f"{prefix}_trips.csv", index_col="trip",
+                                dtype={"shape_id": str, "headsign": str})
+    if (out_dir / f"{prefix}_shapes.csv.gz").exists():
+        sh = pd.read_csv(out_dir / f"{prefix}_shapes.csv.gz", dtype={"shape_id": str})
+        shapes = {sid: (g["dist"].to_numpy(), g["lat"].to_numpy(), g["lon"].to_numpy())
+                  for sid, g in sh.groupby("shape_id", sort=False)}
     return timetable_from_events(events.astype({"trip": np.int32, "seq": np.int32,
-                                                "arr_s": np.int32, "dep_s": np.int32}), G)
+                                                "arr_s": np.int32, "dep_s": np.int32}), G,
+                                 trip_info=trip_info, shapes=shapes)
 
 
 def critical_table(dataset: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
-    """Out-of-fold (spatial CV) predictions for every stop, plus the overall scores."""
-    from transitshock.model import MODELS, TARGET, out_of_fold_predictions, score, spatial_groups
+    """Out-of-fold (spatial CV) predictions for every stop, plus the overall scores.
 
-    pred = out_of_fold_predictions(dataset, MODELS["random_forest"], groups=spatial_groups(dataset))
-    table = pd.DataFrame({
-        "efficiency_loss": dataset[TARGET],
-        "reachable_loss": dataset["reachable_loss"],
-        "predicted": pred,
-        "true_rank": dataset[TARGET].rank(ascending=False, method="first").astype(int),
-        "predicted_rank": pd.Series(pred, index=dataset.index).rank(ascending=False, method="first").astype(int),
-        "type": np.where(dataset["reachable_loss"] > 2 / len(dataset) + 1e-9, "cuts off stops", "slows trips"),
-    }, index=dataset.index)
-    scores = {k: float(v) for k, v in score(dataset[TARGET], pred).items()}
+    Always includes the static model (efficiency_loss). If the dataset has timetable
+    labels (tt_efficiency_loss: blockage damage with waiting counted), a second model
+    is trained on those, and its columns are prefixed tt_.
+    """
+    from transitshock.model import MODELS, out_of_fold_predictions, score, spatial_groups
+
+    groups = spatial_groups(dataset)
+    own_pairs = 2 / len(dataset)
+    table, scores = pd.DataFrame(index=dataset.index), {}
+    labels = [("", "efficiency_loss", "reachable_loss"), ("tt_", "tt_efficiency_loss", "tt_reachable_loss")]
+    for prefix, target, reachable in labels:
+        if target not in dataset:
+            continue
+        pred = out_of_fold_predictions(dataset, MODELS["random_forest"], target=target, groups=groups)
+        table[f"{prefix}efficiency_loss"] = dataset[target]
+        table[f"{prefix}reachable_loss"] = dataset[reachable]
+        table[f"{prefix}predicted"] = pred
+        table[f"{prefix}true_rank"] = dataset[target].rank(ascending=False, method="first").astype(int)
+        table[f"{prefix}predicted_rank"] = pd.Series(pred, index=dataset.index).rank(
+            ascending=False, method="first").astype(int)
+        table[f"{prefix}type"] = np.where(dataset[reachable] > own_pairs + 1e-9, "cuts off stops", "slows trips")
+        scores[prefix.rstrip("_") or "static"] = {k: float(v) for k, v in score(dataset[target], pred).items()}
     return table, scores
 
 

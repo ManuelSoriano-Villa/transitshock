@@ -188,3 +188,85 @@ def test_blocked_trip_pieces_count_as_one_bus(tt):
     # T1 (A-B-C) loses B and splits into A and C pieces with one stop each, so neither is drawn;
     # nothing is double-counted.
     assert buses_running(paths, 1500) == 1
+
+
+def test_timetable_removal_damage(tt):
+    from transitshock.simulate import timetable_removal_damage
+
+    dmg = timetable_removal_damage(tt, "blocked", "07:55", "08:05", every_min=5)
+    assert list(dmg.index) == STOPS
+    # Blocking C (the transfer point) strands D and E from A and B; blocking D (a dead end) only loses D.
+    assert dmg.loc["C", "tt_efficiency_loss"] > dmg.loc["D", "tt_efficiency_loss"] > 0
+    assert dmg.loc["C", "tt_reachable_loss"] > dmg.loc["D", "tt_reachable_loss"]
+    closed = timetable_removal_damage(tt, "closed", "07:55", "08:05", every_min=5)
+    assert closed.loc["B", "tt_efficiency_loss"] <= dmg.loc["B", "tt_efficiency_loss"]  # skipping is milder
+
+
+def test_street_path_follows_shape_and_interpolates_time():
+    from transitshock.animation import street_path
+
+    # A shape that bends: east 1 mile, then north 1 mile. Stops at the start and the end.
+    shape = (np.array([0.0, 0.5, 1.0, 1.5, 2.0]),
+             np.array([33.0, 33.0, 33.0, 33.01, 33.02]),
+             np.array([-118.02, -118.01, -118.0, -118.0, -118.0]))
+    path, times = street_path(np.array([0.0, 2.0]), np.array([0, 400]),
+                              np.array([33.0, 33.02]), np.array([-118.02, -118.0]), shape)
+    assert len(path) == 5  # both stops plus the 3 shape points between them
+    assert path[2] == [-118.0, 33.0]  # the corner is kept
+    assert times == [0, 100, 200, 300, 400]  # time grows with distance traveled
+
+
+def test_street_path_falls_back_when_distances_go_backwards():
+    from transitshock.animation import street_path
+
+    shape = (np.array([0.0, 1.0]), np.array([33.0, 33.1]), np.array([-118.0, -118.0]))
+    assert street_path(np.array([1.0, 0.5]), np.array([0, 60]), np.zeros(2), np.zeros(2), shape) is None
+    assert street_path(np.array([0.0, np.nan]), np.array([0, 60]), np.zeros(2), np.zeros(2), shape) is None
+
+
+def test_simplify_mask_drops_collinear_points():
+    from transitshock.timetable import simplify_mask
+
+    lat = np.array([33.0, 33.001, 33.002, 33.003, 33.003])
+    lon = np.array([-118.0, -118.0, -118.0, -118.0, -117.99])  # straight north, then a turn east
+    keep = simplify_mask(lat, lon, tolerance_m=1.0)
+    assert keep.tolist() == [True, False, False, True, True]
+
+
+def test_greedy_blocking_picks_the_transfer_point_first(tt):
+    from transitshock.simulate import greedy_blocking
+
+    result = greedy_blocking(tt, 2, candidates=["A", "B", "C", "D", "E"], start="07:55", end="08:05", every_min=5)
+    assert result["stop"].iloc[0] == "C"  # C is the only way to D and E
+    assert result["total_loss"].is_monotonic_increasing
+    assert result["extra_loss"].iloc[0] >= result["extra_loss"].iloc[1]
+
+
+def test_lazy_and_plain_greedy_agree_on_small_case(tt):
+    from transitshock.simulate import greedy_blocking
+
+    kwargs = dict(candidates=["A", "B", "C", "D", "E"], start="07:55", end="08:05", every_min=5)
+    lazy = greedy_blocking(tt, 3, lazy=True, **kwargs)
+    plain = greedy_blocking(tt, 3, lazy=False, **kwargs)
+    assert lazy["stop"].tolist() == plain["stop"].tolist()
+    assert lazy["evaluations"].iloc[-1] <= plain["evaluations"].iloc[-1]
+
+
+def test_route_impacts(tt):
+    from transitshock.scenario import route_impacts, timetable_baseline, timetable_impact
+
+    base = timetable_baseline(tt, "07:55", "08:56", every_min=30)
+    assert base.window_s == (hm("07:55"), hm("08:56"))
+    kw = dict(canceled_routes=["2"], blocked_stops=["B"])
+    _, per_stop = timetable_impact(base, **kw)
+    routes = route_impacts(base, per_stop, **kw)
+    assert routes.loc["2", "change"] == "canceled"
+    assert routes.loc["2", "trips_before"] == 2 and routes.loc["2", "trips_after"] == 0
+    assert routes.loc["1", "closed"] == 1  # B is on route 1
+    assert routes.loc["1", "change"] == "affected"
+    # Route 1's trips are split at B but are still the same 2 buses.
+    assert routes.loc["1", "trips_after"] == routes.loc["1", "trips_before"] == 2
+
+    _, per_stop = timetable_impact(base, delays_min={"1": 7})
+    late = route_impacts(base, per_stop, delays_min={"1": 7})
+    assert late.loc["1", "change"] == "late" and late.loc["1", "delay_min"] == 7

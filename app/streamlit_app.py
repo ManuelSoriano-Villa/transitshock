@@ -3,8 +3,11 @@
 Run from the repo root:
     streamlit run app/streamlit_app.py
 
-Needs the graph and model dataset in data/processed/ (see README for the build commands).
+Reads the small committed files in app/data/ (written by `python -m transitshock.app_data`),
+so it runs without the raw GTFS feeds or scikit-learn. That's what lets it deploy as-is.
 """
+import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -12,14 +15,15 @@ import pandas as pd
 import pydeck as pdk
 import streamlit as st
 
-from transitshock.build_graph import load_graph
-from transitshock.model import MODELS, TARGET, out_of_fold_predictions, score, spatial_groups
-from transitshock.scenario import baseline, impact
-
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data" / "processed"
-GRAPH_PATH = DATA / "lbt_20261104.gpickle"
-DATASET_PATH = DATA / "lbt_20261104_dataset.csv"
+sys.path.insert(0, str(ROOT / "src"))  # import the package without installing it (for hosting)
+
+from transitshock.app_data import read_graph_csv  # noqa: E402
+from transitshock.scenario import baseline, impact  # noqa: E402
+
+DATA = Path(__file__).resolve().parent / "data"
+PREFIX = "lbt"
+TARGET = "efficiency_loss"
 REPO_URL = "https://github.com/ManuelSoriano-Villa/transitshock"
 
 STATUS_COLORS = {
@@ -37,7 +41,7 @@ st.set_page_config(page_title="TransitShock", page_icon="🚌", layout="wide")
 
 @st.cache_resource
 def load_network():
-    G = load_graph(GRAPH_PATH)
+    G = read_graph_csv(DATA, PREFIX)
     return G, baseline(G)
 
 
@@ -53,27 +57,24 @@ def load_edges(_G) -> pd.DataFrame:
 
 
 @st.cache_data
-def load_predictions() -> pd.DataFrame:
-    """Model predictions for every stop, each made by a model that never saw that stop's neighborhood."""
-    df = pd.read_csv(DATASET_PATH, index_col="node")
-    df["predicted"] = out_of_fold_predictions(df, MODELS["random_forest"], groups=spatial_groups(df))
-    df["true_rank"] = df[TARGET].rank(ascending=False).astype(int)
-    df["predicted_rank"] = df["predicted"].rank(ascending=False, method="first").astype(int)
-    df["type"] = np.where(df["reachable_loss"] > 2 / len(df) + 1e-9, "cuts off stops", "slows trips")
-    return df
+def load_predictions() -> tuple[pd.DataFrame, dict]:
+    """Model predictions for every stop (each from a model that never saw that stop's neighborhood)."""
+    return pd.read_csv(DATA / f"{PREFIX}_critical.csv", index_col="node"), \
+        json.loads((DATA / f"{PREFIX}_meta.json").read_text())
 
 
-if not GRAPH_PATH.exists() or not DATASET_PATH.exists():
+if not (DATA / f"{PREFIX}_nodes.csv").exists():
     st.error(
-        "Missing data. From the repo root, run:\n\n"
-        "```\npython -m transitshock.build_graph lbt --date 20261104\n"
-        "python -m transitshock.features data/processed/lbt_20261104.gpickle\n```"
+        "Missing app/data/. From the repo root, run:\n\n"
+        "```\npython scripts/run_pipeline.py\n```"
     )
     st.stop()
 
 G, BASE = load_network()
 EDGES = load_edges(G)
-PRED = load_predictions()
+PRED, META = load_predictions()
+PRED["name"] = [G.nodes[n]["name"] for n in PRED.index]
+PRED["trips_per_day"] = [G.nodes[n]["trips_per_day"] for n in PRED.index]
 ROUTE_NAMES = G.graph["route_names"]["lbt"]
 STOP_LABELS = {n: f"{G.nodes[n]['name']} ({n.split(':')[1]})" for n in sorted(G, key=lambda n: G.nodes[n]["name"])}
 
@@ -171,13 +172,14 @@ with tab_whatif:
         st.info("Nothing closed yet. Try a preset in the sidebar.")
 
 with tab_critical:
+    t = META["timings"]
     st.markdown(
         "Which single stop closures hurt the network most? The exact answer means closing each stop and "
-        "recomputing every fastest path, about **570 CPU-seconds** for LBT. The model predicts it from cheap "
-        "graph features in about **9 seconds**. Every prediction below comes from a model that **never saw that "
-        "stop's neighborhood** during training."
+        f"recomputing every fastest path, about **{t['labels_cpu_s']:.0f} CPU-seconds** for LBT. The model predicts "
+        f"it from cheap graph features in about **{t['features_cpu_s']:.0f} seconds**. Every prediction below comes "
+        "from a model that **never saw that stop's neighborhood** during training."
     )
-    s = score(PRED[TARGET], PRED["predicted"])
+    s = META["scores"]
     m1, m2, m3 = st.columns(3)
     m1.metric("Spearman ρ", f"{s['spearman']:.2f}")
     m2.metric("Top-5% found", f"{100 * s['top5_overlap']:.0f}%")

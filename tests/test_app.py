@@ -1,15 +1,14 @@
-"""Smoke test: the Streamlit app runs end to end (skipped if the data hasn't been built)."""
+"""Smoke tests: the Streamlit app runs end to end on the committed app/data files."""
 from pathlib import Path
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app" / "streamlit_app.py"
-DATA = ROOT / "data" / "processed"
+DATA = ROOT / "app" / "data"
 
 pytestmark = pytest.mark.skipif(
-    not (DATA / "lbt_20261104.gpickle").exists() or not (DATA / "lbt_20261104_dataset.csv").exists(),
-    reason="build the LBT graph and dataset first",
+    not (DATA / "lbt_nodes.csv").exists(), reason="export app data first: python scripts/run_pipeline.py"
 )
 
 

@@ -1,0 +1,8 @@
+# Lean dependencies for the hosted demo (Streamlit Community Cloud reads this file).
+# The full development environment is in the repo-root requirements.txt.
+streamlit
+pydeck
+pandas
+numpy
+scipy
+networkx

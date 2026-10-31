@@ -1,0 +1,1854 @@
+node,routes,modes,name,lat,lon,trips_per_day,n_routes,feed
+lbt:0002,"46,51",bus,Long Beach Blvd & 8th NE,33.776887,-118.18922,110,2,lbt
+lbt:0004,"46,51",bus,Long Beach Blvd & 10th NE,33.779377,-118.189199,110,2,lbt
+lbt:0005,51,bus,Long Beach Blvd & Anaheim NE,33.783125,-118.189196,64,1,lbt
+lbt:0006,51,bus,Long Beach Blvd & 16th NE,33.787367,-118.189157,64,1,lbt
+lbt:0008,"171,175",bus,PCH & Locust NE,33.789935,-118.19095,52,2,lbt
+lbt:0009,"171,175",bus,PCH & Pacific NW,33.789914,-118.194307,52,2,lbt
+lbt:0011,"171,175",bus,PCH & Magnolia NW,33.789962,-118.198496,52,2,lbt
+lbt:0012,"171,175",bus,PCH & Maine NW,33.789952,-118.201007,52,2,lbt
+lbt:0013,41,bus,Harbor & PCH NE,33.790258,-118.210417,36,1,lbt
+lbt:0014,41,bus,Harbor & 19th NE,33.791851,-118.210431,36,1,lbt
+lbt:0015,41,bus,Easy & 20th NE,33.793663,-118.209955,36,1,lbt
+lbt:0016,41,bus,Easy & 21st NE,33.795487,-118.210002,36,1,lbt
+lbt:0017,41,bus,Easy & Hill NE,33.797219,-118.20995,36,1,lbt
+lbt:0018,41,bus,Easy & 23rd NE,33.799081,-118.210001,36,1,lbt
+lbt:0019,41,bus,Easy & Burnett NE,33.800846,-118.209943,36,1,lbt
+lbt:0020,41,bus,Easy & 25th NE,33.802676,-118.209948,36,1,lbt
+lbt:0021,41,bus,Easy & Willow NE,33.804657,-118.209985,36,1,lbt
+lbt:0022,41,bus,Easy & 27th NE,33.806295,-118.209947,36,1,lbt
+lbt:0023,41,bus,Easy & 28th NE,33.808116,-118.209945,36,1,lbt
+lbt:0024,41,bus,Easy & 29th NE,33.809927,-118.209936,36,1,lbt
+lbt:0025,41,bus,Easy & Spring NE,33.811856,-118.21,36,1,lbt
+lbt:0026,41,bus,Easy & 32nd NE,33.815506,-118.209928,36,1,lbt
+lbt:0027,41,bus,Easy & 33rd NE,33.817302,-118.209994,36,1,lbt
+lbt:0028,41,bus,Easy & 34th SE,33.81869,-118.210011,36,1,lbt
+lbt:0029,41,bus,Delta & Taper NE,33.819836,-118.211087,36,1,lbt
+lbt:0031,"191,8",bus,Wardlow & Santa Fe NW,33.824485,-118.215945,56,2,lbt
+lbt:0032,41,bus,Delta & Wardlow SW,33.823444,-118.211172,38,1,lbt
+lbt:0033,41,bus,Delta & Arlington SW,33.821208,-118.211159,38,1,lbt
+lbt:0034,41,bus,Delta & 34th NW,33.819097,-118.211171,38,1,lbt
+lbt:0036,41,bus,Easy & 33rd SW,33.816873,-118.210085,38,1,lbt
+lbt:0037,41,bus,Easy & 32nd SW,33.815046,-118.210074,38,1,lbt
+lbt:0038,41,bus,Easy & Spring SW,33.811433,-118.210088,38,1,lbt
+lbt:0039,41,bus,Easy & 29th SW,33.809647,-118.2101,38,1,lbt
+lbt:0040,41,bus,Easy & 28th SW,33.807814,-118.210109,38,1,lbt
+lbt:0041,41,bus,Easy & 27th SW,33.806006,-118.210084,38,1,lbt
+lbt:0042,41,bus,Easy & Willow SW,33.80403,-118.210063,38,1,lbt
+lbt:0043,41,bus,Easy & 25th SW,33.802401,-118.210075,38,1,lbt
+lbt:0044,41,bus,Easy & Burnett SW,33.800631,-118.210068,38,1,lbt
+lbt:0045,41,bus,Easy & 23rd SW,33.798765,-118.210096,38,1,lbt
+lbt:0046,41,bus,Easy & Hill SW,33.796853,-118.210078,38,1,lbt
+lbt:0047,41,bus,Easy & 21st SW,33.795108,-118.210097,38,1,lbt
+lbt:0048,41,bus,Harbor & 20th SW,33.79328,-118.210592,38,1,lbt
+lbt:0049,41,bus,Harbor & 19th SW,33.791433,-118.210588,38,1,lbt
+lbt:0050,"171,175",bus,PCH & Harbor SW,33.789792,-118.210694,48,2,lbt
+lbt:0051,"171,175",bus,PCH & Oregon SE,33.789782,-118.200727,48,2,lbt
+lbt:0052,"171,175",bus,PCH & Henderson SE,33.789771,-118.197436,48,2,lbt
+lbt:0054,"171,172,173,174,175",bus,PCH & Pacific SE,33.789761,-118.193365,115,5,lbt
+lbt:0057,51,bus,Long Beach Blvd & PCH SW,33.789414,-118.189583,61,1,lbt
+lbt:0058,51,bus,Long Beach Blvd & 16th SW,33.786791,-118.18959,61,1,lbt
+lbt:0059,51,bus,Long Beach Blvd & 15th SW,33.785038,-118.189566,61,1,lbt
+lbt:0060,"46,51",bus,Long Beach Blvd & Anaheim SW,33.781885,-118.189605,107,2,lbt
+lbt:0062,"46,51",bus,Long Beach Blvd & 10th NW,33.779159,-118.189565,107,2,lbt
+lbt:0063,"46,51",bus,Long Beach Blvd & 8th SW,33.776111,-118.189589,107,2,lbt
+lbt:0065,"181,191,192",bus,3rd & Cedar NE,33.770585,-118.194627,82,3,lbt
+lbt:0068,"191,192",bus,Magnolia & 3rd NE,33.770802,-118.198,67,2,lbt
+lbt:0070,"181,191,192",bus,Magnolia & 5th NE,33.773094,-118.198002,82,3,lbt
+lbt:0072,"181,191,192",bus,Magnolia & 7th NE,33.775589,-118.198024,82,3,lbt
+lbt:0074,"181,191,192",bus,Magnolia & 9th NE,33.778018,-118.19802,82,3,lbt
+lbt:0076,"181,191,192",bus,Magnolia & 11th NE,33.780428,-118.198023,82,3,lbt
+lbt:0078,"191,192,41",bus,Anaheim & Oregon NE,33.78269,-118.200838,103,3,lbt
+lbt:0079,"191,192,41",bus,Anaheim & Caspian NW,33.782868,-118.212481,103,3,lbt
+lbt:0081,"191,192,41",bus,Santa Fe & Cowles NE,33.78497,-118.215399,103,3,lbt
+lbt:0082,"191,192,41",bus,Santa Fe & 16th NE,33.787572,-118.215389,103,3,lbt
+lbt:0083,"191,192",bus,Santa Fe & PCH NE,33.790183,-118.215379,67,2,lbt
+lbt:0084,"191,192",bus,Santa Fe & 19th NE,33.791944,-118.215364,67,2,lbt
+lbt:0085,"191,192",bus,Santa Fe & 20th NE,33.793736,-118.215315,67,2,lbt
+lbt:0086,"191,192",bus,Santa Fe & Hill NE,33.797676,-118.215356,67,2,lbt
+lbt:0087,"191,192",bus,Santa Fe & 23rd NE,33.799215,-118.215315,67,2,lbt
+lbt:0088,"191,192",bus,Santa Fe & 25th SE,33.802098,-118.215314,67,2,lbt
+lbt:0089,"101,103,104",bus,Santa Fe & 25th NE,33.802677,-118.215312,155,3,lbt
+lbt:0090,"191,192",bus,Santa Fe & Willow NE,33.805045,-118.215314,67,2,lbt
+lbt:0091,"191,192",bus,Santa Fe & La Vere E,33.806648,-118.215372,67,2,lbt
+lbt:0093,"191,192",bus,Santa Fe & Columbia NE,33.809352,-118.215366,67,2,lbt
+lbt:0095,"191,192",bus,Santa Fe & Spring NE,33.811896,-118.215326,67,2,lbt
+lbt:0096,"191,192",bus,Santa Fe & 31st NE,33.814254,-118.215356,67,2,lbt
+lbt:0097,"191,192",bus,Santa Fe & 33rd SE,33.816993,-118.215382,67,2,lbt
+lbt:0098,"191,192",bus,Santa Fe & 34th NE,33.819107,-118.215326,67,2,lbt
+lbt:0099,"191,192",bus,Santa Fe & Arlington NE,33.82156,-118.215384,67,2,lbt
+lbt:0100,192,bus,Santa Fe & Wardlow NE,33.825028,-118.215393,33,1,lbt
+lbt:0103,192,bus,Via Oro & Hughes Way NE,33.829055,-118.212469,33,1,lbt
+lbt:0104,"191,192,41",bus,Santa Fe & Anaheim NE,33.783022,-118.215416,103,3,lbt
+lbt:0106,"191,8",bus,Wardlow & Webster NW,33.824458,-118.220264,56,2,lbt
+lbt:0107,191,bus,McHelen & Wardlow NE,33.824658,-118.22223,34,1,lbt
+lbt:0108,191,bus,McHelen & 221st NE,33.826749,-118.222239,34,1,lbt
+lbt:0109,191,bus,McHelen & 220th NE,33.828329,-118.222257,34,1,lbt
+lbt:0110,191,bus,McHelen & 219th NE,33.829525,-118.222161,34,1,lbt
+lbt:0111,191,bus,Bataan & Carson SE,33.83158,-118.223375,34,1,lbt
+lbt:0112,"191,4",bus,Carson & Harbor View SE,33.831705,-118.221432,57,2,lbt
+lbt:0113,"191,192,4",bus,Santa Fe & Carson NE,33.832116,-118.216678,90,3,lbt
+lbt:0114,"191,192,4",bus,Santa Fe & Madison SE,33.834466,-118.215895,90,3,lbt
+lbt:0115,"191,192,4",bus,Santa Fe & Van Buren NE,33.837141,-118.21489,90,3,lbt
+lbt:0121,8,bus,Wardlow & Santa Fe SE,33.824225,-118.215117,23,1,lbt
+lbt:0123,"191,4",bus,Carson & Harbor View NW,33.831803,-118.221976,58,2,lbt
+lbt:0124,191,bus,Bataan & Carson SW,33.831487,-118.223477,34,1,lbt
+lbt:0125,191,bus,McHelen & 219th SW,33.829263,-118.222308,34,1,lbt
+lbt:0126,191,bus,McHelen & 220th SW,33.827977,-118.222404,34,1,lbt
+lbt:0127,191,bus,McHelen & 221st SW,33.826565,-118.222377,34,1,lbt
+lbt:0129,"191,8",bus,Wardlow & Webster SE,33.824228,-118.219827,57,2,lbt
+lbt:0131,"191,192",bus,Santa Fe & Wardlow SW,33.824066,-118.215588,66,2,lbt
+lbt:0132,192,bus,Hughes Way & Via Oro NW,33.828698,-118.213194,32,1,lbt
+lbt:0134,192,bus,Santa Fe & Warnock SW,33.825862,-118.215991,32,1,lbt
+lbt:0135,"191,192",bus,Santa Fe & Arlington SW,33.821161,-118.215587,66,2,lbt
+lbt:0136,"191,192",bus,Santa Fe & 34th SW,33.818449,-118.215574,66,2,lbt
+lbt:0137,"191,192",bus,Santa Fe & 33rd W,33.816864,-118.215652,66,2,lbt
+lbt:0138,"191,192",bus,Santa Fe & 31st SW,33.813844,-118.215578,66,2,lbt
+lbt:0139,"191,192",bus,Santa Fe & Spring SW,33.811426,-118.215575,66,2,lbt
+lbt:0140,"191,192",bus,Santa Fe & Columbia SW,33.808911,-118.215605,66,2,lbt
+lbt:0142,"191,192",bus,Santa Fe & La Vere SW,33.806405,-118.215599,66,2,lbt
+lbt:0143,"191,192",bus,Santa Fe & Willow SW,33.804064,-118.215553,66,2,lbt
+lbt:0144,"191,192",bus,Santa Fe & 25th SW,33.802259,-118.215597,66,2,lbt
+lbt:0145,"191,192",bus,Santa Fe & Burnett SW,33.800575,-118.215557,66,2,lbt
+lbt:0146,"191,192",bus,Santa Fe & 23rd SW,33.798723,-118.215579,66,2,lbt
+lbt:0147,"191,192",bus,Santa Fe & Hill SW,33.796917,-118.215548,66,2,lbt
+lbt:0148,"191,192",bus,Santa Fe & 21st NW,33.795422,-118.215584,66,2,lbt
+lbt:0150,"191,192",bus,Santa Fe & 19th SW,33.791633,-118.215584,66,2,lbt
+lbt:0151,"191,192,41",bus,Santa Fe & PCH SW,33.789391,-118.215601,104,3,lbt
+lbt:0152,"191,192,41",bus,Santa Fe & 16th NW,33.787149,-118.215635,104,3,lbt
+lbt:0153,"191,192,41",bus,Santa Fe & Cowles SW,33.784442,-118.215638,104,3,lbt
+lbt:0154,"191,192,41",bus,Anaheim & Santa Fe SE,33.782583,-118.215064,104,3,lbt
+lbt:0155,"191,192,41",bus,Anaheim & Harbor SW,33.782624,-118.210588,104,3,lbt
+lbt:0156,"191,192,41",bus,Anaheim & Oregon SE,33.782622,-118.200595,104,3,lbt
+lbt:0157,"181,191,192",bus,Magnolia & Anaheim SW,33.782499,-118.198153,82,3,lbt
+lbt:0158,"181,191,192",bus,Magnolia & 11th SW,33.77996,-118.198137,82,3,lbt
+lbt:0160,"181,191,192",bus,Magnolia & 9th SW,33.777537,-118.198154,82,3,lbt
+lbt:0162,"181,191,192",bus,Magnolia & 7th SW,33.775083,-118.198148,82,3,lbt
+lbt:0164,"181,191,192",bus,Magnolia & 5th SW,33.77275,-118.19811,82,3,lbt
+lbt:0167,"181,191,192",bus,Broadway & Magnolia SE,33.769253,-118.197812,82,3,lbt
+lbt:0169,181,bus,Broadway & Maine SE,33.769217,-118.20028,16,1,lbt
+lbt:0170,"121,21,22,61,71",bus,Ocean & Hart Pl SE,33.766679,-118.188515,213,5,lbt
+lbt:0172,"121,21,22,71",bus,Ocean & Linden SW,33.766422,-118.186433,141,4,lbt
+lbt:0173,"121,21,22",bus,Ocean & Atlantic SE,33.766226,-118.184888,114,3,lbt
+lbt:0175,"121,21,22",bus,Ocean & 1st Place SE,33.766069,-118.181173,114,3,lbt
+lbt:0176,"121,21,22",bus,Ocean & 3rd Place SE,33.765874,-118.179419,114,3,lbt
+lbt:0177,"121,21,22",bus,Ocean & 5th Place SE,33.765651,-118.177718,114,3,lbt
+lbt:0178,"121,21,22",bus,Ocean & 7th Place SE,33.765421,-118.175869,114,3,lbt
+lbt:0179,"121,21,22",bus,Ocean & 11th Place SE,33.764904,-118.172199,114,3,lbt
+lbt:0180,"21,22",bus,Cherry & Ocean NE,33.764901,-118.168286,65,2,lbt
+lbt:0181,"21,22",bus,Cherry & Broadway NE,33.767551,-118.167776,65,2,lbt
+lbt:0182,"21,22",bus,Cherry & 3rd NE,33.769246,-118.167593,65,2,lbt
+lbt:0183,"21,22",bus,Cherry & 4th NE,33.771939,-118.167593,65,2,lbt
+lbt:0184,"21,22",bus,Cherry & 7th NE,33.775651,-118.167628,65,2,lbt
+lbt:0185,"21,22",bus,Cherry & 10th NE,33.779309,-118.167606,65,2,lbt
+lbt:0186,"21,22",bus,Cherry & Anaheim NE,33.783174,-118.167596,65,2,lbt
+lbt:0187,"21,22",bus,Cherry & 14th NE,33.784642,-118.167603,65,2,lbt
+lbt:0188,"21,22",bus,Cherry & 15th NE,33.786428,-118.167613,65,2,lbt
+lbt:0189,"21,22",bus,Cherry & PCH NE,33.790248,-118.167578,65,2,lbt
+lbt:0191,"21,22",bus,Cherry & 21th NE,33.79562,-118.167608,65,2,lbt
+lbt:0192,"21,22",bus,Cherry & Hill NE,33.797634,-118.167514,65,2,lbt
+lbt:0193,"21,22",bus,Cherry & Burnett NE,33.80105,-118.167478,65,2,lbt
+lbt:0194,"21,22",bus,Cherry & Willow NE,33.804732,-118.167554,65,2,lbt
+lbt:0196,"21,22",bus,Cherry & 28th NE,33.808348,-118.167502,65,2,lbt
+lbt:0198,"131,21,22",bus,Cherry & Spring NE,33.812289,-118.167457,96,3,lbt
+lbt:0199,"131,21,22",bus,Cherry & 33rd SE,33.81677,-118.167532,96,3,lbt
+lbt:0200,"21,22",bus,Cherry & Wardlow NE,33.819174,-118.167454,65,2,lbt
+lbt:0201,"21,22",bus,Cherry & 36th NE,33.822447,-118.167425,65,2,lbt
+lbt:0202,"21,22",bus,Cherry & 37th E,33.824747,-118.16742,65,2,lbt
+lbt:0203,"21,22",bus,Cherry & Bixby NE,33.826981,-118.167447,65,2,lbt
+lbt:0205,21,bus,Cherry & Carson NE,33.832773,-118.167426,33,1,lbt
+lbt:0206,"101,103,22",bus,Carson & Cherry SE,33.832338,-118.1671,78,3,lbt
+lbt:0207,"101,103",bus,Carson & Cherry NW,33.832544,-118.168071,50,2,lbt
+lbt:0208,21,bus,Cherry & Tehachapi E,33.836847,-118.167379,33,1,lbt
+lbt:0209,21,bus,Cherry & 45th SE,33.838262,-118.167378,33,1,lbt
+lbt:0211,21,bus,Cherry & San Antonio SE,33.845976,-118.16738,33,1,lbt
+lbt:0212,21,bus,Cherry & Del Amo NE,33.847372,-118.167392,33,1,lbt
+lbt:0213,21,bus,Cherry & Denmead NE,33.851219,-118.167489,33,1,lbt
+lbt:0214,21,bus,Cherry & Candlewood NE,33.854585,-118.167703,33,1,lbt
+lbt:0215,21,bus,Cherry & 55th NE,33.856296,-118.168366,33,1,lbt
+lbt:0216,"192,21",bus,Cherry & South NE,33.860543,-118.168431,34,2,lbt
+lbt:0217,21,bus,Cherry & Hungarford NE,33.863124,-118.168491,33,1,lbt
+lbt:0218,21,bus,Cherry & 61st NE,33.865866,-118.1685,33,1,lbt
+lbt:0219,21,bus,Cherry & Harding NE,33.867685,-118.168507,33,1,lbt
+lbt:0220,21,bus,Cherry & 63rd NE,33.869851,-118.168528,33,1,lbt
+lbt:0222,21,bus,Cherry & 65th NE,33.872703,-118.168527,33,1,lbt
+lbt:0223,21,bus,Cherry & Artesia SE,33.87431,-118.168546,33,1,lbt
+lbt:0224,21,bus,Cherry & 68th NE,33.878655,-118.168579,32,1,lbt
+lbt:0225,21,bus,Garfield & Mobile Home E,33.883419,-118.168641,32,1,lbt
+lbt:0226,21,bus,Garfield & Jackson NE,33.885714,-118.168652,32,1,lbt
+lbt:0227,21,bus,Garfield & Alondra SE,33.88881,-118.168681,32,1,lbt
+lbt:0228,21,bus,Garfield & Alondra SW,33.888353,-118.168853,31,1,lbt
+lbt:0229,21,bus,Garfield & Jackson SW,33.885004,-118.168868,31,1,lbt
+lbt:0230,21,bus,Garfield & Mobile Homes W,33.883013,-118.168796,31,1,lbt
+lbt:0231,21,bus,Cherry & 68th SW,33.878044,-118.168827,32,1,lbt
+lbt:0232,21,bus,Cherry & Artesia SW,33.874186,-118.168725,32,1,lbt
+lbt:0233,21,bus,Cherry & 65th NW,33.873028,-118.168701,32,1,lbt
+lbt:0235,21,bus,Cherry & 63rd SW,33.869062,-118.168684,32,1,lbt
+lbt:0236,21,bus,Cherry & Harding SW,33.867147,-118.168665,32,1,lbt
+lbt:0237,21,bus,Cherry & 61st SW,33.865463,-118.168653,32,1,lbt
+lbt:0238,21,bus,Cherry & Hungerford SW,33.862698,-118.168637,32,1,lbt
+lbt:0239,21,bus,Cherry & South SW,33.859865,-118.168679,32,1,lbt
+lbt:0240,21,bus,Cherry & 56th SW,33.857689,-118.168668,32,1,lbt
+lbt:0241,21,bus,Cherry & 55th SW,33.855774,-118.168499,32,1,lbt
+lbt:0242,21,bus,Cherry & Market SW,33.854104,-118.167841,32,1,lbt
+lbt:0243,21,bus,Cherry & 52nd NW,33.851125,-118.167785,32,1,lbt
+lbt:0245,"191,21",bus,Cherry & San Antonio SW,33.845647,-118.167669,34,2,lbt
+lbt:0247,21,bus,Cherry & Cherry Park SW,33.840296,-118.167727,32,1,lbt
+lbt:0248,21,bus,Cherry & 45th SW,33.838191,-118.167749,32,1,lbt
+lbt:0249,21,bus,Cherry & Tehachapi SW,33.836326,-118.167766,32,1,lbt
+lbt:0250,"21,22",bus,Cherry & Carson SW,33.831831,-118.167661,64,2,lbt
+lbt:0252,"21,22",bus,Cherry & Bixby SW,33.826451,-118.167622,64,2,lbt
+lbt:0253,"21,22",bus,Cherry & 37th SW,33.824103,-118.167592,64,2,lbt
+lbt:0254,"21,22",bus,Cherry & 36th SW,33.82196,-118.167624,64,2,lbt
+lbt:0255,"131,21,22",bus,Cherry & Wardlow SW,33.818678,-118.167711,92,3,lbt
+lbt:0256,"131,21,22",bus,Cherry & 33rd SW,33.816904,-118.167779,92,3,lbt
+lbt:0257,"21,22",bus,Cherry & Spring SW,33.811461,-118.167768,64,2,lbt
+lbt:0258,"21,22",bus,Cherry & 29th SW,33.809622,-118.167755,64,2,lbt
+lbt:0259,"21,22",bus,Cherry & 28th SW,33.807762,-118.167745,64,2,lbt
+lbt:0261,"21,22",bus,Cherry & Willow SW,33.803118,-118.167742,64,2,lbt
+lbt:0262,"21,22",bus,Cherry & Burnett SW,33.800464,-118.167727,64,2,lbt
+lbt:0263,"21,22",bus,Cherry & Hill SW,33.796859,-118.167779,64,2,lbt
+lbt:0264,"21,22",bus,Cherry & 21th SW,33.795037,-118.167851,64,2,lbt
+lbt:0265,"21,22",bus,Cherry & 19th NW,33.792074,-118.167889,64,2,lbt
+lbt:0266,"21,22",bus,Cherry & PCH SW,33.789654,-118.167715,64,2,lbt
+lbt:0267,"21,22",bus,Cherry & 15th SW,33.786065,-118.167744,64,2,lbt
+lbt:0268,"21,22",bus,Cherry & 14th SW,33.784263,-118.16775,64,2,lbt
+lbt:0269,"21,22",bus,Cherry & Anaheim SW,33.782295,-118.167723,64,2,lbt
+lbt:0270,"21,22",bus,Cherry & 10th SW,33.778729,-118.16771,64,2,lbt
+lbt:0271,"21,22",bus,Cherry & 7th SW,33.775063,-118.167715,64,2,lbt
+lbt:0272,"21,22",bus,Cherry & 4th SW,33.771407,-118.167721,64,2,lbt
+lbt:0273,"21,22",bus,Cherry & 3rd SW,33.768769,-118.167731,64,2,lbt
+lbt:0274,"21,22",bus,Cherry & Broadway SW,33.76704,-118.168015,64,2,lbt
+lbt:0275,"121,21,22",bus,Ocean & Cherry NW,33.764582,-118.168755,113,3,lbt
+lbt:0276,"121,21,22",bus,Ocean & Gaviota NW,33.76508,-118.172229,113,3,lbt
+lbt:0277,"121,21,22",bus,Ocean & Esperanza NW,33.765539,-118.175829,113,3,lbt
+lbt:0278,"121,21,22",bus,Ocean & Orange NW,33.765778,-118.177606,113,3,lbt
+lbt:0279,"121,21,22",bus,Ocean & Cerritos NW,33.766025,-118.179449,113,3,lbt
+lbt:0280,"121,21,22",bus,Ocean & Bonito NW,33.766248,-118.181286,113,3,lbt
+lbt:0282,"121,21,22,61",bus,Ocean & Atlantic NW,33.766511,-118.185313,181,4,lbt
+lbt:0284,"121,21,22,61",bus,Ocean & Elm NW,33.766866,-118.188239,181,4,lbt
+lbt:0285,"101,103,22",bus,Carson & R/R Tracks SW,33.832321,-118.164484,78,3,lbt
+lbt:0286,22,bus,Paramount & Carson NE,33.832932,-118.159866,32,1,lbt
+lbt:0287,22,bus,Paramount & Village NE,33.83505,-118.159842,32,1,lbt
+lbt:0288,22,bus,Paramount & Warwood NE,33.83645,-118.159835,32,1,lbt
+lbt:0289,22,bus,Paramount & Bomberry NE,33.838565,-118.159864,32,1,lbt
+lbt:0290,22,bus,Paramount & Greentop NE,33.840007,-118.159853,32,1,lbt
+lbt:0291,22,bus,Paramount & Fairman NE,33.842097,-118.159813,32,1,lbt
+lbt:0292,22,bus,Paramount & Arbor NE,33.843305,-118.159803,32,1,lbt
+lbt:0293,22,bus,Paramount & Del Amo NE,33.847526,-118.159789,32,1,lbt
+lbt:0294,22,bus,Paramount & Hardwick NE,33.850455,-118.159767,32,1,lbt
+lbt:0295,22,bus,Candlewood & Paramount SE,33.853755,-118.159534,32,1,lbt
+lbt:0296,22,bus,Candlewood & Obispo SE,33.853782,-118.154544,32,1,lbt
+lbt:0297,22,bus,Downey & Candlewood NE,33.854347,-118.151087,32,1,lbt
+lbt:0298,22,bus,Downey & Michelson NE,33.857081,-118.151094,32,1,lbt
+lbt:0299,22,bus,Downey & St. Pancratius NE,33.858803,-118.151161,32,1,lbt
+lbt:0300,22,bus,Downey & South NE,33.860638,-118.151118,32,1,lbt
+lbt:0301,22,bus,Downey & 59th NE,33.862996,-118.151149,32,1,lbt
+lbt:0302,22,bus,Downey & La Jara NE,33.865181,-118.151146,32,1,lbt
+lbt:0303,22,bus,Downey & Harding NE,33.868236,-118.151184,32,1,lbt
+lbt:0304,22,bus,Downey & 64th NE,33.871253,-118.151203,32,1,lbt
+lbt:0305,22,bus,Downey & Artesia NE,33.875026,-118.151217,32,1,lbt
+lbt:0306,22,bus,Downey & 68th NE,33.879414,-118.151257,31,1,lbt
+lbt:0307,22,bus,Downey & 70th SE,33.882371,-118.151269,31,1,lbt
+lbt:0308,22,bus,Downey & Harrison NE,33.884017,-118.151276,31,1,lbt
+lbt:0312,61,bus,Atlantic & 1st SE,33.767864,-118.184992,72,1,lbt
+lbt:0313,61,bus,Atlantic & 4th St NW,33.771941,-118.185141,68,1,lbt
+lbt:0314,61,bus,Atlantic & 4th St NE,33.771941,-118.184996,72,1,lbt
+lbt:0315,22,bus,Downey & 70th SW,33.881752,-118.151449,32,1,lbt
+lbt:0316,22,bus,Downey & 68th NW,33.878545,-118.151437,32,1,lbt
+lbt:0317,22,bus,Downey & Artesia SW,33.874339,-118.1514,32,1,lbt
+lbt:0318,22,bus,Downey & 64th SW,33.870865,-118.15138,32,1,lbt
+lbt:0319,22,bus,Downey & Poppy SW,33.868445,-118.151321,32,1,lbt
+lbt:0320,22,bus,Downey & La Jara SW,33.864966,-118.151303,32,1,lbt
+lbt:0321,22,bus,Downey & 59th NW,33.863085,-118.151356,32,1,lbt
+lbt:0322,22,bus,Downey & South SW,33.859789,-118.151285,32,1,lbt
+lbt:0323,22,bus,Downey & Wolfe NW,33.858033,-118.151242,32,1,lbt
+lbt:0324,"111,112,22",bus,Candlewood & Downey NW,33.853895,-118.151593,65,3,lbt
+lbt:0325,"111,112,22",bus,Candlewood & Obispo NW,33.853929,-118.154985,65,3,lbt
+lbt:0326,22,bus,Paramount & Candlewood SW,33.853477,-118.159988,32,1,lbt
+lbt:0327,22,bus,Paramount & Hardwick NW,33.850292,-118.159955,32,1,lbt
+lbt:0328,22,bus,Paramount & Del Amo SW,33.846679,-118.160037,32,1,lbt
+lbt:0329,22,bus,Paramount & Arbor W,33.843488,-118.159988,32,1,lbt
+lbt:0330,22,bus,Paramount & Greentop NW,33.840007,-118.159998,32,1,lbt
+lbt:0331,22,bus,Paramount & Bomberry SW,33.838565,-118.160002,32,1,lbt
+lbt:0332,22,bus,Paramount & Warwood SW,33.836452,-118.160028,32,1,lbt
+lbt:0333,22,bus,Paramount & Village W,33.834872,-118.160031,32,1,lbt
+lbt:0334,22,bus,Paramount & Carson NW,33.832819,-118.16012,32,1,lbt
+lbt:0335,"101,103,22",bus,Carson & R/R Tracks NE,33.832544,-118.163613,82,3,lbt
+lbt:0337,61,bus,Atlantic at Broadway SW,33.769078,-118.185135,68,1,lbt
+lbt:0338,71,bus,Alamitos & 7th NE,33.775569,-118.180052,27,1,lbt
+lbt:0339,61,bus,Atlantic & 6th St SW,33.773922,-118.185119,68,1,lbt
+lbt:0340,151,bus,4th & Orange NW,33.771794,-118.176708,31,1,lbt
+lbt:0342,71,bus,Alamitos & New York SW,33.784658,-118.177403,27,1,lbt
+lbt:0344,71,bus,Alamitos & 6th SE,33.77394,-118.180565,27,1,lbt
+lbt:0345,71,bus,Alamitos & Broadway SE,33.768991,-118.182075,27,1,lbt
+lbt:0346,71,bus,Alamitos & Anaheim SW,33.782371,-118.178109,27,1,lbt
+lbt:0347,71,bus,Alamitos & 10th NE,33.779089,-118.178967,27,1,lbt
+lbt:0348,71,bus,Alamitos & 10th NW,33.779078,-118.179122,27,1,lbt
+lbt:0349,71,bus,Alamitos & 4th NE,33.771953,-118.181163,27,1,lbt
+lbt:0350,71,bus,Alamitos & 5th SW,33.772772,-118.18106,27,1,lbt
+lbt:0351,61,bus,Atlantic & Anaheim SW,33.782262,-118.185147,68,1,lbt
+lbt:0352,61,bus,Atlantic & 11th SW,33.780753,-118.185121,68,1,lbt
+lbt:0358,71,bus,Alamitos & 7th SW,33.775012,-118.18037,27,1,lbt
+lbt:0360,"172,173,174,182,91,92,93,94",bus,Pacific & 7th SW,33.775263,-118.193809,169,8,lbt
+lbt:0362,"172,173,174,182,91,92,93,94",bus,Pacific & 5th SW,33.772845,-118.193856,169,8,lbt
+lbt:0364,"172,173,174,182,51,91,92,93,94",bus,Pacific & 3rd SW,33.770208,-118.193856,230,9,lbt
+lbt:0366,121,bus,Pacific & Ocean NW,33.76744,-118.193853,44,1,lbt
+lbt:0367,121,bus,Ocean & Chestnut NW,33.767364,-118.196531,44,1,lbt
+lbt:0369,181,bus,3rd & Magnolia NW,33.770551,-118.198432,31,1,lbt
+lbt:0378,51,bus,Long Beach Blvd & 4th SW,33.771427,-118.189526,61,1,lbt
+lbt:0382,181,bus,Magnolia & Anaheim NE,33.782879,-118.198009,15,1,lbt
+lbt:0383,181,bus,Magnolia & 14th SE,33.783873,-118.198044,15,1,lbt
+lbt:0384,181,bus,Magnolia & 15th NE,33.786432,-118.198043,15,1,lbt
+lbt:0385,181,bus,Magnolia & 17th NE,33.788325,-118.198058,15,1,lbt
+lbt:0386,181,bus,Magnolia & PCH NE,33.790358,-118.198063,15,1,lbt
+lbt:0387,181,bus,Magnolia & 19th NE,33.791795,-118.198059,15,1,lbt
+lbt:0388,181,bus,Magnolia & 20th NE,33.793587,-118.198014,15,1,lbt
+lbt:0390,181,bus,Magnolia & Hill NE,33.797387,-118.198059,15,1,lbt
+lbt:0391,181,bus,Magnolia & 23rd NE,33.799217,-118.198074,15,1,lbt
+lbt:0392,181,bus,Magnolia & Burnett NE,33.801,-118.198068,15,1,lbt
+lbt:0393,181,bus,Magnolia & 25th NE,33.8028,-118.198039,15,1,lbt
+lbt:0394,181,bus,Magnolia & Willow NE,33.804717,-118.198011,15,1,lbt
+lbt:0395,181,bus,Magnolia & 27th NE,33.806416,-118.198058,15,1,lbt
+lbt:0396,181,bus,Magnolia & 28th NE,33.808175,-118.198039,15,1,lbt
+lbt:0397,181,bus,Magnolia & 29th NE,33.810052,-118.198047,15,1,lbt
+lbt:0398,181,bus,Magnolia & Spring NE,33.811937,-118.198051,15,1,lbt
+lbt:0400,181,bus,Magnolia & 32nd NE,33.815561,-118.198037,15,1,lbt
+lbt:0401,"181,41,8",bus,Wardlow & Magnolia SE,33.818892,-118.197577,74,3,lbt
+lbt:0403,"181,182",bus,Pacific & Brethren Manor W,33.817898,-118.195405,30,2,lbt
+lbt:0404,"181,182",bus,Pacific & Cedar NW,33.817009,-118.19489,30,2,lbt
+lbt:0405,181,bus,32nd & Chestnut NW,33.815322,-118.196153,16,1,lbt
+lbt:0408,181,bus,Magnolia & Spring SW,33.811423,-118.198224,16,1,lbt
+lbt:0409,181,bus,Magnolia & 29th SW,33.809609,-118.198133,16,1,lbt
+lbt:0410,181,bus,Magnolia & 28th SW,33.807864,-118.198226,16,1,lbt
+lbt:0411,181,bus,Magnolia & 27th SW,33.806048,-118.198189,16,1,lbt
+lbt:0412,181,bus,Magnolia & Willow SW,33.804094,-118.198148,16,1,lbt
+lbt:0413,181,bus,Magnolia & 25th SW,33.802363,-118.198163,16,1,lbt
+lbt:0414,181,bus,Magnolia & Burnett SW,33.800563,-118.198182,16,1,lbt
+lbt:0415,181,bus,Magnolia & 23rd SW,33.798744,-118.198191,16,1,lbt
+lbt:0416,181,bus,Magnolia & Hill SW,33.796906,-118.19816,16,1,lbt
+lbt:0418,181,bus,Magnolia & 20th SW,33.793249,-118.198191,16,1,lbt
+lbt:0419,181,bus,Magnolia & 19th SW,33.791504,-118.1982,16,1,lbt
+lbt:0420,181,bus,Magnolia & PCH SW,33.789539,-118.198192,16,1,lbt
+lbt:0421,181,bus,Magnolia & 17th SW,33.78766,-118.198214,16,1,lbt
+lbt:0422,181,bus,Magnolia & 15th SW,33.785571,-118.198206,16,1,lbt
+lbt:0423,181,bus,Magnolia & 14th SW,33.783837,-118.198169,16,1,lbt
+lbt:0424,"172,173,174,182",bus,Pacific & 7th NE,33.775703,-118.193612,82,4,lbt
+lbt:0425,"172,173,174,182",bus,Pacific & 9th NE,33.777896,-118.19368,82,4,lbt
+lbt:0426,"172,173,174,182",bus,Pacific & 10th NE,33.779231,-118.193673,82,4,lbt
+lbt:0427,"172,173,174,182",bus,Pacific & Anaheim SE,33.782246,-118.193651,82,4,lbt
+lbt:0429,"172,173,174,182",bus,Pacific & 14th NE,33.784153,-118.193655,82,4,lbt
+lbt:0430,"172,173,174,182",bus,Pacific & 15th NE,33.785537,-118.193651,82,4,lbt
+lbt:0431,"172,173,174,182",bus,Pacific & 16th NE,33.787313,-118.193652,82,4,lbt
+lbt:0432,182,bus,Pacific & PCH NE,33.790209,-118.193639,15,1,lbt
+lbt:0433,182,bus,Pacific & 19th NE,33.791929,-118.193617,15,1,lbt
+lbt:0434,182,bus,Pacific & 20th NE,33.79372,-118.193595,15,1,lbt
+lbt:0435,182,bus,Pacific & 21st NE,33.795515,-118.193591,15,1,lbt
+lbt:0436,182,bus,Pacific & Hill NE,33.797362,-118.19359,15,1,lbt
+lbt:0437,182,bus,Pacific & 23rd NE,33.799199,-118.193606,15,1,lbt
+lbt:0438,182,bus,Pacific & Burnett NE,33.801026,-118.193598,15,1,lbt
+lbt:0439,182,bus,Pacific & 25th NE,33.802832,-118.193608,15,1,lbt
+lbt:0440,182,bus,Pacific & Willow NE,33.804689,-118.193632,15,1,lbt
+lbt:0441,182,bus,Pacific & 27th NE,33.806426,-118.193667,15,1,lbt
+lbt:0442,182,bus,Pacific & 28th NE,33.808245,-118.193625,15,1,lbt
+lbt:0443,182,bus,Pacific & Spring NE,33.811773,-118.193646,15,1,lbt
+lbt:0445,182,bus,Pacific & Spring SW,33.81138,-118.193869,14,1,lbt
+lbt:0446,182,bus,Pacific & 29th SW,33.809627,-118.193862,14,1,lbt
+lbt:0447,182,bus,Pacific & 28th SW,33.807775,-118.193772,14,1,lbt
+lbt:0448,182,bus,Pacific & 27th SW,33.80599,-118.193861,14,1,lbt
+lbt:0449,182,bus,Pacific & Willow NW,33.804593,-118.193863,14,1,lbt
+lbt:0450,182,bus,Pacific & 25th SW,33.802403,-118.193871,14,1,lbt
+lbt:0451,182,bus,Pacific & Burnett SW,33.800584,-118.193867,14,1,lbt
+lbt:0452,182,bus,Pacific & 23rd SW,33.798628,-118.193856,14,1,lbt
+lbt:0453,182,bus,Pacific & Hill SW,33.796954,-118.193849,14,1,lbt
+lbt:0454,182,bus,Pacific & 21st SW,33.795157,-118.193871,14,1,lbt
+lbt:0455,182,bus,Pacific & 20th SW,33.793327,-118.193854,14,1,lbt
+lbt:0456,182,bus,Pacific & 19th SW,33.791544,-118.193846,14,1,lbt
+lbt:0457,"172,173,174,182",bus,Pacific & PCH SW,33.789494,-118.193832,81,4,lbt
+lbt:0458,"172,173,174,182",bus,Pacific & 16th SW,33.786917,-118.193836,81,4,lbt
+lbt:0459,"172,173,174,182",bus,Pacific & 15th SW,33.785122,-118.193851,81,4,lbt
+lbt:0460,"172,173,174,182",bus,Pacific & Anaheim SW,33.782294,-118.193812,81,4,lbt
+lbt:0461,"172,173,174,182",bus,Pacific & 10th SW,33.778807,-118.19378,81,4,lbt
+lbt:0462,"172,173,174,182",bus,Pacific & 9th SW,33.777566,-118.19385,81,4,lbt
+lbt:0463,"41,46",bus,Anaheim & Long Beach Blvd SE,33.782554,-118.18831,85,2,lbt
+lbt:0464,"41,46",bus,Anaheim & Linden SE,33.782559,-118.186451,85,2,lbt
+lbt:0465,"41,46",bus,Anaheim & Atlantic SE,33.782562,-118.184733,85,2,lbt
+lbt:0466,"41,46",bus,Anaheim & Olive SE,33.78256,-118.18266,85,2,lbt
+lbt:0467,"41,46",bus,Anaheim & Martin Luther King Jr SE,33.78256,-118.180475,85,2,lbt
+lbt:0468,"41,46",bus,Anaheim & Alamitos SE,33.78255,-118.177714,85,2,lbt
+lbt:0469,"41,46",bus,Anaheim & Orange SE,33.782543,-118.176203,85,2,lbt
+lbt:0471,"41,46",bus,Anaheim & Walnut SW,33.782522,-118.172374,85,2,lbt
+lbt:0472,"41,46",bus,Anaheim & Rose SE,33.782543,-118.169646,85,2,lbt
+lbt:0473,"41,46",bus,Anaheim & Cherry SE,33.782568,-118.167438,85,2,lbt
+lbt:0474,"41,46",bus,Anaheim & Dawson SE,33.782525,-118.16527,85,2,lbt
+lbt:0475,"41,46",bus,Anaheim & Junipero SE,33.78254,-118.163081,85,2,lbt
+lbt:0476,"41,46",bus,Anaheim & Molino SE,33.782543,-118.16082,85,2,lbt
+lbt:0477,"41,46",bus,Anaheim & Temple SE,33.782496,-118.15874,85,2,lbt
+lbt:0478,"41,46",bus,Anaheim & Orizaba SE,33.782537,-118.156519,85,2,lbt
+lbt:0479,"41,46",bus,Anaheim & Obispo SE,33.782524,-118.15435,85,2,lbt
+lbt:0480,"41,46",bus,Anaheim & Redondo SE,33.782536,-118.152011,85,2,lbt
+lbt:0481,"41,46",bus,Anaheim & Loma SE,33.782533,-118.14999,85,2,lbt
+lbt:0482,"41,46",bus,Anaheim & Mira Mar SE,33.782539,-118.147318,85,2,lbt
+lbt:0483,"41,46",bus,Anaheim & Termino SE,33.782555,-118.14568,85,2,lbt
+lbt:0484,"41,46",bus,Anaheim & Roswell SE,33.782536,-118.143518,85,2,lbt
+lbt:0485,"41,46",bus,Anaheim & Ximeno SE,33.782552,-118.141168,85,2,lbt
+lbt:0486,"41,46",bus,Anaheim & Quincy SW,33.782526,-118.139677,85,2,lbt
+lbt:0488,"41,46",bus,Anaheim & Argonne S,33.782525,-118.136005,85,2,lbt
+lbt:0489,"41,46",bus,Anaheim & PCH NW,33.782674,-118.133476,101,2,lbt
+lbt:0491,"41,46",bus,Anaheim & Park NW,33.782666,-118.13741,82,2,lbt
+lbt:0492,"41,46",bus,Anaheim & Lee NW,33.782655,-118.140194,82,2,lbt
+lbt:0493,"41,46",bus,Anaheim & Ximeno NW,33.782683,-118.141886,82,2,lbt
+lbt:0494,"41,46",bus,Anaheim & Roswill NW,33.782669,-118.144462,82,2,lbt
+lbt:0495,"41,46",bus,Anaheim & Termino NW,33.782673,-118.146196,82,2,lbt
+lbt:0496,"41,46",bus,Anaheim & Mira Mar NW,33.782664,-118.14851,82,2,lbt
+lbt:0497,"41,46",bus,Anaheim & Loma NW,33.782689,-118.150863,82,2,lbt
+lbt:0498,"41,46",bus,Anaheim & Redondo NW,33.78267,-118.153247,82,2,lbt
+lbt:0500,"41,46",bus,Anaheim & Orizaba NW,33.782686,-118.157036,82,2,lbt
+lbt:0501,"41,46",bus,Anaheim & Temple NW,33.782673,-118.159251,82,2,lbt
+lbt:0502,"41,46",bus,Anaheim & Molino NW,33.782681,-118.161403,82,2,lbt
+lbt:0503,"41,46",bus,Anaheim & Junipero NW,33.782661,-118.163775,82,2,lbt
+lbt:0504,"41,46",bus,Anaheim & Dawson NW,33.782708,-118.165763,82,2,lbt
+lbt:0505,"41,46",bus,Anaheim & Cherry NW,33.782721,-118.168191,82,2,lbt
+lbt:0507,"41,46",bus,Anaheim & Walnut NW,33.782706,-118.17243,82,2,lbt
+lbt:0508,"41,46",bus,Anaheim & Gundry NW,33.78269,-118.174457,82,2,lbt
+lbt:0509,"41,46",bus,Anaheim & Alamitos NE,33.782707,-118.177554,82,2,lbt
+lbt:0510,71,bus,Anaheim & Alamitos NW,33.782698,-118.178281,27,1,lbt
+lbt:0511,"41,46,71",bus,Anaheim & Martin Luther King Jr NW,33.782708,-118.180966,109,3,lbt
+lbt:0512,"41,46,71",bus,Anaheim & Olive NW,33.782716,-118.183055,109,3,lbt
+lbt:0513,"41,46",bus,Anaheim & Atlantic NW,33.782706,-118.185481,82,2,lbt
+lbt:0514,"41,46",bus,Anaheim & Linden NW,33.78272,-118.186981,82,2,lbt
+lbt:0515,"171,175",bus,Anaheim & Los Altos SE,33.783363,-118.130853,48,2,lbt
+lbt:0516,"171,175",bus,Anaheim & La Pasada SE,33.781495,-118.128612,48,2,lbt
+lbt:0518,171,bus,Bellflower & Anaheim NE,33.779872,-118.122322,36,1,lbt
+lbt:0520,"121,171,175,41,46,91,92,93,94",bus,7th & Channel SE,33.775156,-118.118211,249,9,lbt
+lbt:0527,173,bus,Atherton & Palo Verde SE,33.788602,-118.10742,31,1,lbt
+lbt:0528,173,bus,Atherton & Iroquois SE,33.788598,-118.105686,31,1,lbt
+lbt:0529,173,bus,Atherton & Vuelta Grande SE,33.788595,-118.10253,31,1,lbt
+lbt:0531,"121,171,91,92,93,94",bus,Beach Dr & Dorms S,33.78197,-118.12011,171,6,lbt
+lbt:0532,"121,171,91,92,93,94",bus,Beach Dr & W Campus S,33.781977,-118.115743,171,6,lbt
+lbt:0537,"91,92,93,94",bus,7th & VA Hospital NW,33.775446,-118.119772,88,4,lbt
+lbt:0538,"41,46",bus,PCH & Anaheim NW,33.782741,-118.133008,66,2,lbt
+lbt:0540,"171,175",bus,Bellflower & Anaheim NW,33.779604,-118.122545,51,2,lbt
+lbt:0541,"175,41,46",bus,Bellflower & Anaheim Rd SW,33.779189,-118.122541,76,3,lbt
+lbt:0542,"171,175",bus,Anaheim & La Pasada NW,33.781884,-118.128889,51,2,lbt
+lbt:0543,"171,175",bus,Los Altos & Anaheim SW,33.783454,-118.131228,51,2,lbt
+lbt:0544,"171,175",bus,Los Altos & PCH NE,33.783002,-118.1324,51,2,lbt
+lbt:0545,"121,171,91,92,93,94",bus,W Campus & Library West Side,33.77801,-118.115185,172,6,lbt
+lbt:0546,51,bus,Long Beach Blvd & PCH NE,33.790605,-118.189193,64,1,lbt
+lbt:0547,51,bus,Long Beach Blvd & 20th NE,33.794306,-118.189204,64,1,lbt
+lbt:0548,51,bus,Long Beach Blvd & Hill NE,33.797721,-118.189194,64,1,lbt
+lbt:0550,51,bus,Long Beach Blvd & Burnett NE,33.800978,-118.189225,64,1,lbt
+lbt:0552,51,bus,Long Beach Blvd & Willow NE,33.80468,-118.189213,64,1,lbt
+lbt:0553,51,bus,Long Beach Blvd & Memorial Hospital E,33.807543,-118.189278,64,1,lbt
+lbt:0554,51,bus,Long Beach Blvd & Columbia NE,33.809166,-118.189284,64,1,lbt
+lbt:0555,51,bus,Long Beach Blvd & Spring NE,33.811977,-118.189293,64,1,lbt
+lbt:0556,51,bus,Long Beach Blvd & 31st NE,33.813707,-118.189161,64,1,lbt
+lbt:0557,51,bus,Long Beach Blvd & 32nd NE,33.815456,-118.189159,64,1,lbt
+lbt:0558,51,bus,Long Beach Blvd & Wardlow NE,33.819279,-118.189199,64,1,lbt
+lbt:0559,51,bus,Long Beach Blvd & 36th NE,33.82247,-118.189265,64,1,lbt
+lbt:0560,51,bus,Long Beach Blvd & Bixby NE,33.826959,-118.189286,64,1,lbt
+lbt:0561,51,bus,Long Beach Blvd & Roosevelt NE,33.829224,-118.189288,64,1,lbt
+lbt:0562,51,bus,Long Beach Blvd & Marshall NE,33.830853,-118.189281,64,1,lbt
+lbt:0564,51,bus,Long Beach Blvd & San Antonio NE,33.835153,-118.189503,64,1,lbt
+lbt:0565,51,bus,Long Beach Blvd & 44th NE,33.837414,-118.190287,64,1,lbt
+lbt:0566,51,bus,Long Beach Blvd & 45th SE,33.839022,-118.190897,64,1,lbt
+lbt:0567,51,bus,Long Beach Blvd & 46th SE,33.840733,-118.191509,64,1,lbt
+lbt:0568,51,bus,Long Beach Blvd & 47th SE,33.842915,-118.192298,64,1,lbt
+lbt:0570,"192,51",bus,Long Beach Blvd & Del Amo NE,33.847132,-118.193876,97,2,lbt
+lbt:0571,"192,51",bus,Long Beach Blvd & 51st SE,33.848734,-118.194508,97,2,lbt
+lbt:0572,"192,51",bus,Long Beach Blvd & 52nd NE,33.850716,-118.195175,97,2,lbt
+lbt:0573,"192,51",bus,Long Beach Blvd & 53rd NE,33.852652,-118.195881,97,2,lbt
+lbt:0575,51,bus,Long Beach Blvd & Market NE,33.854495,-118.19659,64,1,lbt
+lbt:0577,51,bus,Long Beach Blvd & Ellis NE,33.857013,-118.197486,64,1,lbt
+lbt:0582,"141,51,61",bus,Artesia & Suzana SE,33.874185,-118.206786,165,3,lbt
+lbt:0584,51,bus,Long Beach Blvd & Artesia SW,33.873864,-118.202737,61,1,lbt
+lbt:0585,51,bus,Long Beach Blvd & Bort SW,33.870358,-118.201693,61,1,lbt
+lbt:0587,51,bus,Long Beach Blvd & Harcourt SW,33.867607,-118.200873,61,1,lbt
+lbt:0588,51,bus,Long Beach Blvd & Victoria NW,33.865397,-118.200206,61,1,lbt
+lbt:0589,51,bus,Long Beach Blvd & Ellis NW,33.856985,-118.197663,61,1,lbt
+lbt:0591,"192,51",bus,Long Beach Blvd & Market SW,33.853802,-118.196546,93,2,lbt
+lbt:0592,"192,51",bus,Long Beach Blvd & 53rd SW,33.852308,-118.195983,93,2,lbt
+lbt:0593,"192,51",bus,Long Beach Blvd & 52nd NW,33.850336,-118.19527,93,2,lbt
+lbt:0594,"192,51",bus,Long Beach Blvd & 51st SW,33.848617,-118.194647,93,2,lbt
+lbt:0595,51,bus,Long Beach Blvd & Del Amo SW,33.846341,-118.193828,61,1,lbt
+lbt:0597,51,bus,Long Beach Blvd & 47th NW,33.842918,-118.192567,61,1,lbt
+lbt:0598,51,bus,Long Beach Blvd & 46th NW,33.840994,-118.191856,61,1,lbt
+lbt:0599,51,bus,Long Beach Blvd & 45th SW,33.839022,-118.191119,61,1,lbt
+lbt:0600,51,bus,Long Beach Blvd & 44th NW,33.837221,-118.190471,61,1,lbt
+lbt:0601,51,bus,Long Beach Blvd & San Antonio SW,33.834146,-118.189433,61,1,lbt
+lbt:0602,51,bus,Long Beach Blvd & Marshall SW,33.8306,-118.189482,61,1,lbt
+lbt:0603,51,bus,Long Beach Blvd & Roosevelt SW,33.828788,-118.189449,61,1,lbt
+lbt:0604,51,bus,Long Beach Blvd & Bixby SW,33.826344,-118.189475,61,1,lbt
+lbt:0605,51,bus,Long Beach Blvd & Cameron SW,33.822977,-118.189456,61,1,lbt
+lbt:0606,51,bus,Long Beach Blvd & Wardlow SW,33.818567,-118.189484,61,1,lbt
+lbt:0607,51,bus,Long Beach Blvd & 31st SW,33.813052,-118.189508,61,1,lbt
+lbt:0608,51,bus,Long Beach Blvd & Spring SW,33.811288,-118.189557,61,1,lbt
+lbt:0609,51,bus,Long Beach Blvd & Columbia SW,33.80876,-118.189541,61,1,lbt
+lbt:0610,51,bus,Long Beach Blvd & Memorial Hospital W,33.807002,-118.189481,61,1,lbt
+lbt:0611,51,bus,Long Beach Blvd & Willow SW,33.804182,-118.189547,61,1,lbt
+lbt:0613,51,bus,Long Beach Blvd & Burnett SW,33.800171,-118.189538,61,1,lbt
+lbt:0615,51,bus,Long Beach Blvd & Hill SW,33.796848,-118.18955,61,1,lbt
+lbt:0616,51,bus,Long Beach Blvd & 20th NW,33.793598,-118.189539,61,1,lbt
+lbt:0617,"172,173,174,91,92,93,94",bus,7th & Long Beach Blvd NW,33.775404,-118.189893,155,7,lbt
+lbt:0618,151,bus,Elm & 1st NE,33.768239,-118.187604,30,1,lbt
+lbt:0621,151,bus,4th & Linden SE,33.771698,-118.186095,30,1,lbt
+lbt:0622,151,bus,4th & Atlantic SE,33.771648,-118.184746,30,1,lbt
+lbt:0624,151,bus,4th & Alamitos SE,33.771672,-118.181084,30,1,lbt
+lbt:0625,151,bus,4th & Bonito SE,33.771694,-118.179636,30,1,lbt
+lbt:0627,151,bus,4th & Orange SE,33.771647,-118.176247,30,1,lbt
+lbt:0629,151,bus,4th & Walnut SE,33.77165,-118.171894,30,1,lbt
+lbt:0631,151,bus,4th & Cherry SE,33.771703,-118.167422,30,1,lbt
+lbt:0632,151,bus,4th & Junipero SE,33.77171,-118.164188,30,1,lbt
+lbt:0633,151,bus,4th & Wisconsin SE,33.77167,-118.161562,30,1,lbt
+lbt:0634,151,bus,4th & Temple SE,33.771638,-118.158822,30,1,lbt
+lbt:0635,151,bus,4th & Orizaba SE,33.771704,-118.156561,30,1,lbt
+lbt:0637,151,bus,4th & Redondo SE,33.771663,-118.152277,30,1,lbt
+lbt:0639,151,bus,4th & Grand SE,33.771641,-118.14797,30,1,lbt
+lbt:0640,151,bus,4th & Termino SE,33.771687,-118.145671,30,1,lbt
+lbt:0642,151,bus,4th & Ximeno SE,33.771668,-118.141298,30,1,lbt
+lbt:0644,151,bus,4th & Park SW,33.771637,-118.137363,30,1,lbt
+lbt:0645,71,bus,Rosecrans & Spane Park SE,33.903547,-118.176732,27,1,lbt
+lbt:0647,71,bus,Rosecrans & Garfield SE,33.903544,-118.168615,27,1,lbt
+lbt:0648,"121,131",bus,2nd & Park SE,33.761458,-118.137826,77,2,lbt
+lbt:0650,"121,131",bus,2nd & Nieto SE,33.760288,-118.135212,77,2,lbt
+lbt:0652,"121,131",bus,2nd & Glendora SE,33.759159,-118.132526,77,2,lbt
+lbt:0653,"121,131",bus,2nd & Santa Ana SE,33.758652,-118.131311,77,2,lbt
+lbt:0655,"121,131",bus,2nd & Venetia SE,33.757519,-118.126829,77,2,lbt
+lbt:0657,"121,131",bus,2nd & Ravenna SE,33.756767,-118.122932,77,2,lbt
+lbt:0658,"121,131",bus,2nd & E Campo SW,33.756413,-118.12103,77,2,lbt
+lbt:0659,"121,131",bus,Marina & Seaport SW,33.756172,-118.111815,40,2,lbt
+lbt:0660,"121,131",bus,Marina & Studebaker SW,33.752704,-118.108047,40,2,lbt
+lbt:0661,"121,131",bus,Alamitos Bay Landing W,33.748248,-118.113077,40,2,lbt
+lbt:0665,171,bus,Main & PCH SW,33.744146,-118.102837,36,1,lbt
+lbt:0666,171,bus,Electric & Main NW,33.742939,-118.104191,73,1,lbt
+lbt:0668,151,bus,Colorado & Appian Way NE,33.769962,-118.134032,61,1,lbt
+lbt:0669,171,bus,Electric & 7th NW,33.744429,-118.105382,37,1,lbt
+lbt:0674,"121,131",bus,Marina & Studebaker NE,33.753547,-118.108615,42,2,lbt
+lbt:0675,"121,131",bus,2nd & Marina NW,33.75754,-118.113907,78,2,lbt
+lbt:0676,71,bus,Rosecrans & Mobile Home Park NW,33.90374,-118.175661,27,1,lbt
+lbt:0677,"121,131",bus,2nd & Ravenna NW,33.757088,-118.123601,78,2,lbt
+lbt:0678,71,bus,Rosecrans & Garfield NW,33.903752,-118.169426,27,1,lbt
+lbt:0679,"121,131",bus,2nd & Venetia NW,33.757736,-118.126921,78,2,lbt
+lbt:0680,"121,131",bus,2nd & Santa Ana NW,33.758925,-118.131561,78,2,lbt
+lbt:0681,"121,131",bus,2nd & Glendora NW,33.759491,-118.132852,78,2,lbt
+lbt:0683,"121,131",bus,2nd & Nieto NW,33.760574,-118.135397,78,2,lbt
+lbt:0685,"121,131",bus,2nd & Park NW,33.761758,-118.138087,78,2,lbt
+lbt:0688,151,bus,4th & Park NW,33.771755,-118.137448,31,1,lbt
+lbt:0690,151,bus,4th & Ximeno NW,33.771761,-118.141903,31,1,lbt
+lbt:0692,151,bus,4th & Termino NW,33.771755,-118.146237,31,1,lbt
+lbt:0693,151,bus,4th & Grand NW,33.771767,-118.148319,31,1,lbt
+lbt:0695,151,bus,4th & Redondo NW,33.771778,-118.152702,31,1,lbt
+lbt:0697,151,bus,4th & Orizaba NW,33.771772,-118.157052,31,1,lbt
+lbt:0698,151,bus,4th & Temple NW,33.771778,-118.159181,31,1,lbt
+lbt:0699,151,bus,4th & Molino NW,33.771786,-118.161411,31,1,lbt
+lbt:0700,151,bus,4th & Junipero NW,33.771759,-118.164711,31,1,lbt
+lbt:0701,151,bus,4th & Cherry NW,33.771776,-118.168038,31,1,lbt
+lbt:0703,151,bus,4th & Walnut NW,33.77179,-118.172256,31,1,lbt
+lbt:0705,151,bus,4th & Bonito NW,33.771737,-118.179866,31,1,lbt
+lbt:0706,151,bus,4th & Alamitos NW,33.771809,-118.181729,31,1,lbt
+lbt:0708,151,bus,4th & Atlantic NW,33.771779,-118.185328,31,1,lbt
+lbt:0709,151,bus,4th & Linden NW,33.771768,-118.186657,31,1,lbt
+lbt:0711,"91,92,93,94",bus,6th & Long Beach Blvd SE,33.774114,-118.18891,85,4,lbt
+lbt:0713,61,bus,Atlantic & 6th NE,33.774392,-118.184972,72,1,lbt
+lbt:0714,61,bus,Atlantic & 7th NE,33.77574,-118.184977,72,1,lbt
+lbt:0715,61,bus,Atlantic & 8th NE,33.776805,-118.184973,72,1,lbt
+lbt:0717,61,bus,Atlantic & 10th NE,33.779268,-118.184979,72,1,lbt
+lbt:0718,61,bus,Atlantic & 11th NE,33.781111,-118.184984,72,1,lbt
+lbt:0719,"61,71",bus,Atlantic & Anaheim NE,33.782765,-118.184981,99,2,lbt
+lbt:0720,61,bus,Atlantic & New York NE,33.784969,-118.184962,72,1,lbt
+lbt:0721,61,bus,Atlantic & 16th NE,33.787131,-118.18498,72,1,lbt
+lbt:0722,61,bus,Atlantic & PCH NE,33.79,-118.184967,72,1,lbt
+lbt:0724,61,bus,Atlantic & 20th NE,33.793737,-118.184962,72,1,lbt
+lbt:0726,61,bus,Atlantic & Hill NE,33.797369,-118.184983,72,1,lbt
+lbt:0728,61,bus,Atlantic & Burnett NE,33.80095,-118.184978,72,1,lbt
+lbt:0730,"101,103,61",bus,Atlantic & Willow NE,33.804761,-118.18493,118,3,lbt
+lbt:0731,"101,103,61",bus,Atlantic & Patterson NE,33.807204,-118.184929,118,3,lbt
+lbt:0732,"101,103,61",bus,Atlantic & Columbia NE,33.80902,-118.184906,118,3,lbt
+lbt:0733,"101,103,61",bus,Atlantic & 31st NE,33.813557,-118.184906,118,3,lbt
+lbt:0734,"101,103,61",bus,Atlantic & 33rd NE,33.817184,-118.184945,118,3,lbt
+lbt:0735,"101,103,61",bus,Atlantic & Wardlow NE,33.819143,-118.184931,118,3,lbt
+lbt:0736,"101,103,61",bus,Atlantic & 36th NE,33.822377,-118.184957,118,3,lbt
+lbt:0737,"101,103,61",bus,Atlantic & 37th NE,33.824512,-118.184946,118,3,lbt
+lbt:0738,"101,103,61",bus,Atlantic & Bixby SE,33.827398,-118.184881,118,3,lbt
+lbt:0739,"101,103,61",bus,Atlantic & Roosevelt NE,33.829375,-118.184875,118,3,lbt
+lbt:0740,61,bus,Atlantic & Carson NE,33.83216,-118.18489,72,1,lbt
+lbt:0742,61,bus,Atlantic & San Antonio NE,33.837727,-118.184885,72,1,lbt
+lbt:0743,61,bus,Atlantic & 45th NE,33.840159,-118.184835,72,1,lbt
+lbt:0744,61,bus,Atlantic & 46th NE,33.842993,-118.184824,72,1,lbt
+lbt:0745,61,bus,Atlantic & Del Amo NE,33.845623,-118.184807,72,1,lbt
+lbt:0746,61,bus,Atlantic & 51st NE,33.848737,-118.184772,72,1,lbt
+lbt:0747,61,bus,Atlantic & 52nd NE,33.850739,-118.184773,72,1,lbt
+lbt:0749,"192,61",bus,Atlantic & Market NE,33.854635,-118.184826,105,2,lbt
+lbt:0751,"192,61",bus,Atlantic & 56th NE,33.858349,-118.184833,105,2,lbt
+lbt:0752,61,bus,Atlantic & South NE,33.860475,-118.184854,72,1,lbt
+lbt:0753,61,bus,Atlantic & 60th NE,33.86388,-118.184903,72,1,lbt
+lbt:0754,61,bus,Atlantic & Harding NE,33.867593,-118.185162,72,1,lbt
+lbt:0756,61,bus,Atlantic & Jordan HS E,33.871418,-118.185711,72,1,lbt
+lbt:0759,151,bus,Elm & 4th SW,33.771588,-118.187769,31,1,lbt
+lbt:0768,61,bus,Atlantic & Artesia SW,33.874232,-118.186243,68,1,lbt
+lbt:0769,61,bus,Atlantic & Jordan HS W,33.870981,-118.185893,68,1,lbt
+lbt:0771,61,bus,Atlantic & Harding SW,33.867046,-118.185367,68,1,lbt
+lbt:0772,61,bus,Atlantic & 60th NW,33.863816,-118.185114,68,1,lbt
+lbt:0773,"192,61",bus,Atlantic & South SW,33.859822,-118.185095,100,2,lbt
+lbt:0774,"192,61",bus,Atlantic & 56th SW,33.857862,-118.185084,100,2,lbt
+lbt:0776,"192,61",bus,Atlantic & Market NW,33.854606,-118.18507,100,2,lbt
+lbt:0778,61,bus,Atlantic & 52nd SW,33.850195,-118.185032,68,1,lbt
+lbt:0779,61,bus,Atlantic & 51st SW,33.848393,-118.185067,68,1,lbt
+lbt:0780,61,bus,Atlantic & Del Amo SW,33.844799,-118.185115,68,1,lbt
+lbt:0781,61,bus,Atlantic & 46th SW,33.842443,-118.185104,68,1,lbt
+lbt:0782,61,bus,Atlantic & 45th SW,33.839667,-118.185139,68,1,lbt
+lbt:0783,61,bus,Atlantic & San Antonio SW,33.836258,-118.185127,68,1,lbt
+lbt:0784,61,bus,Atlantic & Burlinghall SW,33.834099,-118.185176,68,1,lbt
+lbt:0785,"101,103,61",bus,Atlantic & Carson SW,33.831452,-118.185133,118,3,lbt
+lbt:0786,"101,103,61",bus,Atlantic & Roosevelt SW,33.828724,-118.185138,118,3,lbt
+lbt:0787,"101,103,61",bus,Atlantic & Bixby SW,33.826512,-118.18513,118,3,lbt
+lbt:0788,"101,103,61",bus,Atlantic & 37th SW,33.823984,-118.185079,118,3,lbt
+lbt:0789,"101,103,61",bus,Atlantic & 36th SW,33.82197,-118.185088,118,3,lbt
+lbt:0790,"101,103,61",bus,Atlantic & Wardlow SW,33.818607,-118.185099,118,3,lbt
+lbt:0791,"101,103,61",bus,Atlantic & 31st NW,33.813675,-118.1852,118,3,lbt
+lbt:0792,"101,103,61",bus,Atlantic & Columbia SW,33.808682,-118.185189,118,3,lbt
+lbt:0794,61,bus,Atlantic & Willow SW,33.804076,-118.185091,68,1,lbt
+lbt:0796,61,bus,Atlantic & Burnett SW,33.800551,-118.185079,68,1,lbt
+lbt:0798,61,bus,Atlantic & Hill SW,33.796844,-118.185088,68,1,lbt
+lbt:0800,61,bus,Atlantic & 20th SW,33.793258,-118.185088,68,1,lbt
+lbt:0802,61,bus,Atlantic & PCH SW,33.789609,-118.185101,68,1,lbt
+lbt:0803,61,bus,Atlantic & 16th SW,33.78676,-118.185144,68,1,lbt
+lbt:0804,61,bus,Atlantic & New York SW,33.784606,-118.185182,68,1,lbt
+lbt:0805,61,bus,Atlantic & 10th SW,33.778631,-118.185101,68,1,lbt
+lbt:0807,61,bus,Atlantic & 8th SW,33.776285,-118.185151,68,1,lbt
+lbt:0808,"91,92,93,94",bus,7th & Atlantic NW,33.775405,-118.18555,88,4,lbt
+lbt:0810,71,bus,New York & Atlantic SE,33.78482,-118.184781,27,1,lbt
+lbt:0811,71,bus,New York & Martin Luther King Jr SE,33.784821,-118.180612,27,1,lbt
+lbt:0812,71,bus,New York & Cerritos SW,33.784807,-118.178102,27,1,lbt
+lbt:0813,71,bus,Alamitos & 15th NE,33.786439,-118.176707,27,1,lbt
+lbt:0814,71,bus,Orange & PCH NE,33.790107,-118.176225,27,1,lbt
+lbt:0815,71,bus,Orange & 19th NE,33.791429,-118.176233,27,1,lbt
+lbt:0816,71,bus,Orange & 20th SE,33.793401,-118.176273,27,1,lbt
+lbt:0817,71,bus,Orange & Hill NE,33.797443,-118.176281,27,1,lbt
+lbt:0818,71,bus,Orange & 23rd SE,33.798776,-118.176278,27,1,lbt
+lbt:0819,71,bus,Orange & Burnett SE,33.800666,-118.176278,27,1,lbt
+lbt:0820,71,bus,Orange & Willow SE,33.803623,-118.176281,27,1,lbt
+lbt:0822,71,bus,Orange & 29th SE,33.809673,-118.176251,27,1,lbt
+lbt:0823,71,bus,Orange & Spring NE,33.812092,-118.176226,27,1,lbt
+lbt:0824,71,bus,Orange & 32nd NE,33.815531,-118.176281,27,1,lbt
+lbt:0825,71,bus,Orange & 33rd NE,33.817303,-118.176265,27,1,lbt
+lbt:0826,71,bus,Orange & Wardlow NE,33.819134,-118.176273,27,1,lbt
+lbt:0827,71,bus,Orange & 36th NE,33.822354,-118.176268,27,1,lbt
+lbt:0828,71,bus,Orange & 37th NE,33.824446,-118.176302,27,1,lbt
+lbt:0829,71,bus,Orange & Bixby NE,33.826982,-118.176284,27,1,lbt
+lbt:0830,71,bus,Orange & Roosevelt NE,33.830175,-118.176245,27,1,lbt
+lbt:0831,71,bus,Orange & Carson NE,33.832785,-118.17626,27,1,lbt
+lbt:0832,71,bus,Orange & Tehachapi NE,33.836096,-118.176254,27,1,lbt
+lbt:0833,71,bus,Orange & Goldfield NE,33.839281,-118.176247,27,1,lbt
+lbt:0834,71,bus,Orange & San Antonio NE,33.841938,-118.176273,27,1,lbt
+lbt:0835,71,bus,Orange & E Goldfield NE,33.844202,-118.176531,27,1,lbt
+lbt:0836,71,bus,Orange & Del Amo NE,33.847287,-118.176827,27,1,lbt
+lbt:0837,71,bus,Orange & 52nd NE,33.850389,-118.177127,27,1,lbt
+lbt:0839,71,bus,Orange & Market NE,33.854676,-118.177215,27,1,lbt
+lbt:0841,71,bus,Orange & 56th NE,33.857827,-118.177218,27,1,lbt
+lbt:0842,71,bus,Orange & South NE,33.860435,-118.177227,27,1,lbt
+lbt:0843,71,bus,Orange & Hungerford NE,33.863037,-118.177276,27,1,lbt
+lbt:0844,71,bus,Orange & 61st NE,33.865744,-118.177265,27,1,lbt
+lbt:0845,71,bus,Orange & Harding NE,33.867582,-118.177278,27,1,lbt
+lbt:0847,71,bus,Orange & 64th NE,33.871188,-118.1773,27,1,lbt
+lbt:0848,71,bus,Orange & 65th NE,33.873053,-118.177311,27,1,lbt
+lbt:0849,71,bus,Orange & Artesia NE,33.874919,-118.177321,27,1,lbt
+lbt:0851,71,bus,Orange & 68th NE,33.878441,-118.177349,27,1,lbt
+lbt:0852,71,bus,Orange & 70th SE,33.881568,-118.177365,27,1,lbt
+lbt:0853,71,bus,Orange & Jackson NE,33.885811,-118.177381,27,1,lbt
+lbt:0854,71,bus,Orange & Alondra NE,33.889722,-118.177358,27,1,lbt
+lbt:0855,71,bus,Orange & Myrrh NE,33.892953,-118.177438,27,1,lbt
+lbt:0856,71,bus,Orange & Somerset Blvd NE,33.896687,-118.177451,27,1,lbt
+lbt:0857,71,bus,Orange & San Vicente NE,33.899861,-118.177485,27,1,lbt
+lbt:0858,71,bus,Orange & San Carlos NE,33.902216,-118.177496,27,1,lbt
+lbt:0861,71,bus,Orange & San Carlos NW,33.901946,-118.177654,27,1,lbt
+lbt:0862,71,bus,Orange & San Vicente NW,33.899443,-118.177639,27,1,lbt
+lbt:0863,71,bus,Orange & Somerset Blvd SW,33.895983,-118.177625,27,1,lbt
+lbt:0864,71,bus,Orange & Myrrh W,33.892568,-118.177621,27,1,lbt
+lbt:0865,71,bus,Orange & Alondra NW,33.889427,-118.177596,27,1,lbt
+lbt:0866,71,bus,Orange & 72nd SW,33.885225,-118.17749,27,1,lbt
+lbt:0867,71,bus,Orange & 70th SW,33.881598,-118.177536,27,1,lbt
+lbt:0868,71,bus,Orange & 68th SW,33.878071,-118.177457,27,1,lbt
+lbt:0870,71,bus,Orange & Artesia SW,33.874372,-118.17751,27,1,lbt
+lbt:0871,71,bus,Orange & 65th SW,33.872634,-118.177449,27,1,lbt
+lbt:0872,71,bus,Orange & 64th SW,33.870849,-118.17741,27,1,lbt
+lbt:0874,71,bus,Orange & Harding SW,33.867063,-118.177386,27,1,lbt
+lbt:0875,71,bus,Orange & 61st SW,33.865365,-118.177375,27,1,lbt
+lbt:0876,71,bus,Orange & 60th SW,33.863504,-118.177379,27,1,lbt
+lbt:0877,71,bus,Orange & South SW,33.859861,-118.177394,27,1,lbt
+lbt:0878,71,bus,Orange & 56th SW,33.85772,-118.177343,27,1,lbt
+lbt:0880,71,bus,Orange & Market SW,33.854121,-118.177304,27,1,lbt
+lbt:0881,71,bus,Orange & Via Wanda SW,33.84979,-118.177267,27,1,lbt
+lbt:0882,71,bus,Orange & Del Amo SW,33.846709,-118.176882,27,1,lbt
+lbt:0883,71,bus,Orange & 45th Way SW,33.84374,-118.176668,27,1,lbt
+lbt:0884,71,bus,Orange & San Antonio SW,33.84099,-118.176361,27,1,lbt
+lbt:0885,71,bus,Orange & Claiborne SW,33.838816,-118.176437,27,1,lbt
+lbt:0886,71,bus,Orange & Tehachapi SW,33.835601,-118.17645,27,1,lbt
+lbt:0887,71,bus,Orange & Carson SW,33.832112,-118.176436,27,1,lbt
+lbt:0888,71,bus,Orange & Roosevelt SW,33.829541,-118.176369,27,1,lbt
+lbt:0889,71,bus,Orange & Bixby NW,33.827473,-118.176374,27,1,lbt
+lbt:0890,71,bus,Orange & 37th SW,33.823992,-118.176433,27,1,lbt
+lbt:0891,71,bus,Orange & 36th SW,33.822003,-118.176428,27,1,lbt
+lbt:0892,71,bus,Orange & Wardlow SW,33.818699,-118.17644,27,1,lbt
+lbt:0893,71,bus,Orange & 33rd SW,33.816946,-118.176375,27,1,lbt
+lbt:0894,71,bus,Orange & 32nd SW,33.815023,-118.17645,27,1,lbt
+lbt:0895,71,bus,Orange & Spring SW,33.811058,-118.176429,27,1,lbt
+lbt:0898,71,bus,Orange & Willow SW,33.803982,-118.176423,27,1,lbt
+lbt:0899,71,bus,Orange & Burnett NW,33.801199,-118.176444,27,1,lbt
+lbt:0900,71,bus,Orange & 23rd SW,33.798654,-118.176442,27,1,lbt
+lbt:0901,71,bus,Orange & Hill NW,33.797625,-118.176392,27,1,lbt
+lbt:0902,71,bus,Orange & 20th SW,33.79323,-118.176444,27,1,lbt
+lbt:0903,71,bus,Orange & 19th SW,33.791052,-118.176341,27,1,lbt
+lbt:0904,71,bus,Orange & PCH SW,33.789534,-118.176442,27,1,lbt
+lbt:0905,71,bus,Alamitos & 16th SW,33.786946,-118.176763,27,1,lbt
+lbt:0999,"91,92,93,94",bus,6th & Atlantic SE,33.774074,-118.184833,85,4,lbt
+lbt:1000,"91,92,93,94",bus,6th & Olive SE,33.774114,-118.182076,85,4,lbt
+lbt:1001,"91,92,93,94",bus,7th & Alamitos SE,33.775285,-118.179815,85,4,lbt
+lbt:1003,"91,92,93,94",bus,7th & Orange SE,33.775288,-118.1761,85,4,lbt
+lbt:1005,"91,92,93,94",bus,7th & Walnut SE,33.775277,-118.171776,85,4,lbt
+lbt:1006,"91,92,93,94",bus,7th & Rose SE,33.775289,-118.169638,85,4,lbt
+lbt:1007,"91,92,93,94",bus,7th & Cherry SE,33.775267,-118.167242,85,4,lbt
+lbt:1009,"91,92,93,94",bus,7th & Junipero SE,33.77529,-118.163057,85,4,lbt
+lbt:1011,"91,92,93,94",bus,7th & Temple SE,33.775287,-118.158657,85,4,lbt
+lbt:1012,"91,92,93,94",bus,7th & Orizaba SE,33.77529,-118.156558,85,4,lbt
+lbt:1013,"91,92,93,94",bus,7th & Obispo SE,33.775315,-118.154298,85,4,lbt
+lbt:1014,"91,92,93,94",bus,7th & Redondo SE,33.775276,-118.152172,85,4,lbt
+lbt:1017,"91,92,93,94",bus,7th & Termino SE,33.77526,-118.145601,85,4,lbt
+lbt:1019,"91,92,93,94",bus,7th & Ximeno SE,33.775254,-118.141363,85,4,lbt
+lbt:1020,"91,92,93,94",bus,7th & Park SE,33.775306,-118.136866,85,4,lbt
+lbt:1021,"91,92,93,94",bus,7th & Federation SW,33.775283,-118.13493,85,4,lbt
+lbt:1022,"91,92,93,94",bus,7th & Terraine SE,33.775247,-118.127264,85,4,lbt
+lbt:1023,"91,92,93,94",bus,7th & Los Altos SE,33.775258,-118.125026,85,4,lbt
+lbt:1024,"41,46,91,92,93,94",bus,7th & Bellflower SW,33.775207,-118.121469,151,6,lbt
+lbt:1025,"121,171,175,41,46,91,92,93,94",bus,W Campus & Library East Side,33.777788,-118.115135,249,9,lbt
+lbt:1026,"121,171,175,41,46,91,92,93,94",bus,Beach Dr & W Campus N,33.782069,-118.11485,327,9,lbt
+lbt:1027,"121,171,175,41,46,91,92,93,94",bus,Beach Dr & Dorms N,33.78213,-118.120288,249,9,lbt
+lbt:1029,"92,93,94",bus,Bellflower & Atherton NE,33.788987,-118.124527,56,3,lbt
+lbt:1030,"92,93,94",bus,Bellflower & Garford NE,33.792064,-118.125194,56,3,lbt
+lbt:1031,"92,93,94",bus,Bellflower & Britton NE,33.7941,-118.125222,56,3,lbt
+lbt:1032,"91,92,93",bus,Bellflower & Stearns NE,33.796158,-118.125196,80,3,lbt
+lbt:1033,"91,92,93",bus,Bellflower & 23rd NE,33.799301,-118.125184,80,3,lbt
+lbt:1034,"91,93",bus,Bellflower & 28th NE,33.80697,-118.125149,56,2,lbt
+lbt:1035,"91,93",bus,Bellflower & Spring NE,33.810749,-118.125125,56,2,lbt
+lbt:1036,"91,93",bus,Bellflower & Mezzanine NE,33.815392,-118.125119,56,2,lbt
+lbt:1037,"91,93",bus,Bellflower & Wardlow NE,33.819132,-118.125075,56,2,lbt
+lbt:1038,"91,93",bus,Bellflower & Monlaco NE,33.822509,-118.125103,56,2,lbt
+lbt:1039,"91,93",bus,Bellflower & Conant NE,33.824909,-118.125041,56,2,lbt
+lbt:1040,"91,93",bus,Bellflower & Harco NE,33.827977,-118.125075,56,2,lbt
+lbt:1042,"103,91",bus,Bellflower & Carson NE,33.832637,-118.124979,51,2,lbt
+lbt:1043,"103,91",bus,Bellflower & Harvey Way NE,33.83638,-118.124992,51,2,lbt
+lbt:1044,"103,91",bus,Bellflower & Centralia NE,33.839718,-118.124991,51,2,lbt
+lbt:1045,"103,91",bus,Bellflower & Arbor Way NE,33.843291,-118.124963,51,2,lbt
+lbt:1046,91,bus,Bellflower & Del Amo NE,33.847514,-118.124933,29,1,lbt
+lbt:1047,91,bus,Bellflower & Hardwick NE,33.850794,-118.124933,29,1,lbt
+lbt:1048,91,bus,Bellflower & Candlewood NE,33.853804,-118.124914,29,1,lbt
+lbt:1049,91,bus,Bellflower & Michelson NE,33.856361,-118.124926,29,1,lbt
+lbt:1050,91,bus,Bellflower & South SE,33.859951,-118.124904,29,1,lbt
+lbt:1051,91,bus,Bellflower & Andy NE,33.861978,-118.124996,29,1,lbt
+lbt:1052,91,bus,Bellflower & Hedda NE,33.864191,-118.124983,29,1,lbt
+lbt:1053,91,bus,Bellflower & Allington NE,33.865354,-118.124999,29,1,lbt
+lbt:1054,91,bus,Bellflower & Ashworth SE,33.867739,-118.125018,29,1,lbt
+lbt:1056,91,bus,Bellflower & Ramona SE,33.872823,-118.125085,29,1,lbt
+lbt:1057,91,bus,Bellflower & Artesia SE,33.874454,-118.125075,29,1,lbt
+lbt:1059,91,bus,Bellflower & Park NE,33.878766,-118.12515,27,1,lbt
+lbt:1060,91,bus,Bellflower & Walnut SE,33.880123,-118.125189,27,1,lbt
+lbt:1061,"91,93",bus,Bellflower & Flower NE,33.88235,-118.12518,54,2,lbt
+lbt:1062,"91,93",bus,Bellflower & Flora Vista NE,33.886171,-118.125205,54,2,lbt
+lbt:1065,"91,93",bus,Bellflower & Flora Vista SW,33.886231,-118.125353,56,2,lbt
+lbt:1066,"91,93",bus,Bellflower & Oak SW,33.884453,-118.125403,56,2,lbt
+lbt:1067,91,bus,Bellflower & Flower SW,33.881906,-118.125321,27,1,lbt
+lbt:1068,91,bus,Bellflower & Walnut SW,33.880144,-118.125357,27,1,lbt
+lbt:1069,91,bus,Bellflower & Park SW,33.878191,-118.125348,27,1,lbt
+lbt:1071,91,bus,Bellflower & Artesia SW,33.874389,-118.125268,27,1,lbt
+lbt:1072,91,bus,Bellflower & Ramona SW,33.872828,-118.125299,27,1,lbt
+lbt:1073,91,bus,Bellflower & Ashworth NW,33.868128,-118.125323,27,1,lbt
+lbt:1074,91,bus,Bellflower & Allington SW,33.865559,-118.125273,27,1,lbt
+lbt:1075,91,bus,Bellflower & Hedda SW,33.864047,-118.125266,27,1,lbt
+lbt:1076,91,bus,Bellflower & Andy NW,33.862251,-118.125265,27,1,lbt
+lbt:1077,91,bus,Bellflower & South SW,33.859772,-118.125274,27,1,lbt
+lbt:1078,91,bus,Bellflower & Michelson SW,33.856013,-118.1252,27,1,lbt
+lbt:1079,91,bus,Bellflower & Candlewood SW,33.853474,-118.125195,27,1,lbt
+lbt:1080,91,bus,Bellflower & Hardwick SW,33.850623,-118.125206,27,1,lbt
+lbt:1081,"103,91",bus,Bellflower & Del Amo SW,33.846657,-118.125238,51,2,lbt
+lbt:1082,"103,91",bus,Bellflower & Arbor SW,33.842774,-118.125265,51,2,lbt
+lbt:1083,"103,91",bus,Bellflower & Centralia SW,33.839361,-118.125267,51,2,lbt
+lbt:1084,"103,91",bus,Bellflower & Harvey Way SW,33.835869,-118.125301,51,2,lbt
+lbt:1085,"91,93",bus,Bellflower & Carson SW,33.831854,-118.125321,57,2,lbt
+lbt:1087,"91,93",bus,Bellflower & Harco SW,33.827417,-118.125325,57,2,lbt
+lbt:1088,"91,93",bus,Bellflower & Conant SW,33.824919,-118.125331,57,2,lbt
+lbt:1089,"91,93",bus,Bellflower & Monlaco SW,33.822075,-118.12533,57,2,lbt
+lbt:1090,"91,93",bus,Bellflower & Wardlow SW,33.818156,-118.125346,57,2,lbt
+lbt:1091,"91,93",bus,Bellflower & Killdee SW,33.8166,-118.125343,57,2,lbt
+lbt:1092,"91,93",bus,Bellflower & Mezzanine SW,33.815126,-118.125354,57,2,lbt
+lbt:1093,"91,93",bus,Bellflower & Pagentry SW,33.813053,-118.125363,57,2,lbt
+lbt:1094,"91,93",bus,Bellflower & Spring SW,33.810157,-118.125385,57,2,lbt
+lbt:1095,"91,93",bus,Bellflower & 28th NW,33.806668,-118.125396,57,2,lbt
+lbt:1096,"91,92,93,94",bus,Bellflower & Los Coyotes SW,33.801637,-118.125488,86,4,lbt
+lbt:1097,"91,92,93,94",bus,Bellflower & 23rd SW,33.79893,-118.12543,86,4,lbt
+lbt:1098,"92,93,94",bus,Bellflower & Stearns SW,33.795786,-118.125498,60,3,lbt
+lbt:1099,"92,93,94",bus,Bellflower & Abbeyfield SW,33.793679,-118.125518,60,3,lbt
+lbt:1101,"121,91,92,93,94",bus,Bellflower & Atherton SW,33.788147,-118.124364,135,5,lbt
+lbt:1103,"91,92,93,94",bus,7th & PCH NW,33.775408,-118.123348,88,4,lbt
+lbt:1104,"91,92,93,94",bus,7th & Los Altos NW,33.775409,-118.125546,88,4,lbt
+lbt:1106,"91,92,93,94",bus,7th & Federation NW,33.775399,-118.134376,88,4,lbt
+lbt:1107,"91,92,93,94",bus,7th & Park NW,33.775428,-118.137987,88,4,lbt
+lbt:1108,"91,92,93,94",bus,7th & Ximeno NW,33.775371,-118.142008,88,4,lbt
+lbt:1110,"91,92,93,94",bus,7th & Termino NW,33.775391,-118.146213,88,4,lbt
+lbt:1113,"91,92,93,94",bus,7th & Redondo NW,33.775418,-118.152814,88,4,lbt
+lbt:1114,"91,92,93,94",bus,7th & Obispo NW,33.775419,-118.154831,88,4,lbt
+lbt:1115,"91,92,93,94",bus,7th & Orizaba NW,33.775435,-118.156999,88,4,lbt
+lbt:1116,"91,92,93,94",bus,7th & Temple NW,33.775435,-118.159388,88,4,lbt
+lbt:1118,"91,92,93,94",bus,7th & Junipero NW,33.775429,-118.163577,88,4,lbt
+lbt:1120,"91,92,93,94",bus,7th & Cherry NW,33.775417,-118.16792,88,4,lbt
+lbt:1121,"91,92,93,94",bus,7th & Rose NW,33.775412,-118.170112,88,4,lbt
+lbt:1122,"91,92,93,94",bus,7th & Walnut NW,33.775441,-118.172369,88,4,lbt
+lbt:1124,"91,92,93,94",bus,7th & Orange NW,33.775435,-118.176725,88,4,lbt
+lbt:1125,"91,92,93,94",bus,7th & Alamitos NE,33.77538,-118.179944,88,4,lbt
+lbt:1126,"91,92,93,94",bus,7th & Olive NW,33.775371,-118.182641,88,4,lbt
+lbt:1128,"103,191",bus,Del Amo & Bellflower NW,33.84717,-118.125578,54,2,lbt
+lbt:1129,"103,191",bus,Del Amo & Pearce NW,33.8472,-118.129955,54,2,lbt
+lbt:1134,93,bus,Clark & Candlewood NW,33.854261,-118.133914,29,1,lbt
+lbt:1135,93,bus,Clark & Candlewood NE,33.85405,-118.13372,27,1,lbt
+lbt:1136,93,bus,Candlewood & Graywood NW,33.85389,-118.13837,29,1,lbt
+lbt:1137,93,bus,Clark & Michelson NE,33.857504,-118.133717,27,1,lbt
+lbt:1138,93,bus,Clark & South SE,33.860053,-118.133713,27,1,lbt
+lbt:1139,93,bus,Clark & Hedda SE,33.863964,-118.133802,27,1,lbt
+lbt:1140,93,bus,Clark & Ashworth SE,33.867756,-118.133811,27,1,lbt
+lbt:1141,93,bus,Clark & Rose SE,33.869463,-118.133807,27,1,lbt
+lbt:1142,93,bus,Clark & Cedar NE,33.871394,-118.133853,27,1,lbt
+lbt:1144,93,bus,Clark & Artesia SE,33.874486,-118.133868,27,1,lbt
+lbt:1145,93,bus,Clark & Park SE,33.878289,-118.133884,27,1,lbt
+lbt:1147,93,bus,Flower & Clark SE,33.882012,-118.133669,27,1,lbt
+lbt:1148,93,bus,Flower & Ardmore SE,33.882026,-118.128839,27,1,lbt
+lbt:1149,93,bus,Flower & Bellflower NW,33.88212,-118.125976,29,1,lbt
+lbt:1150,93,bus,Flower & Ardmore NE,33.88216,-118.128915,29,1,lbt
+lbt:1151,93,bus,Clark & Flower SW,33.881877,-118.134061,29,1,lbt
+lbt:1153,93,bus,Clark & Park NW,33.878577,-118.134052,29,1,lbt
+lbt:1154,93,bus,Clark & Artesia SW,33.874447,-118.134032,29,1,lbt
+lbt:1156,93,bus,Clark & Cedar NW,33.87143,-118.133995,29,1,lbt
+lbt:1157,93,bus,Clark & Rose SW,33.869432,-118.133981,29,1,lbt
+lbt:1158,93,bus,Clark & Ashworth NW,33.868089,-118.133976,29,1,lbt
+lbt:1159,93,bus,Clark & Hedda NW,33.864374,-118.13397,29,1,lbt
+lbt:1160,93,bus,Clark & South SW,33.859979,-118.133888,29,1,lbt
+lbt:1163,103,bus,Clark & Candlewood SW,33.853306,-118.133877,24,1,lbt
+lbt:1164,103,bus,Clark & Hardwick SW,33.849942,-118.133885,24,1,lbt
+lbt:1165,"103,191",bus,Del Amo & Clark SE,33.847019,-118.13335,57,2,lbt
+lbt:1166,"103,191",bus,Del Amo & Pearce SE,33.846985,-118.129791,57,2,lbt
+lbt:1167,92,bus,Willow & Los Coyotes SE,33.80316,-118.121408,24,1,lbt
+lbt:1168,92,bus,Willow & San Vicente SE,33.803125,-118.117011,24,1,lbt
+lbt:1169,92,bus,Woodruff & Willow NE,33.803461,-118.114456,24,1,lbt
+lbt:1170,92,bus,Woodruff & Oakbrook NE,33.806193,-118.114441,24,1,lbt
+lbt:1171,92,bus,Woodruff & Spring NE,33.811053,-118.11446,24,1,lbt
+lbt:1172,92,bus,Woodruff & Los Coyotes NE,33.813223,-118.115377,24,1,lbt
+lbt:1173,92,bus,Woodruff & Fanwood NE,33.815461,-118.116408,24,1,lbt
+lbt:1174,92,bus,Woodruff & Wardlow NE,33.818964,-118.116407,24,1,lbt
+lbt:1175,92,bus,Woodruff & Monlaco NE,33.822461,-118.116383,24,1,lbt
+lbt:1176,92,bus,Woodruff & Conant NE,33.825156,-118.116471,24,1,lbt
+lbt:1177,92,bus,Woodruff & Harco NE,33.827527,-118.116511,24,1,lbt
+lbt:1178,92,bus,Woodruff & Mortuary E,33.829934,-118.116498,24,1,lbt
+lbt:1179,92,bus,Woodruff & Carson NE,33.832678,-118.116433,24,1,lbt
+lbt:1180,92,bus,Woodruff & Harvey Way NE,33.836376,-118.116347,24,1,lbt
+lbt:1181,92,bus,Woodruff & Centralia NE,33.839608,-118.116298,24,1,lbt
+lbt:1182,92,bus,Woodruff & Arbor NE,33.843867,-118.116295,24,1,lbt
+lbt:1183,92,bus,Woodruff & Del Amo NE,33.847207,-118.116308,24,1,lbt
+lbt:1184,92,bus,Woodruff & Hardwick NE,33.851403,-118.116646,24,1,lbt
+lbt:1185,92,bus,Woodruff & Candlewood NE,33.853816,-118.116859,24,1,lbt
+lbt:1186,92,bus,Woodruff & Pavilions SE,33.856634,-118.116966,24,1,lbt
+lbt:1187,92,bus,Woodruff & South SE,33.857961,-118.116981,24,1,lbt
+lbt:1188,92,bus,Woodruff & Arabella SE,33.862874,-118.11708,24,1,lbt
+lbt:1189,92,bus,Woodruff & Ashworth NE,33.868175,-118.117131,24,1,lbt
+lbt:1190,92,bus,Woodruff & Rose NE,33.870118,-118.117153,24,1,lbt
+lbt:1191,92,bus,Woodruff & Artesia NE,33.873258,-118.1172,24,1,lbt
+lbt:1192,92,bus,Woodruff & Beach NE,33.877743,-118.117249,24,1,lbt
+lbt:1193,92,bus,Woodruff & Walnut NE,33.88054,-118.11727,24,1,lbt
+lbt:1194,92,bus,Woodruff & Midway SE,33.883587,-118.117307,24,1,lbt
+lbt:1195,92,bus,Woodruff & Trabuco SE,33.887215,-118.117302,24,1,lbt
+lbt:1196,"91,92,93",bus,Alondra & Woodruff SE,33.889297,-118.117038,78,3,lbt
+lbt:1198,92,bus,Woodruff & Walnut SW,33.8801,-118.117457,26,1,lbt
+lbt:1199,92,bus,Woodruff & Flora Vista NW,33.882799,-118.117454,26,1,lbt
+lbt:1200,92,bus,Woodruff & Beach SW,33.877372,-118.117427,26,1,lbt
+lbt:1201,92,bus,Woodruff & Artesia SW,33.872437,-118.117316,26,1,lbt
+lbt:1202,92,bus,Woodruff & Rose NW,33.869873,-118.117383,26,1,lbt
+lbt:1203,92,bus,Woodruff & Ashworth SW,33.867681,-118.117259,26,1,lbt
+lbt:1204,92,bus,Woodruff & Allington SW,33.86518,-118.117227,26,1,lbt
+lbt:1205,92,bus,Woodruff & Arabella SW,33.861509,-118.117263,26,1,lbt
+lbt:1206,92,bus,Woodruff & South SW,33.857547,-118.117149,26,1,lbt
+lbt:1207,92,bus,Woodruff & Pavilions SW,33.856189,-118.117088,26,1,lbt
+lbt:1208,92,bus,Woodruff & Candlewood SW,33.852978,-118.117005,26,1,lbt
+lbt:1209,92,bus,Woodruff & Hardwick SW,33.850095,-118.116774,26,1,lbt
+lbt:1210,92,bus,Woodruff & Del Amo SW,33.846572,-118.116534,26,1,lbt
+lbt:1211,92,bus,Woodruff & Arbor NW,33.843113,-118.116539,26,1,lbt
+lbt:1212,92,bus,Woodruff & Centralia SW,33.839422,-118.116573,26,1,lbt
+lbt:1213,92,bus,Woodruff & Harvey Way SW,33.835601,-118.116566,26,1,lbt
+lbt:1214,92,bus,Woodruff & Carson SW,33.831948,-118.116678,26,1,lbt
+lbt:1215,92,bus,Woodruff & Harco SW,33.827527,-118.116656,26,1,lbt
+lbt:1216,92,bus,Woodruff & Conant SW,33.824875,-118.116699,26,1,lbt
+lbt:1217,92,bus,Woodruff & Monlaco SW,33.822278,-118.116641,26,1,lbt
+lbt:1218,92,bus,Woodruff & Wardlow SW,33.818121,-118.116663,26,1,lbt
+lbt:1219,92,bus,Woodruff & Mezzanine SW,33.814739,-118.116519,26,1,lbt
+lbt:1220,92,bus,Woodruff & Los Coyotes NW,33.813198,-118.115662,26,1,lbt
+lbt:1221,92,bus,Woodruff & Spring NW,33.810852,-118.114713,26,1,lbt
+lbt:1222,92,bus,Woodruff & Oakbridge SW,33.805728,-118.114756,26,1,lbt
+lbt:1223,92,bus,Woodruff & Willow SW,33.803565,-118.114779,26,1,lbt
+lbt:1224,92,bus,Woodruff & San Vicente NW,33.803372,-118.117195,26,1,lbt
+lbt:1225,92,bus,Willow & Radnor NW,33.803395,-118.122461,26,1,lbt
+lbt:1230,"101,103,104",bus,Willow & Easy SE,33.8043,-118.209705,76,3,lbt
+lbt:1231,"101,103,104",bus,Willow & Oregon SE,33.80432,-118.201058,76,3,lbt
+lbt:1233,"101,103,104",bus,Willow & Magnolia SE,33.804273,-118.197804,76,3,lbt
+lbt:1235,"101,103,104",bus,Willow & Pacific SE,33.804266,-118.193389,76,3,lbt
+lbt:1236,"101,103,104",bus,Willow & Long Beach Blvd SE,33.804312,-118.189054,76,3,lbt
+lbt:1237,"101,103",bus,Carson & Atlantic SE,33.831682,-118.184634,46,2,lbt
+lbt:1239,"101,103",bus,Carson & California SE,33.832359,-118.180487,46,2,lbt
+lbt:1240,"101,103",bus,Carson & Orange SE,33.832341,-118.175923,46,2,lbt
+lbt:1241,"101,103",bus,Carson & Walnut SW,33.832345,-118.172256,46,2,lbt
+lbt:1243,"101,103",bus,Carson & Paramount SE,33.83228,-118.159454,46,2,lbt
+lbt:1244,"101,103",bus,Carson & Obispo SE,33.832274,-118.156897,46,2,lbt
+lbt:1245,"101,103",bus,Carson & Watson SE,33.832241,-118.15471,46,2,lbt
+lbt:1246,"101,103",bus,Carson & Worsham SE,33.83219,-118.145781,46,2,lbt
+lbt:1247,"101,103",bus,Carson & Lakewood SE,33.832235,-118.141683,46,2,lbt
+lbt:1249,"101,103",bus,Carson & Faculty/LBCC SE,33.832242,-118.136678,46,2,lbt
+lbt:1250,"112,93",bus,Clark & Carson NE,33.832627,-118.133779,43,2,lbt
+lbt:1251,"112,93",bus,Clark & Harvey Way SE,33.836016,-118.13378,43,2,lbt
+lbt:1252,"112,93",bus,Clark & Centralia NE,33.839836,-118.133763,43,2,lbt
+lbt:1253,"112,93",bus,Clark & Arbor NE,33.84332,-118.133739,43,2,lbt
+lbt:1254,"112,93",bus,Clark & Del Amo SW,33.846178,-118.133842,46,2,lbt
+lbt:1255,"112,93",bus,Clark & Arbor SW,33.842861,-118.133903,46,2,lbt
+lbt:1270,"101,173",bus,Carson & Los Coyotes SE,33.83214,-118.098398,55,2,lbt
+lbt:1271,"101,103",bus,Carson & Worsham NW,33.832521,-118.146003,50,2,lbt
+lbt:1272,"101,173",bus,Carson & Nector - LB Towne Center NW,33.83159,-118.088352,59,2,lbt
+lbt:1274,101,bus,Carson & Los Coyotes Diagonal NE,33.832379,-118.098293,26,1,lbt
+lbt:1282,101,bus,Carson & Woodruff NE,33.83241,-118.116302,26,1,lbt
+lbt:1288,"112,93",bus,Clark & Centralia NW,33.839786,-118.133911,46,2,lbt
+lbt:1289,"112,93",bus,Clark & Harvey Way SW,33.835873,-118.133961,46,2,lbt
+lbt:1290,"112,93",bus,Clark & LBCC NW,33.833669,-118.133938,46,2,lbt
+lbt:1291,"101,103,111",bus,Carson & Clark NW,33.832457,-118.134351,51,3,lbt
+lbt:1292,"101,103,111",bus,Carson & Faculty/LBCC NE,33.83246,-118.137044,51,3,lbt
+lbt:1293,"101,103,111",bus,Carson & Norse Way NW,33.832488,-118.141285,51,3,lbt
+lbt:1294,"101,103",bus,Carson & Lakewood Blvd NW,33.832461,-118.142991,50,2,lbt
+lbt:1295,"101,103",bus,Carson & Lakewood Dr NW,33.832504,-118.148104,50,2,lbt
+lbt:1296,"101,103",bus,Carson & Clubhouse NE,33.832512,-118.154864,50,2,lbt
+lbt:1297,"101,103",bus,Carson & Obispo NW,33.832517,-118.157495,50,2,lbt
+lbt:1298,"101,103",bus,Carson & Paramount NE,33.832523,-118.159576,50,2,lbt
+lbt:1299,"101,103",bus,Carson & Walnut NE,33.832552,-118.172117,50,2,lbt
+lbt:1300,"101,103",bus,Carson & Orange SE,33.832548,-118.176747,50,2,lbt
+lbt:1301,"101,103",bus,Carson & California NW,33.832508,-118.181022,50,2,lbt
+lbt:1303,"101,103,104",bus,Willow & Atlantic NW,33.804529,-118.185453,79,3,lbt
+lbt:1304,"101,103,104",bus,Willow & Long Beach Blvd NW,33.804501,-118.189841,79,3,lbt
+lbt:1305,"101,103,104",bus,Willow & Pacific NW,33.804499,-118.194028,79,3,lbt
+lbt:1306,"101,103,104",bus,Willow & Chestnut NW,33.804488,-118.196003,79,3,lbt
+lbt:1307,"101,103,104",bus,Willow & Magnolia NW,33.804512,-118.198422,79,3,lbt
+lbt:1308,101,bus,Carson & Woodruff SE,33.832143,-118.116287,24,1,lbt
+lbt:1309,"101,103,104",bus,Willow & Oregon NW,33.804493,-118.201552,79,3,lbt
+lbt:1310,"101,103,104",bus,Willow & Easy NW,33.804477,-118.21036,79,3,lbt
+lbt:1311,"101,103,104",bus,Willow & Caspian NW,33.804476,-118.212496,79,3,lbt
+lbt:1312,"101,103,104",bus,Adriatic & Willow SW,33.804167,-118.214434,79,3,lbt
+lbt:1313,"111,112",bus,Broadway & Long Beach Bl SE,33.769281,-118.188893,33,2,lbt
+lbt:1316,"111,112",bus,Broadway & Atlantic SE,33.769239,-118.184691,33,2,lbt
+lbt:1318,"111,112",bus,Broadway & Alamitos SE,33.769099,-118.181838,33,2,lbt
+lbt:1320,"111,112",bus,Broadway & Cerritos SE,33.768626,-118.17854,33,2,lbt
+lbt:1321,"111,112",bus,Broadway & Orange SE,33.76842,-118.176655,33,2,lbt
+lbt:1323,"111,112",bus,Broadway & Falcon SE,33.767933,-118.173071,33,2,lbt
+lbt:1324,"111,112",bus,Broadway & Gaviota SE,33.767702,-118.171257,33,2,lbt
+lbt:1326,"111,112",bus,Broadway & Cherry SE,33.76724,-118.167657,33,2,lbt
+lbt:1327,"111,112",bus,Broadway & Junipero SE,33.766828,-118.16562,33,2,lbt
+lbt:1329,"111,112",bus,Broadway & Wisconsin SE,33.766034,-118.161614,33,2,lbt
+lbt:1330,"111,112",bus,Broadway & Temple SE,33.765398,-118.158698,33,2,lbt
+lbt:1332,"111,112",bus,Broadway & Obispo SE,33.764497,-118.154377,33,2,lbt
+lbt:1333,"111,112",bus,Broadway & Redondo SE,33.764403,-118.152198,33,2,lbt
+lbt:1335,"111,112",bus,Broadway & Grand SE,33.764414,-118.147839,33,2,lbt
+lbt:1336,"111,112",bus,Broadway & Termino SE,33.764402,-118.145706,33,2,lbt
+lbt:1338,"111,112",bus,Ximeno & Broadway NE,33.764666,-118.141497,33,2,lbt
+lbt:1339,"111,112",bus,Ximeno & 3rd NE,33.768273,-118.141493,33,2,lbt
+lbt:1341,"111,112",bus,Ximeno & 4th NE,33.771794,-118.141482,33,2,lbt
+lbt:1342,"111,112",bus,Ximeno & 7th NE,33.775723,-118.141496,33,2,lbt
+lbt:1343,"111,112",bus,Ximeno & 10th SE,33.778867,-118.141484,33,2,lbt
+lbt:1344,"111,112",bus,Ximeno & Anaheim NE,33.782923,-118.141465,33,2,lbt
+lbt:1345,"111,112",bus,Ximeno & 15th NE,33.785901,-118.141427,33,2,lbt
+lbt:1346,"171,172,173,174,175",bus,PCH & Ximeno NW,33.788127,-118.139722,119,5,lbt
+lbt:1347,"111,112",bus,Lakewood & Outer Circle NE,33.791739,-118.142579,33,2,lbt
+lbt:1348,"111,112",bus,Lakewood & De Ora E,33.7943,-118.14259,33,2,lbt
+lbt:1349,"111,112",bus,Lakewood & Stearns NE,33.796158,-118.142573,33,2,lbt
+lbt:1350,"111,112",bus,Lakewood & 23rd NE,33.79979,-118.14256,33,2,lbt
+lbt:1351,"104,111",bus,Willow & Lakewood NW,33.803444,-118.14306,46,2,lbt
+lbt:1352,101,bus,Carson & Bellflower SE,33.832194,-118.124897,24,1,lbt
+lbt:1353,"104,111",bus,Willow & Grand NW,33.804202,-118.147965,46,2,lbt
+lbt:1354,"111,131",bus,Redondo & Willow NE,33.805025,-118.151242,48,2,lbt
+lbt:1355,131,bus,Redondo & Kilroy Airport NE,33.807859,-118.151295,31,1,lbt
+lbt:1356,111,bus,Kilroy Airport Way & Redondo SE,33.807589,-118.151069,17,1,lbt
+lbt:1357,111,bus,Kilroy Airport Way & 3800 Building NE,33.806805,-118.145017,17,1,lbt
+lbt:1358,"104,111",bus,Lakewood & Spring NE,33.813217,-118.139044,76,2,lbt
+lbt:1360,"104,111",bus,Long Beach Airport / Lot A,33.81753,-118.142919,94,2,lbt
+lbt:1361,111,bus,Lakewood & Wardlow NE,33.819433,-118.139107,17,1,lbt
+lbt:1362,111,bus,Lakewood & Conant NE,33.825279,-118.142399,16,1,lbt
+lbt:1363,111,bus,Lakewood & Cover E,33.828549,-118.142407,16,1,lbt
+lbt:1365,111,bus,Lakewood & Carson NE,33.833139,-118.142379,17,1,lbt
+lbt:1366,111,bus,Lakewood & Harvey Way NE,33.836375,-118.142369,17,1,lbt
+lbt:1367,111,bus,Lakewood & Centralia NE,33.839788,-118.142352,17,1,lbt
+lbt:1368,111,bus,Lakewood & Arbor NE,33.843263,-118.142348,17,1,lbt
+lbt:1369,"103,111,112,93",bus,Lakewood & Del Amo NE,33.847611,-118.142387,82,4,lbt
+lbt:1370,"103,111,112,93",bus,Lakewood & Hardwick NE,33.851105,-118.142335,106,4,lbt
+lbt:1371,"103,93",bus,Candlewood & Lakewood SE,33.853738,-118.141847,51,2,lbt
+lbt:1372,"103,93",bus,Candlewood & Graywood SE,33.853775,-118.137689,51,2,lbt
+lbt:1374,"111,112,93",bus,Lakewood & Candlewood SW,33.853508,-118.142671,63,3,lbt
+lbt:1375,"111,112,93",bus,Lakewood & Hardwick SW,33.850044,-118.142721,64,3,lbt
+lbt:1376,111,bus,Lakewood & Del Amo SW,33.846134,-118.14266,18,1,lbt
+lbt:1377,111,bus,Lakewood & Arbor SW,33.842813,-118.142655,18,1,lbt
+lbt:1378,111,bus,Lakewood & Centralia SW,33.839717,-118.14267,18,1,lbt
+lbt:1379,111,bus,Lakewood & Harvey Way SW,33.835965,-118.14271,18,1,lbt
+lbt:1380,111,bus,Lakewood & Carson SW,33.831749,-118.142741,18,1,lbt
+lbt:1381,111,bus,Lakewood & Cover W,33.827037,-118.142751,18,1,lbt
+lbt:1382,111,bus,Lakewood & Conant SW,33.824729,-118.142707,18,1,lbt
+lbt:1384,111,bus,Lakewood & Spring NW,33.812968,-118.139427,18,1,lbt
+lbt:1386,111,bus,Kilroy Airport Way & 3800 Building NW,33.806828,-118.145161,18,1,lbt
+lbt:1387,"111,131",bus,Redondo & 29th SW,33.806292,-118.151488,46,2,lbt
+lbt:1388,104,bus,Willow & Adult School,33.804547,-118.149961,29,1,lbt
+lbt:1389,131,bus,Redondo & Kilroy Airport NW,33.807714,-118.151407,28,1,lbt
+lbt:1390,"111,112",bus,Lakewood & Willow SW,33.802906,-118.142901,34,2,lbt
+lbt:1391,"111,112",bus,Lakewood & 23rd SW,33.799474,-118.142878,34,2,lbt
+lbt:1392,"111,112",bus,Lakewood & Stearns SW,33.795871,-118.142882,34,2,lbt
+lbt:1393,"111,112",bus,Lakewood & De Ora W,33.794119,-118.142879,34,2,lbt
+lbt:1394,"111,112",bus,Outer Circle & Lakewood SE,33.791489,-118.142407,34,2,lbt
+lbt:1395,"111,112,174",bus,Ximeno & PCH SW,33.787524,-118.13998,40,3,lbt
+lbt:1396,"111,112",bus,Ximeno & Ransom SW,33.786402,-118.141257,34,2,lbt
+lbt:1397,"111,112",bus,Ximeno & Anaheim SW,33.782282,-118.141615,34,2,lbt
+lbt:1398,"111,112",bus,Ximeno & 10th SW,33.778683,-118.141625,34,2,lbt
+lbt:1399,"111,112",bus,Ximeno & 7th SW,33.77499,-118.141632,34,2,lbt
+lbt:1400,"111,112",bus,Ximeno & 4th SW,33.771511,-118.141623,34,2,lbt
+lbt:1402,"111,112",bus,Ximeno & 3rd SW,33.767889,-118.141627,34,2,lbt
+lbt:1403,"111,112",bus,Broadway & Ximeno NW,33.764474,-118.141852,34,2,lbt
+lbt:1405,"111,112",bus,Broadway & Termino NE,33.764502,-118.145786,34,2,lbt
+lbt:1407,"111,112",bus,Broadway & Loma NW,33.76451,-118.150363,34,2,lbt
+lbt:1408,"111,112",bus,Broadway & Redondo NW,33.764501,-118.152827,34,2,lbt
+lbt:1409,"111,112",bus,Broadway & Corto NE,33.764898,-118.15577,34,2,lbt
+lbt:1410,111,bus,Lakewood & Conant SE,33.824475,-118.142144,1,1,lbt
+lbt:1411,"111,112",bus,Broadway & Temple NE,33.765532,-118.158823,34,2,lbt
+lbt:1412,"111,112",bus,Broadway & Molino NW,33.765977,-118.160887,34,2,lbt
+lbt:1414,"111,112",bus,Broadway & Junipero NW,33.767036,-118.166039,34,2,lbt
+lbt:1415,"111,112",bus,Broadway & Cherry NW,33.767366,-118.168042,34,2,lbt
+lbt:1417,"111,112",bus,Broadway & Gaviota NW,33.767872,-118.171722,34,2,lbt
+lbt:1418,"111,112",bus,Broadway & Falcon NW,33.768117,-118.173551,34,2,lbt
+lbt:1420,"111,112",bus,Broadway & Orange NW,33.768551,-118.177076,34,2,lbt
+lbt:1421,"111,112",bus,Broadway & Cerritos NW,33.768788,-118.178939,34,2,lbt
+lbt:1423,"111,112,71",bus,Alamitos & Broadway SW,33.769038,-118.182206,61,3,lbt
+lbt:1425,"111,112,71",bus,1st & Alamitos NW,33.768147,-118.182573,61,3,lbt
+lbt:1427,"111,112,71",bus,1st & Linden NE,33.76815,-118.186288,61,3,lbt
+lbt:1428,112,bus,Willow & Lakewood SE,33.803203,-118.142151,16,1,lbt
+lbt:1429,112,bus,Clark & Willow NE,33.803735,-118.133867,16,1,lbt
+lbt:1430,112,bus,Clark & 28th NE,33.807035,-118.133908,16,1,lbt
+lbt:1431,112,bus,Clark & Spring NE,33.811088,-118.133918,16,1,lbt
+lbt:1433,112,bus,Clark & Mezzanine NE,33.815616,-118.133899,16,1,lbt
+lbt:1435,112,bus,Clark & Wardlow NE,33.819202,-118.133878,16,1,lbt
+lbt:1436,112,bus,Clark & Monlaco NE,33.822549,-118.133861,16,1,lbt
+lbt:1437,112,bus,Clark & Conant SE,33.824934,-118.133851,16,1,lbt
+lbt:1438,"111,112",bus,Clark & Harco SE,33.826836,-118.133825,17,2,lbt
+lbt:1439,"111,112",bus,Clark & Hanbury NE,33.829457,-118.133789,17,2,lbt
+lbt:1440,112,bus,Clark & Lew Davis SW,33.829707,-118.13401,16,1,lbt
+lbt:1441,112,bus,Clark & Harco NW,33.82694,-118.134042,16,1,lbt
+lbt:1442,112,bus,Clark & Conant SW,33.824741,-118.134047,16,1,lbt
+lbt:1443,112,bus,Clark & Monlaco SW,33.821937,-118.134069,16,1,lbt
+lbt:1444,112,bus,Clark & Wardlow SW,33.818518,-118.134058,16,1,lbt
+lbt:1446,112,bus,Clark & Mezzanine SW,33.814903,-118.134074,16,1,lbt
+lbt:1448,112,bus,Clark & Spring SW,33.810149,-118.134126,16,1,lbt
+lbt:1449,112,bus,Clark & 28th SW,33.806622,-118.134088,16,1,lbt
+lbt:1450,112,bus,Clark & Willow NW,33.803792,-118.134105,16,1,lbt
+lbt:1453,121,bus,Ocean & Queensway SE,33.767208,-118.197903,43,1,lbt
+lbt:1454,121,bus,Ocean & Chestnut SE,33.767139,-118.19629,43,1,lbt
+lbt:1455,121,bus,Ocean & Cherry SE,33.764403,-118.168185,49,1,lbt
+lbt:1456,121,bus,Ocean & 19th Pl SE,33.763826,-118.165209,49,1,lbt
+lbt:1457,121,bus,Ocean & Lindero SE,33.76309,-118.163058,49,1,lbt
+lbt:1458,121,bus,Ocean & Temple SE,33.762338,-118.159488,49,1,lbt
+lbt:1459,121,bus,Ocean & Paloma SE,33.76166,-118.156059,49,1,lbt
+lbt:1460,"121,131",bus,Ocean & Redondo SE,33.760905,-118.152393,77,2,lbt
+lbt:1461,"121,131",bus,Ocean & 38th Pl SW,33.76044,-118.148931,77,2,lbt
+lbt:1462,"121,131",bus,Livingston & Termino SE,33.760562,-118.145385,77,2,lbt
+lbt:1464,"121,131",bus,Livingston & Ximeno SE,33.761605,-118.141333,77,2,lbt
+lbt:1465,"121,171",bus,PCH & 2nd NE,33.758373,-118.111266,86,2,lbt
+lbt:1467,121,bus,Loynes & PCH SE,33.76748,-118.116036,49,1,lbt
+lbt:1468,121,bus,Bixby Village & Loynes NE,33.768999,-118.114044,49,1,lbt
+lbt:1469,"121,171",bus,Channel & 7th SW,33.774443,-118.119109,84,2,lbt
+lbt:1470,121,bus,Bixby Village & S Greenway W,33.771685,-118.114528,48,1,lbt
+lbt:1471,"121,171",bus,PCH & Loynes SW,33.76694,-118.116979,84,2,lbt
+lbt:1473,"121,171",bus,PCH & Marina Pacifica W,33.759923,-118.113149,84,2,lbt
+lbt:1474,"121,131",bus,Livingston & Ximeno NW,33.761778,-118.141778,78,2,lbt
+lbt:1477,"121,131",bus,Ocean & Grand NW,33.760591,-118.148411,78,2,lbt
+lbt:1478,121,bus,Ocean & Redondo NW,33.761124,-118.152939,48,1,lbt
+lbt:1479,121,bus,Ocean & Paloma NW,33.761853,-118.156431,48,1,lbt
+lbt:1480,121,bus,Ocean & Temple NW,33.76261,-118.160045,48,1,lbt
+lbt:1481,121,bus,Ocean & Lindero NW,33.763328,-118.163471,48,1,lbt
+lbt:1482,121,bus,Ocean & Kennebec NW,33.763969,-118.16513,48,1,lbt
+lbt:1483,171,bus,PCH & Loynes NE,33.767605,-118.116846,37,1,lbt
+lbt:1484,2,bus,Central & Victoria SW,33.867106,-118.2488,22,1,lbt
+lbt:1485,2,bus,Victoria and Central NW,33.86758,-118.249139,21,1,lbt
+lbt:1488,2,bus,Central & University SW,33.857426,-118.248699,22,1,lbt
+lbt:1489,2,bus,Central and University SE,33.85754,-118.248401,21,1,lbt
+lbt:1490,2,bus,Central & Turmont SW,33.853208,-118.248651,22,1,lbt
+lbt:1491,2,bus,Central and Turmont,33.853658,-118.248408,21,1,lbt
+lbt:1492,2,bus,Central & Helmick SW,33.851511,-118.248661,22,1,lbt
+lbt:1493,2,bus,Central and Helmick NE,33.851957,-118.248406,21,1,lbt
+lbt:1494,2,bus,Avalon & Del Amo SW,33.84731,-118.264942,22,1,lbt
+lbt:1495,2,bus,Central and Del Amo NE,33.847142,-118.248406,21,1,lbt
+lbt:1496,2,bus,Avalon & South Bay Pavilion SW,33.843229,-118.263161,22,1,lbt
+lbt:1497,2,bus,Avalon and South Bay Pavilion SE,33.843329,-118.26294,21,1,lbt
+lbt:1498,2,bus,Avalon & 213th SW,33.835173,-118.263837,22,1,lbt
+lbt:1499,2,bus,Avalon and 213th NE,33.835605,-118.263531,21,1,lbt
+lbt:1500,2,bus,Avalon & Carson SW,33.831357,-118.263802,22,1,lbt
+lbt:1501,2,bus,Avalon and Carson NE,33.832578,-118.263523,21,1,lbt
+lbt:1502,2,bus,Avalon and 220th SW,33.827514,-118.263798,22,1,lbt
+lbt:1503,2,bus,Avalon and 220th SE,33.828078,-118.263518,21,1,lbt
+lbt:1504,"2,8",bus,223rd and Avalon NW,33.824271,-118.264108,44,2,lbt
+lbt:1505,2,bus,Avalon and 223rd,33.824562,-118.26351,21,1,lbt
+lbt:1506,"2,8",bus,223rd and Grace NW,33.824262,-118.268272,44,2,lbt
+lbt:1507,"2,8",bus,223rd & Grace SE,33.824146,-118.267829,44,2,lbt
+lbt:1508,"2,8",bus,223rd and Dolores NW,33.824244,-118.272686,44,2,lbt
+lbt:1509,"2,8",bus,223rd and Dolores SW,33.824143,-118.272488,44,2,lbt
+lbt:1510,2,bus,Main and 223rd SW,33.824078,-118.276138,22,1,lbt
+lbt:1511,"2,8",bus,223rd and Main SE,33.824138,-118.275546,44,2,lbt
+lbt:1512,2,bus,Main and 225th SW,33.821796,-118.275779,22,1,lbt
+lbt:1513,"2,8",bus,223rd and Moneta SW,33.824229,-118.281894,44,2,lbt
+lbt:1514,2,bus,Main and 228th SW,33.818696,-118.275652,22,1,lbt
+lbt:1515,2,bus,Figueroa and 223rd SE,33.824188,-118.285899,21,1,lbt
+lbt:1516,2,bus,Main and 234th NW,33.813585,-118.275716,22,1,lbt
+lbt:1517,2,bus,Figueroa and Shadewell NE,33.821977,-118.2859,21,1,lbt
+lbt:1518,2,bus,Sepulveda and Main NW,33.807994,-118.276303,22,1,lbt
+lbt:1519,2,bus,Figueroa and 228th NE,33.819218,-118.285822,21,1,lbt
+lbt:1520,2,bus,321 W Sepulveda NE,33.808014,-118.279091,22,1,lbt
+lbt:1522,2,bus,Figueroa and Sepulveda NE,33.808173,-118.284509,22,1,lbt
+lbt:1523,2,bus,Figueroa & 234 SE,33.813211,-118.285317,21,1,lbt
+lbt:1525,2,bus,Figueroa & Carriagedale SE,33.809907,-118.285219,43,1,lbt
+lbt:1531,121,bus,Ocean & Magnolia NW,33.767435,-118.198407,44,1,lbt
+lbt:1541,"111,112",bus,Ximeno & PCH SE,33.787563,-118.139634,33,2,lbt
+lbt:1546,"191,192,4",bus,Santa Fe & Dominguez NE,33.839689,-118.213898,90,3,lbt
+lbt:1547,"191,192,4",bus,Santa Fe & El Presidio NE,33.841986,-118.213112,90,3,lbt
+lbt:1549,"191,192",bus,Del Amo & Pacific SW,33.846556,-118.198271,68,2,lbt
+lbt:1550,191,bus,Del Amo & Long Beach Blvd SE,33.846644,-118.193078,35,1,lbt
+lbt:1551,191,bus,Del Amo & Locust SE,33.846331,-118.189478,35,1,lbt
+lbt:1552,191,bus,Del Amo & Atlantic SE,33.845239,-118.184236,35,1,lbt
+lbt:1553,191,bus,Del Amo & Orange SW,33.846865,-118.177003,35,1,lbt
+lbt:1554,191,bus,Del Amo & Cherry SE,33.8468,-118.167009,33,1,lbt
+lbt:1555,191,bus,Del Amo & Clair Del SE,33.846952,-118.165096,33,1,lbt
+lbt:1556,191,bus,Del Amo & Paramount SE,33.846996,-118.159369,33,1,lbt
+lbt:1557,191,bus,Del Amo & Obispo SE,33.847032,-118.15444,33,1,lbt
+lbt:1558,191,bus,Del Amo & Downey SW,33.847075,-118.151522,33,1,lbt
+lbt:1559,191,bus,Del Amo & Bellflower SE,33.847004,-118.124633,33,1,lbt
+lbt:1560,191,bus,Del Amo & Eastbrook SE,33.846956,-118.120453,33,1,lbt
+lbt:1561,191,bus,Del Amo & Woodruff SE,33.846971,-118.115932,33,1,lbt
+lbt:1562,191,bus,Del Amo & Snowden SE,33.846906,-118.111453,33,1,lbt
+lbt:1563,191,bus,Del Amo & Palo Verde SE,33.846944,-118.10708,33,1,lbt
+lbt:1564,191,bus,Del Amo & Stables S,33.845837,-118.096112,33,1,lbt
+lbt:1565,191,bus,Del Amo & Roseton SE,33.845924,-118.086549,33,1,lbt
+lbt:1566,191,bus,Del Amo & Pioneer SE,33.845955,-118.081589,33,1,lbt
+lbt:1567,191,bus,Del Amo & Violeta SE,33.845971,-118.078606,33,1,lbt
+lbt:1568,191,bus,Del Amo & Artesia HS S,33.845993,-118.074598,33,1,lbt
+lbt:1569,191,bus,Del Amo & Norwalk SE,33.845936,-118.071177,33,1,lbt
+lbt:1570,191,bus,Del Amo & Claretta SE,33.84603,-118.067587,33,1,lbt
+lbt:1572,191,bus,Bloomfield & Del Amo SW,33.845864,-118.063549,65,1,lbt
+lbt:1573,191,bus,Bloomfield & Lemming SW,33.840822,-118.063516,32,1,lbt
+lbt:1574,191,bus,Centralia & Bloomfield NW,33.838821,-118.063849,32,1,lbt
+lbt:1575,191,bus,Centralia & Claretta NW,33.838809,-118.067932,32,1,lbt
+lbt:1576,191,bus,Centralia & Norwalk NW,33.838844,-118.072547,32,1,lbt
+lbt:1577,191,bus,Centralia & Elaine NW,33.83882,-118.076679,32,1,lbt
+lbt:1578,191,bus,Centralia & Pioneer NW,33.838824,-118.08236,32,1,lbt
+lbt:1579,191,bus,Centralia & Gridley NW,33.838779,-118.09102,32,1,lbt
+lbt:1580,191,bus,Studebaker & Lemming NE,33.841154,-118.093779,32,1,lbt
+lbt:1581,191,bus,Studebaker & Horney NE,33.843283,-118.094884,32,1,lbt
+lbt:1582,191,bus,Del Amo & Palo Verde NE,33.847108,-118.107294,32,1,lbt
+lbt:1583,191,bus,Del Amo & McNab NW,33.84711,-118.111839,32,1,lbt
+lbt:1584,191,bus,Del Amo & Woodruff NW,33.847144,-118.116752,32,1,lbt
+lbt:1585,191,bus,Del Amo & Dunrobin NW,33.847147,-118.121728,32,1,lbt
+lbt:1586,191,bus,Del Amo & Lakewood NW,33.847233,-118.143131,32,1,lbt
+lbt:1587,191,bus,Del Amo & Downey NW,33.847231,-118.151631,32,1,lbt
+lbt:1588,191,bus,Del Amo & Obispo NW,33.847183,-118.155075,32,1,lbt
+lbt:1589,191,bus,Del Amo & Paramount NW,33.84717,-118.160397,32,1,lbt
+lbt:1590,191,bus,Del Amo & Clair Del NW,33.847108,-118.165768,32,1,lbt
+lbt:1591,191,bus,Del Amo & Cherry NW,33.847075,-118.168133,33,1,lbt
+lbt:1592,191,bus,Del Amo & Orange NW,33.8471,-118.177314,33,1,lbt
+lbt:1593,191,bus,Del Amo & Atlantic NW,33.845282,-118.185362,33,1,lbt
+lbt:1594,191,bus,Del Amo & Locust NE,33.846589,-118.189673,33,1,lbt
+lbt:1595,191,bus,Del Amo & Del Amo Gardens N,33.846854,-118.192525,33,1,lbt
+lbt:1596,"191,192",bus,Del Amo & Long Beach Blvd NW,33.846837,-118.194485,65,2,lbt
+lbt:1597,"191,192",bus,Del Amo & Daisy NW,33.846756,-118.19897,65,2,lbt
+lbt:1598,"191,192,4",bus,Santa Fe & Del Amo SW,33.846517,-118.211803,90,3,lbt
+lbt:1599,"191,192,4",bus,Santa Fe & El Presido SW,33.841324,-118.213486,90,3,lbt
+lbt:1600,"191,192,4",bus,Santa Fe & Dominguez SW,33.83901,-118.214418,90,3,lbt
+lbt:1601,"191,192,4",bus,Santa Fe & Van Buren SW,33.836797,-118.215265,90,3,lbt
+lbt:1602,"191,192,4",bus,Santa Fe & Madison NW,33.834878,-118.215958,90,3,lbt
+lbt:1604,192,bus,Market & Long Beach Blvd SE,33.854242,-118.196247,33,1,lbt
+lbt:1605,192,bus,Market & Cedar SE,33.854244,-118.193566,33,1,lbt
+lbt:1606,192,bus,Market & Pine SE,33.854286,-118.191554,33,1,lbt
+lbt:1607,192,bus,Market & Elm SE,33.854296,-118.188208,33,1,lbt
+lbt:1608,192,bus,South & Atlantic SE,33.860037,-118.184644,33,1,lbt
+lbt:1609,192,bus,South & Myrtle SE,33.860044,-118.181745,33,1,lbt
+lbt:1610,192,bus,South & Lemon SE,33.860054,-118.178867,33,1,lbt
+lbt:1611,192,bus,South & Orange SE,33.860106,-118.17696,33,1,lbt
+lbt:1612,192,bus,South & Gundry SE,33.860108,-118.175372,33,1,lbt
+lbt:1613,192,bus,South & Walnut SE,33.860059,-118.173254,33,1,lbt
+lbt:1614,192,bus,South & Rose SW,33.86009,-118.170712,33,1,lbt
+lbt:1615,192,bus,South & Cherry SE,33.860025,-118.168149,32,1,lbt
+lbt:1616,192,bus,South & Ackerfield SW,33.860069,-118.163847,32,1,lbt
+lbt:1617,"111,112,192",bus,South & Paramount SE,33.860104,-118.159362,65,3,lbt
+lbt:1618,"111,112,192",bus,South & Obispo SW,33.860099,-118.15566,65,3,lbt
+lbt:1619,"111,112,192",bus,South & Downey SE,33.860144,-118.151032,66,3,lbt
+lbt:1620,"111,112,192",bus,South & Hayter SE,33.860162,-118.145889,66,3,lbt
+lbt:1621,192,bus,South & Lakewood SE,33.860186,-118.141496,32,1,lbt
+lbt:1622,192,bus,South & Graywood SE,33.860176,-118.137886,32,1,lbt
+lbt:1623,192,bus,South & Clark SE,33.860154,-118.133569,32,1,lbt
+lbt:1624,192,bus,South & Pearce SE,33.860205,-118.12978,32,1,lbt
+lbt:1625,192,bus,South & Bellflower SE,33.860237,-118.124639,32,1,lbt
+lbt:1626,192,bus,South & Ocana SE,33.859017,-118.11968,32,1,lbt
+lbt:1627,192,bus,South & Woodruff SE,33.85818,-118.11674,32,1,lbt
+lbt:1628,192,bus,South & Gondar SW,33.858192,-118.113435,32,1,lbt
+lbt:1629,"172,192",bus,South & Palo Verde SE,33.858212,-118.107532,62,2,lbt
+lbt:1630,"141,172,192",bus,Studebaker & South NE,33.858738,-118.099523,95,3,lbt
+lbt:1631,"141,172,192",bus,Studebaker & Auto Square NE,33.861639,-118.099489,95,3,lbt
+lbt:1632,"141,172,173,192",bus,183rd & Studebaker SE,33.865518,-118.099099,131,4,lbt
+lbt:1634,"141,172,173,192",bus,183rd & Los Cerritos Center SE,33.865552,-118.09439,132,4,lbt
+lbt:1637,"172,192",bus,South & Studebaker NW,33.858454,-118.100573,63,2,lbt
+lbt:1638,192,bus,South & Palo Verde NE,33.858376,-118.107527,32,1,lbt
+lbt:1639,192,bus,South & Snowden NW,33.858356,-118.112206,32,1,lbt
+lbt:1640,192,bus,South & Woodruff NE,33.858337,-118.116751,32,1,lbt
+lbt:1641,192,bus,South & Ocana NW,33.859585,-118.120422,32,1,lbt
+lbt:1642,192,bus,South & Bellflower NW,33.860464,-118.125611,32,1,lbt
+lbt:1643,192,bus,South & Pearce NW,33.860409,-118.130001,32,1,lbt
+lbt:1644,192,bus,South & Clark NW,33.860461,-118.134206,32,1,lbt
+lbt:1645,192,bus,South & Graywood NW,33.860392,-118.138374,32,1,lbt
+lbt:1646,192,bus,South & Lakewood NW,33.860376,-118.143032,32,1,lbt
+lbt:1647,192,bus,South & Hayter NW,33.860303,-118.146361,32,1,lbt
+lbt:1648,192,bus,South & Downey NW,33.8603,-118.151635,32,1,lbt
+lbt:1649,192,bus,South & Obispo NW,33.860289,-118.156071,32,1,lbt
+lbt:1650,192,bus,South & Paramount NW,33.860266,-118.16036,32,1,lbt
+lbt:1651,192,bus,South & Ackerfield NW,33.860259,-118.163492,32,1,lbt
+lbt:1652,192,bus,South & Cherry NW,33.860238,-118.16891,32,1,lbt
+lbt:1653,192,bus,South & Rose NW,33.860214,-118.170817,32,1,lbt
+lbt:1654,192,bus,South & Walnut NW,33.860198,-118.173798,32,1,lbt
+lbt:1655,192,bus,South & Gundry NW,33.860176,-118.175609,32,1,lbt
+lbt:1656,192,bus,South & Orange NE,33.86017,-118.177085,32,1,lbt
+lbt:1657,192,bus,South & Lewis NW,33.860178,-118.180395,32,1,lbt
+lbt:1658,192,bus,South & Myrtle NW,33.860158,-118.18225,32,1,lbt
+lbt:1659,192,bus,Market & Elm NW,33.854392,-118.188626,32,1,lbt
+lbt:1660,192,bus,Market & Pine NW,33.854376,-118.191996,32,1,lbt
+lbt:1662,"171,172,173,174,175",bus,PCH & Long Beach Blvd SE,33.789756,-118.188248,115,5,lbt
+lbt:1663,"171,172,173,174,175",bus,PCH & Atlantic SE,33.789784,-118.184226,115,5,lbt
+lbt:1665,"171,172,173,174,175",bus,PCH & Martin Luther King Jr SW,33.789781,-118.180507,115,5,lbt
+lbt:1667,"171,172,173,174,175",bus,PCH & Orange SE,33.789781,-118.175782,115,5,lbt
+lbt:1668,"171,172,173,174,175",bus,PCH & Walnut SE,33.789778,-118.17175,115,5,lbt
+lbt:1670,"171,172,173,174,175",bus,PCH & Cherry SE,33.789766,-118.166394,115,5,lbt
+lbt:1672,"171,172,173,174,175",bus,PCH & Junipero SW,33.789765,-118.163468,115,5,lbt
+lbt:1674,"171,172,173,174,175",bus,PCH & Temple SE,33.789787,-118.158603,115,5,lbt
+lbt:1676,"171,172,173,174,175",bus,PCH & Obispo SE,33.789782,-118.154314,115,5,lbt
+lbt:1677,"171,172,173,174,175",bus,PCH & Redondo SE,33.789772,-118.151543,115,5,lbt
+lbt:1679,"171,172,173,174,175",bus,PCH & Grand SE,33.789752,-118.147851,115,5,lbt
+lbt:1680,"171,172,173,174,175",bus,PCH & Termino SW,33.789759,-118.146209,115,5,lbt
+lbt:1681,"172,173",bus,Ximeno & PCH NE,33.788025,-118.139216,61,2,lbt
+lbt:1682,"171,172,173,174,175",bus,PCH & Termino NW,33.789927,-118.146186,119,5,lbt
+lbt:1683,"171,172,173,174,175",bus,PCH & Redondo NW,33.789948,-118.152208,119,5,lbt
+lbt:1684,"171,172,173,174,175",bus,PCH & Obispo NW,33.789949,-118.15496,119,5,lbt
+lbt:1686,"171,172,173,174,175",bus,PCH & Temple NW,33.789959,-118.159337,119,5,lbt
+lbt:1688,"171,172,173,174,175",bus,PCH & Junipero NW,33.789962,-118.163612,119,5,lbt
+lbt:1690,"172,173,174",bus,PCH & Cherry NE,33.78996,-118.167426,67,3,lbt
+lbt:1692,"171,172,173,174,175",bus,PCH & Walnut NW,33.789969,-118.172231,119,5,lbt
+lbt:1693,"171,172,173,174,175",bus,PCH & Orange Ave NE / LBCC,33.789965,-118.175466,119,5,lbt
+lbt:1695,"171,172,173,174,175",bus,PCH & Martin Luther King Jr NW,33.789965,-118.180976,119,5,lbt
+lbt:1697,"171,172,173,174,175",bus,PCH & Atlantic NW,33.789955,-118.185447,119,5,lbt
+lbt:1698,"171,172,173,174,175",bus,PCH & Long Beach Blvd NE,33.790005,-118.188813,119,5,lbt
+lbt:1699,"111,112,172,91",bus,Ximeno & Atherton NE,33.790113,-118.138843,92,4,lbt
+lbt:1700,"172,91",bus,Los Coyotes & Ximeno NE,33.792091,-118.139199,59,2,lbt
+lbt:1701,"172,91",bus,Los Coyotes & Park SE,33.793153,-118.137847,59,2,lbt
+lbt:1702,"172,91",bus,Los Coyotes & Clark SW,33.795843,-118.134346,59,2,lbt
+lbt:1703,"172,91",bus,Stearns & Fidler SE,33.796016,-118.131965,59,2,lbt
+lbt:1704,"172,91",bus,Stearns & Stanbridge SE,33.795947,-118.129428,59,2,lbt
+lbt:1705,"172,91",bus,Stearns & Stearnlee SE,33.79599,-118.127568,59,2,lbt
+lbt:1706,172,bus,Stearns & Bellflower SE,33.795943,-118.125044,30,1,lbt
+lbt:1707,172,bus,Stearns & San Anseline SE,33.795947,-118.121137,30,1,lbt
+lbt:1708,172,bus,Stearns & Radnor SE,33.795943,-118.118517,30,1,lbt
+lbt:1709,172,bus,Stearns & Fanwood SE,33.795913,-118.115738,30,1,lbt
+lbt:1710,172,bus,Stearns & Senasac SE,33.79591,-118.114104,30,1,lbt
+lbt:1711,172,bus,Stearns & McNab SE,33.795904,-118.112119,30,1,lbt
+lbt:1712,172,bus,Palo Verde & Stearns NE,33.795789,-118.107757,30,1,lbt
+lbt:1713,172,bus,Palo Verde & Cantel NE,33.798501,-118.107874,30,1,lbt
+lbt:1714,172,bus,Palo Verde & Los Arcos NE,33.800504,-118.107866,30,1,lbt
+lbt:1715,172,bus,Palo Verde & Willow NE,33.80369,-118.107865,30,1,lbt
+lbt:1716,172,bus,Palo Verde & Barbanell NE,33.805533,-118.10785,30,1,lbt
+lbt:1717,172,bus,Palo Verde & Belen NE,33.809529,-118.107822,30,1,lbt
+lbt:1718,172,bus,Palo Verde & Spring NE,33.810864,-118.107824,30,1,lbt
+lbt:1719,172,bus,Palo Verde & Metz NE,33.815415,-118.107826,30,1,lbt
+lbt:1720,172,bus,Palo Verde & Wardlow NE,33.819136,-118.107772,30,1,lbt
+lbt:1721,172,bus,Palo Verde & Los Coyotes NE,33.821508,-118.107733,30,1,lbt
+lbt:1722,172,bus,Palo Verde & Keynote NE,33.823193,-118.107713,30,1,lbt
+lbt:1723,172,bus,Palo Verde & Conant NE,33.825167,-118.107682,30,1,lbt
+lbt:1724,172,bus,Palo Verde & Harco NE,33.827612,-118.107675,30,1,lbt
+lbt:1725,172,bus,Palo Verde & Carson SE,33.831831,-118.107667,30,1,lbt
+lbt:1726,172,bus,Palo Verde & Harvey NE,33.836232,-118.107677,30,1,lbt
+lbt:1727,172,bus,Palo Verde & Centralia NE,33.839763,-118.107716,30,1,lbt
+lbt:1728,172,bus,Palo Verde & Arbor NE,33.843415,-118.107688,30,1,lbt
+lbt:1729,172,bus,Palo Verde & Del Amo NE,33.847381,-118.107642,30,1,lbt
+lbt:1730,172,bus,Palo Verde & Denmead NE,33.851633,-118.108238,30,1,lbt
+lbt:1731,172,bus,Palo Verde & Candlewood NE,33.853601,-118.108261,30,1,lbt
+lbt:1732,172,bus,Palo Verde & Michelson NE,33.856109,-118.10828,30,1,lbt
+lbt:1738,172,bus,Palo Verde & South SW,33.857996,-118.108435,31,1,lbt
+lbt:1739,172,bus,Palo Verde & Michelson SW,33.855653,-118.108425,31,1,lbt
+lbt:1740,172,bus,Palo Verde & Candlewood SW,33.852985,-118.108408,31,1,lbt
+lbt:1741,172,bus,Palo Verde & Denmead NW,33.851682,-118.108406,31,1,lbt
+lbt:1742,172,bus,Palo Verde & Carfax SW,33.848959,-118.10837,31,1,lbt
+lbt:1743,172,bus,Palo Verde & Del Amo SW,33.846753,-118.107811,31,1,lbt
+lbt:1744,172,bus,Palo Verde & Arbor SW,33.842992,-118.107839,31,1,lbt
+lbt:1745,172,bus,Palo Verde & Centralia SW,33.839343,-118.107844,31,1,lbt
+lbt:1746,172,bus,Palo Verde & Harvey Way SW,33.835732,-118.107882,31,1,lbt
+lbt:1747,172,bus,Palo Verde & Carson SW,33.831879,-118.107897,31,1,lbt
+lbt:1748,172,bus,Palo Verde & Harco SW,33.827269,-118.107897,31,1,lbt
+lbt:1749,172,bus,Palo Verde & Conant NW,33.825345,-118.107898,31,1,lbt
+lbt:1750,172,bus,Palo Verde & Keynote SW,33.822806,-118.107918,31,1,lbt
+lbt:1752,172,bus,Palo Verde & Wardlow SW,33.818377,-118.107942,31,1,lbt
+lbt:1753,172,bus,Palo Verde & Metz SW,33.81494,-118.107908,31,1,lbt
+lbt:1754,172,bus,Palo Verde & Spring NW,33.810949,-118.107934,33,1,lbt
+lbt:1755,172,bus,Palo Verde & Barbanell SW,33.805035,-118.107966,33,1,lbt
+lbt:1756,172,bus,Palo Verde & Willow NW,33.803505,-118.107995,33,1,lbt
+lbt:1757,172,bus,Palo Verde & Los Arcos SW,33.800082,-118.108008,33,1,lbt
+lbt:1758,172,bus,Palo Verde & Woodruff SW,33.797859,-118.108064,33,1,lbt
+lbt:1759,172,bus,Stearns & Palo Verde NW,33.79554,-118.108452,33,1,lbt
+lbt:1760,172,bus,Stearns & McNab NW,33.796065,-118.11329,33,1,lbt
+lbt:1761,172,bus,Stearns & Fanwood NW,33.796064,-118.116645,33,1,lbt
+lbt:1763,172,bus,Stearns & San Anseline NW,33.796069,-118.121148,33,1,lbt
+lbt:1764,"172,91",bus,Stearns & Bellflower NW,33.796132,-118.125874,60,2,lbt
+lbt:1765,"172,91",bus,Stearns & Stearnlee NW,33.796124,-118.128019,60,2,lbt
+lbt:1766,"172,91",bus,Stearns & Stanbridge NW,33.796109,-118.129839,60,2,lbt
+lbt:1768,"172,91",bus,Los Coyotes & Stearns SW,33.795903,-118.13469,60,2,lbt
+lbt:1769,"172,91",bus,Los Coyotes & La Cara NW,33.792892,-118.138592,60,2,lbt
+lbt:1770,"111,112,172,91",bus,Ximeno & Los Coyotes SE,33.791622,-118.13936,94,4,lbt
+lbt:1771,"111,112,172,173",bus,Ximeno & Atherton SW,33.789545,-118.139034,100,4,lbt
+lbt:1772,"121,173,91",bus,Atherton & Ximeno SE,33.789763,-118.138554,106,3,lbt
+lbt:1774,"121,173,91",bus,Atherton & Clark SE,33.789677,-118.1337,106,3,lbt
+lbt:1776,"121,173,91",bus,Atherton & Ashbrook SE,33.788853,-118.130615,106,3,lbt
+lbt:1777,"121,173,91",bus,Atherton & Litchfield SE,33.788161,-118.128754,106,3,lbt
+lbt:1778,"121,173,91",bus,Atherton & Stearnlee SE,33.788188,-118.126365,106,3,lbt
+lbt:1779,173,bus,Atherton & Bellflower SE,33.788534,-118.123911,31,1,lbt
+lbt:1780,173,bus,Atherton & Chatwin SE,33.788687,-118.122193,31,1,lbt
+lbt:1781,173,bus,Atherton & Lave SE,33.788675,-118.120018,31,1,lbt
+lbt:1783,173,bus,Atherton & Fanwood SE,33.788589,-118.115859,31,1,lbt
+lbt:1784,173,bus,Atherton & McNab SE,33.788564,-118.112375,31,1,lbt
+lbt:1785,173,bus,Atherton & Carfax SE,33.7886,-118.10972,31,1,lbt
+lbt:1786,173,bus,Studebaker & Atherton NE,33.789054,-118.099139,31,1,lbt
+lbt:1787,173,bus,Studebaker & Los Santos NE,33.792481,-118.099126,31,1,lbt
+lbt:1788,173,bus,Studebaker & Stearns NE,33.796371,-118.099083,31,1,lbt
+lbt:1790,173,bus,Studebaker & Los Arcos NE,33.800219,-118.099066,31,1,lbt
+lbt:1791,173,bus,Studebaker & Willow NE,33.803566,-118.099048,31,1,lbt
+lbt:1792,173,bus,Studebaker & Barrios NE,33.807146,-118.099018,31,1,lbt
+lbt:1793,173,bus,Studebaker & Spring NE,33.810877,-118.099029,31,1,lbt
+lbt:1794,173,bus,Studebaker & Mezzanine NE,33.814845,-118.099052,31,1,lbt
+lbt:1795,173,bus,Studebaker & Wardlow SE,33.818579,-118.099045,31,1,lbt
+lbt:1796,173,bus,Studebaker & Keynote NE,33.82313,-118.099039,31,1,lbt
+lbt:1797,173,bus,Studebaker & Harco NE,33.827861,-118.099028,31,1,lbt
+lbt:1798,173,bus,Los Coyotes & Parkcrest NE,33.830526,-118.099264,31,1,lbt
+lbt:1799,"101,173",bus,Carson & LB Towne Center SE,33.831245,-118.087419,55,2,lbt
+lbt:1800,"101,173",bus,Carson & Pioneer SE,33.831326,-118.081197,55,2,lbt
+lbt:1801,"101,173",bus,Carson & Violeta SE,33.831369,-118.078628,55,2,lbt
+lbt:1802,"101,104",bus,Carson & Norwalk SW,33.831337,-118.073589,109,2,lbt
+lbt:1804,"101,104",bus,Civic Center & Ibex NE,33.82962,-118.072652,56,2,lbt
+lbt:1806,"101,104",bus,Civic Center & Joliet NE,33.829619,-118.074617,56,2,lbt
+lbt:1807,"101,104",bus,Norwalk & Civic Center NW,33.830044,-118.072104,55,2,lbt
+lbt:1808,104,bus,Norwalk & 221st SW,33.827447,-118.071997,29,1,lbt
+lbt:1809,173,bus,Carson & Juan SW,33.831368,-118.075715,31,1,lbt
+lbt:1810,104,bus,Norwalk & 226th SW,33.823407,-118.071954,29,1,lbt
+lbt:1811,104,bus,Norwalk & Ring SW,33.821522,-118.071916,29,1,lbt
+lbt:1812,104,bus,Norwalk & Wardlow NW,33.818195,-118.07194,29,1,lbt
+lbt:1813,173,bus,Studebaker & Los Santos SW,33.791969,-118.099394,33,1,lbt
+lbt:1814,173,bus,Atherton & Studebaker NW,33.788781,-118.099664,33,1,lbt
+lbt:1815,173,bus,Atherton & Vuelta Grande NW,33.78882,-118.103142,33,1,lbt
+lbt:1816,173,bus,Atherton & Palo Verde NE,33.788833,-118.107585,33,1,lbt
+lbt:1818,173,bus,Atherton & McNab NW,33.788829,-118.112838,33,1,lbt
+lbt:1820,173,bus,Atherton & Fanwood NW,33.78883,-118.116595,33,1,lbt
+lbt:1822,173,bus,Atherton & Chatwin NE,33.788842,-118.122234,33,1,lbt
+lbt:1823,"121,173,91",bus,Atherton & Bellflower NW,33.788493,-118.125055,111,3,lbt
+lbt:1824,"121,173,91",bus,Atherton & Stearnlee NW,33.788303,-118.126968,111,3,lbt
+lbt:1825,"121,173,91",bus,Atherton & Litchfield NW,33.788408,-118.129008,111,3,lbt
+lbt:1826,"121,173,91",bus,Atherton & Ashbrook NW,33.789189,-118.130961,111,3,lbt
+lbt:1828,"173,91",bus,Atherton & Clark NE,33.789853,-118.133769,62,2,lbt
+lbt:1829,"173,91",bus,Atherton & Park NW,33.789951,-118.13709,62,2,lbt
+lbt:1831,121,bus,Clark & Atherton SW,33.789579,-118.134112,49,1,lbt
+lbt:1832,121,bus,Clark & Clark Terrace,33.787289,-118.134149,49,1,lbt
+lbt:1842,104,bus,Spring & Studebaker NW,33.810565,-118.099342,29,1,lbt
+lbt:1843,104,bus,Spring & Nipomo NW,33.810583,-118.102264,29,1,lbt
+lbt:1844,104,bus,Spring & Palo Verde NW,33.810619,-118.108199,29,1,lbt
+lbt:1846,104,bus,Spring & Woodruff NW,33.810659,-118.115523,29,1,lbt
+lbt:1847,104,bus,Spring & Los Coyotes NW,33.810636,-118.117054,29,1,lbt
+lbt:1848,104,bus,Spring & San Anseline NW,33.810623,-118.121649,29,1,lbt
+lbt:1849,104,bus,Spring & Bellflower NW,33.810655,-118.125481,29,1,lbt
+lbt:1850,104,bus,Spring & Charlemagne NW,33.810663,-118.130879,29,1,lbt
+lbt:1851,104,bus,Spring & Clark NW,33.810732,-118.13444,29,1,lbt
+lbt:1852,104,bus,Spring & Airport Plaza Dr NE,33.811445,-118.136524,29,1,lbt
+lbt:1853,104,bus,Willow & Palm NW,33.804558,-118.155464,29,1,lbt
+lbt:1854,104,bus,Willow & Temple NW,33.804558,-118.159661,29,1,lbt
+lbt:1855,104,bus,Willow & Junipero NW,33.804553,-118.163673,29,1,lbt
+lbt:1856,104,bus,Willow & Cherry NW,33.80453,-118.168064,29,1,lbt
+lbt:1857,104,bus,Willow & Walnut NW,33.804464,-118.172438,29,1,lbt
+lbt:1858,104,bus,Willow & Orange NW,33.804397,-118.176951,29,1,lbt
+lbt:1859,104,bus,Willow & California NW,33.804448,-118.181414,29,1,lbt
+lbt:1860,104,bus,Willow & Atlantic SE,33.804291,-118.184748,30,1,lbt
+lbt:1861,104,bus,Willow & California SE,33.804224,-118.179972,30,1,lbt
+lbt:1862,104,bus,Willow & Orange SW,33.804229,-118.176618,30,1,lbt
+lbt:1863,104,bus,Willow & Walnut SE,33.804257,-118.170539,30,1,lbt
+lbt:1864,104,bus,Willow & Cherry SE,33.804309,-118.1673,30,1,lbt
+lbt:1865,104,bus,Willow & Junipero SE,33.80432,-118.162952,30,1,lbt
+lbt:1866,104,bus,Willow & Temple SE,33.804315,-118.158666,30,1,lbt
+lbt:1867,104,bus,Willow & Palm SE,33.804326,-118.154736,30,1,lbt
+lbt:1868,"104,111",bus,Willow & Redondo SE,33.804314,-118.150747,48,2,lbt
+lbt:1869,"104,111",bus,Willow & Grand SE,33.803925,-118.147853,48,2,lbt
+lbt:1870,104,bus,Lakewood & Willow NE,33.803802,-118.142537,30,1,lbt
+lbt:1871,104,bus,Spring & Lakewood SE,33.812469,-118.138805,30,1,lbt
+lbt:1872,104,bus,Spring & Airport Plaza Dr SE,33.811177,-118.136587,30,1,lbt
+lbt:1873,104,bus,Spring & Clark SE,33.810423,-118.133669,30,1,lbt
+lbt:1875,104,bus,Spring & Bellflower SE,33.810422,-118.125049,30,1,lbt
+lbt:1877,104,bus,Spring & Los Coyotes SE,33.810441,-118.116968,30,1,lbt
+lbt:1878,104,bus,Spring & Woodruff SE,33.810413,-118.113972,30,1,lbt
+lbt:1879,104,bus,Spring & Snowden SE,33.810366,-118.110806,30,1,lbt
+lbt:1880,104,bus,Spring & Palo Verde SE,33.810392,-118.107553,30,1,lbt
+lbt:1881,104,bus,Spring & Nipomo SE,33.810356,-118.101598,30,1,lbt
+lbt:1886,104,bus,Norwalk & Wardlow NE,33.818204,-118.071737,30,1,lbt
+lbt:1887,104,bus,Norwalk & Torin NE,33.821091,-118.071712,30,1,lbt
+lbt:1888,104,bus,Norwalk & 226th SE,33.823789,-118.071727,30,1,lbt
+lbt:1890,104,bus,Norwalk & 221st SE,33.827372,-118.071832,30,1,lbt
+lbt:1892,173,bus,Carson & Norwalk NW,33.83156,-118.072484,33,1,lbt
+lbt:1893,"101,173",bus,Carson & Juan NW,33.831571,-118.076281,59,2,lbt
+lbt:1894,"101,173",bus,Carson & Violeta NE,33.831563,-118.079692,59,2,lbt
+lbt:1896,173,bus,Norwalk & Carson NE,33.831824,-118.071971,31,1,lbt
+lbt:1897,173,bus,Norwalk & 214th NE,33.835368,-118.071981,31,1,lbt
+lbt:1898,173,bus,Norwalk & Centralia NE,33.839103,-118.072017,31,1,lbt
+lbt:1899,173,bus,Norwalk & 207th NE,33.842631,-118.072046,31,1,lbt
+lbt:1900,173,bus,Norwalk & Del Amo NE,33.846602,-118.071985,31,1,lbt
+lbt:1901,173,bus,Norwalk & Yearling NE,33.849699,-118.072033,31,1,lbt
+lbt:1902,173,bus,Norwalk & Flora Vista NE,33.854104,-118.072113,31,1,lbt
+lbt:1903,173,bus,South & Norwalk NW,33.858623,-118.072827,31,1,lbt
+lbt:1905,173,bus,South & Elaine NW,33.858584,-118.076967,31,1,lbt
+lbt:1906,173,bus,South & Pioneer NE,33.858578,-118.082573,31,1,lbt
+lbt:1907,173,bus,South & Jersey NE,33.858559,-118.085633,31,1,lbt
+lbt:1908,173,bus,South & Target (Cerritos) N,33.858552,-118.087863,31,1,lbt
+lbt:1909,"172,173",bus,Gridley & South NE,33.858678,-118.090727,34,2,lbt
+lbt:1911,"172,173",bus,183rd & Gridley NW,33.865806,-118.091728,34,2,lbt
+lbt:1912,"172,173",bus,183rd & Los Cerritos Center NW,33.865762,-118.095176,34,2,lbt
+lbt:1915,"172,173",bus,Gridley & 187th NE,33.861581,-118.090822,34,2,lbt
+lbt:1916,"141,172,173,192",bus,Gridley & 187th SW,33.860748,-118.091083,132,4,lbt
+lbt:1917,173,bus,South & Gridley SE,33.85827,-118.090173,33,1,lbt
+lbt:1918,173,bus,South & Jersey S,33.858372,-118.085827,33,1,lbt
+lbt:1919,173,bus,South & Pioneer SE,33.858347,-118.08174,33,1,lbt
+lbt:1920,173,bus,South & Elaine SW,33.858436,-118.076467,33,1,lbt
+lbt:1922,173,bus,South & Norwalk SW,33.858416,-118.07268,33,1,lbt
+lbt:1923,173,bus,Norwalk & Flora Vista NW,33.854512,-118.072369,33,1,lbt
+lbt:1924,173,bus,Norwalk & Yearling SW,33.849113,-118.072272,33,1,lbt
+lbt:1925,173,bus,Norwalk & Del Amo SW,33.845774,-118.072223,33,1,lbt
+lbt:1926,173,bus,Norwalk & 207th NW,33.84254,-118.072191,33,1,lbt
+lbt:1927,173,bus,Norwalk & Centralia SW,33.83846,-118.072178,33,1,lbt
+lbt:1928,173,bus,Norwalk & 214th NW,33.835388,-118.072155,33,1,lbt
+lbt:1934,173,bus,Studebaker & Harco NW,33.828423,-118.099273,33,1,lbt
+lbt:1936,"41,8",bus,Wardlow & Delta SE,33.823581,-118.210916,59,2,lbt
+lbt:1938,8,bus,Wardlow & River SW,33.824181,-118.222463,23,1,lbt
+lbt:1939,8,bus,Wardlow & Delta NE,33.823817,-118.210857,22,1,lbt
+lbt:1940,8,bus,223rd & Marathon SW,33.824241,-118.233225,23,1,lbt
+lbt:1941,8,bus,Wardlow & McHelen NE,33.824423,-118.222191,22,1,lbt
+lbt:1942,8,bus,223rd & Wilmington SE,33.824114,-118.241418,23,1,lbt
+lbt:1943,8,bus,223rd & Marathon NW,33.824329,-118.2333,22,1,lbt
+lbt:1945,8,bus,223rd & Wilmington NE,33.8244,-118.241235,22,1,lbt
+lbt:1947,8,bus,223rd & Lucerne NW,33.824374,-118.250997,22,1,lbt
+lbt:1949,8,bus,223rd & Edgar NE,33.824358,-118.254706,22,1,lbt
+lbt:1950,8,bus,223rd & Avalon SE,33.82409,-118.263093,23,1,lbt
+lbt:1951,8,bus,223rd & Bonita NW,33.824365,-118.259601,22,1,lbt
+lbt:1954,8,bus,223rd & Figueroa SW,33.824311,-118.286228,23,1,lbt
+lbt:1956,8,bus,223rd & Vermont SE,33.824294,-118.289805,23,1,lbt
+lbt:1959,8,bus,223rd & Main NW,33.824425,-118.276517,22,1,lbt
+lbt:1963,8,bus,223rd & Figueroa NW,33.824555,-118.286475,22,1,lbt
+lbt:1965,8,bus,223rd & Vermont NW,33.824555,-118.290718,22,1,lbt
+lbt:1972,"101,173",bus,Carson & LB Towne Center - Walmart NE,33.83153,-118.089921,59,2,lbt
+lbt:1996,"141,172,192",bus,Los Cerritos Center Layover,33.865569,-118.096333,191,3,lbt
+lbt:1998,"191,4",bus,Santa Fe & Carson NW,33.831885,-118.217068,58,2,lbt
+lbt:2000,192,bus,Carson & Santa Fe SE,33.831681,-118.216582,32,1,lbt
+lbt:2001,1,bus,Del Amo & Alameda NE,33.846837,-118.217701,22,1,lbt
+lbt:2002,1,bus,Del Amo & Alameda SE,33.846505,-118.217551,23,1,lbt
+lbt:2003,1,bus,Del Amo & Rancho Way NW,33.84677,-118.224114,22,1,lbt
+lbt:2004,1,bus,Del Amo & Fordyce SW,33.846544,-118.223985,23,1,lbt
+lbt:2005,1,bus,Del Amo & Wilmington NW,33.84691,-118.234671,22,1,lbt
+lbt:2006,1,bus,Del Amo & Wilmington SW,33.846621,-118.23513,23,1,lbt
+lbt:2007,1,bus,Del Amo & Alvo NW,33.846926,-118.23895,22,1,lbt
+lbt:2008,1,bus,Del Amo & Alvo SE,33.846706,-118.238422,23,1,lbt
+lbt:2009,1,bus,Del Amo & Tajauta NW,33.846922,-118.244002,22,1,lbt
+lbt:2010,1,bus,Del Amo & Tajauta SE,33.846702,-118.24347,23,1,lbt
+lbt:2011,"1,2",bus,Del Amo & Central NW,33.846911,-118.248876,44,2,lbt
+lbt:2012,1,bus,Del Amo & Central SE,33.846666,-118.248261,23,1,lbt
+lbt:2013,"1,2",bus,Del Amo & Tillman NW,33.846864,-118.25376,44,2,lbt
+lbt:2014,"1,2",bus,Del Amo & Tillman SE,33.846681,-118.253213,44,2,lbt
+lbt:2015,"1,2",bus,Del Amo & Leapwood NW,33.8469,-118.259014,44,2,lbt
+lbt:2016,"1,2",bus,Del Amo & Leapwood SE,33.84667,-118.258494,44,2,lbt
+lbt:2017,1,bus,Avalon & Del Amo NE,33.84835,-118.264681,22,1,lbt
+lbt:2018,"1,2",bus,Del Amo & Avalon SE,33.847369,-118.263715,44,2,lbt
+lbt:2019,1,bus,Avalon & Elsmere NE,33.853571,-118.265358,22,1,lbt
+lbt:2020,1,bus,Avalon & Elsmere NW,33.853434,-118.26571,23,1,lbt
+lbt:2021,1,bus,Avalon & 189th NE,33.859266,-118.265957,22,1,lbt
+lbt:2022,1,bus,Avalon & 189th SW,33.858659,-118.266298,23,1,lbt
+lbt:2023,1,bus,Avalon & 184th NE,33.863347,-118.265945,22,1,lbt
+lbt:2024,1,bus,Avalon & 184th SW,33.862833,-118.266333,23,1,lbt
+lbt:2025,1,bus,Victoria & Avalon SE,33.866884,-118.265722,22,1,lbt
+lbt:2026,1,bus,Avalon & Victoria SW,33.866706,-118.266362,23,1,lbt
+lbt:2027,1,bus,Victoria & Rainsbury SW,33.86702,-118.261273,22,1,lbt
+lbt:2028,1,bus,Victoria & Rainsbury NW,33.867224,-118.261416,23,1,lbt
+lbt:2030,"1,2",bus,Victoria & Tamcliff NW,33.867336,-118.257773,44,2,lbt
+lbt:2031,"191,192",bus,Del Amo & Oregon SW,33.846538,-118.200443,68,2,lbt
+lbt:2032,"101,173",bus,Carson & LB Towne Center - Walmart SE,33.831223,-118.089633,55,2,lbt
+lbt:2033,"121,131",bus,Marina & 2nd SE,33.756957,-118.1123,42,2,lbt
+lbt:2035,4,bus,Carson & Arnold Center NW,33.831844,-118.230744,24,1,lbt
+lbt:2036,4,bus,Carson & Arnold Center SE,33.831656,-118.2303,23,1,lbt
+lbt:2037,4,bus,Carson & Wilmington NW,33.831867,-118.239949,24,1,lbt
+lbt:2038,4,bus,Carson & Wilmington SW,33.83161,-118.239857,23,1,lbt
+lbt:2039,4,bus,Carson & Martin NW,33.831832,-118.244378,24,1,lbt
+lbt:2040,4,bus,Carson & Martin SE,33.831617,-118.243855,23,1,lbt
+lbt:2041,4,bus,Carson & Vera NW,33.831824,-118.248896,24,1,lbt
+lbt:2042,4,bus,Carson & Vera SE,33.831618,-118.248196,23,1,lbt
+lbt:2043,4,bus,Carson & Perry NW,33.831801,-118.253073,24,1,lbt
+lbt:2044,4,bus,Carson & Acarus SE,33.831597,-118.25081,23,1,lbt
+lbt:2045,4,bus,Carson & Civic Center NW,33.831786,-118.259637,24,1,lbt
+lbt:2046,4,bus,Carson & Bonita SE,33.831569,-118.259051,23,1,lbt
+lbt:2047,4,bus,Carson & Avalon NW,33.831767,-118.264071,24,1,lbt
+lbt:2048,4,bus,Carson & Avalon SE,33.831538,-118.263483,23,1,lbt
+lbt:2049,4,bus,Carson & Grace NW,33.831753,-118.26827,24,1,lbt
+lbt:2050,4,bus,Carson & Grace SE,33.831541,-118.26774,23,1,lbt
+lbt:2051,4,bus,Carson & Dolores NE,33.831743,-118.272286,24,1,lbt
+lbt:2052,4,bus,Carson & Dolores SE,33.831526,-118.272093,23,1,lbt
+lbt:2053,4,bus,Carson & Orrick NW,33.83171,-118.274663,24,1,lbt
+lbt:2054,4,bus,Carson & Main SE,33.831517,-118.277639,23,1,lbt
+lbt:2055,4,bus,Carson & Main NW,33.831723,-118.278351,24,1,lbt
+lbt:2056,4,bus,Carson & Moneta SE,33.831535,-118.281524,23,1,lbt
+lbt:2057,4,bus,Carson & Moneta NW,33.831721,-118.281965,24,1,lbt
+lbt:2058,4,bus,Carson & Figueroa SE,33.831539,-118.285811,23,1,lbt
+lbt:2059,4,bus,Carson & Figueroa NW,33.831651,-118.286403,24,1,lbt
+lbt:2062,4,bus,Carson & Vermont SE,33.83155,-118.290045,23,1,lbt
+lbt:2071,4,bus,Carson & Vermont NE,33.83167,-118.289984,24,1,lbt
+lbt:2074,2,bus,Victoria & Birchknoll NW,33.867475,-118.252573,21,1,lbt
+lbt:2075,2,bus,Victoria & Birchknoll SE,33.867295,-118.252046,22,1,lbt
+lbt:2076,"1,2",bus,Victoria & Cedar Bluff SW,33.867161,-118.255413,44,2,lbt
+lbt:2147,"171,175,41",bus,PCH & Santa Fe SE,33.789791,-118.214938,84,3,lbt
+lbt:2201,22,bus,Downey & Jefferson SE,33.892524,-118.151293,31,1,lbt
+lbt:2202,22,bus,Downey & Madison NW,33.891207,-118.15153,31,1,lbt
+lbt:2203,22,bus,Downey & Somerset NE,33.896708,-118.151333,31,1,lbt
+lbt:2204,22,bus,Downey & Alondra SW,33.88787,-118.151552,32,1,lbt
+lbt:2205,22,bus,Downey & Contreras SE,33.900869,-118.151365,31,1,lbt
+lbt:2206,22,bus,Downey & Jackson SW,33.885215,-118.151438,32,1,lbt
+lbt:2207,22,bus,Downey & Rosecrans SE,33.904175,-118.151335,31,1,lbt
+lbt:2209,22,bus,Downey & Century NE,33.90707,-118.151441,31,1,lbt
+lbt:2213,22,bus,Downey & Somerset Ranch NE,33.913463,-118.152336,31,1,lbt
+lbt:2214,22,bus,Imperial & Lakewood NW,33.917136,-118.137967,31,1,lbt
+lbt:2215,22,bus,Gardendale & Downey SE,33.914736,-118.151531,31,1,lbt
+lbt:2216,22,bus,Imperial & Barlin NW,33.91821,-118.140625,31,1,lbt
+lbt:2217,22,bus,Gardendale & Somerset Ranch SW,33.913597,-118.149144,31,1,lbt
+lbt:2218,22,bus,Imperial & Brookshire NW,33.92005,-118.143964,31,1,lbt
+lbt:2219,22,bus,Gardendale & Barlin SE,33.911786,-118.14527,31,1,lbt
+lbt:2220,22,bus,Downey & Imperial SW,33.921229,-118.147065,31,1,lbt
+lbt:2221,"41,46",bus,PCH & 7th NE,33.775543,-118.122761,64,2,lbt
+lbt:2222,22,bus,Downey & Gardendale NW,33.915063,-118.151695,31,1,lbt
+lbt:2223,22,bus,Downey & Alondra SE,33.888118,-118.151228,31,1,lbt
+lbt:2224,22,bus,Downey & Somerset Ranch NW,33.913309,-118.152509,31,1,lbt
+lbt:2228,22,bus,Downey & Klondike SW,33.908851,-118.151868,31,1,lbt
+lbt:2229,22,bus,Downey & Rosecrans NW,33.903944,-118.151601,31,1,lbt
+lbt:2232,22,bus,Downey & 2nd NW,33.898415,-118.151564,31,1,lbt
+lbt:2234,22,bus,Downey & Somerset SW,33.896166,-118.151547,31,1,lbt
+lbt:2290,21,bus,Lakewood & Rosecrans NE,33.90415,-118.142675,3,1,lbt
+lbt:2299,22,bus,Lakewood Blvd Station - East,33.913138,-118.140387,62,1,lbt
+lbt:2301,"41,8",bus,Wardlow & Magnolia NE,33.819081,-118.197824,60,2,lbt
+lbt:2384,"121,131",bus,Ocean & Loma NW,33.76097,-118.151091,78,2,lbt
+lbt:2401,"141,51,61",bus,Artesia & Acacia SE,33.874456,-118.224266,165,3,lbt
+lbt:2402,"141,51,61",bus,Artesia & Santa Fe SE,33.874126,-118.213958,165,3,lbt
+lbt:2403,51,bus,Long Beach Blvd & Cambridge NE,33.865881,-118.200142,64,1,lbt
+lbt:2404,51,bus,Long Beach Blvd & Harcourt NE,33.867565,-118.20065,64,1,lbt
+lbt:2406,51,bus,Long Beach Blvd & Bort NE,33.870723,-118.201544,64,1,lbt
+lbt:2407,"141,51,61",bus,Artesia & Long Beach Blvd NW,33.874442,-118.203481,170,3,lbt
+lbt:2408,"141,51,61",bus,Artesia & Harbor NW,33.874412,-118.207521,170,3,lbt
+lbt:2409,"141,51,61",bus,Artesia & Santa Fe NE,33.874375,-118.214464,170,3,lbt
+lbt:2410,"141,51,61",bus,Acacia & Artesia NE,33.874807,-118.224785,170,3,lbt
+lbt:2411,"141,51,61",bus,Acacia & Walnut SW,33.876206,-118.224948,165,3,lbt
+lbt:2412,121,bus,Queensway Dr & State Univ S,33.763679,-118.201321,44,1,lbt
+lbt:2413,121,bus,Golden & Seaside NE,33.766215,-118.201694,43,1,lbt
+lbt:2414,121,bus,Ocean & Golden SE,33.767227,-118.201272,43,1,lbt
+lbt:2415,"121,21,22,61",bus,Pacific & Ocean NE,33.767384,-118.193585,180,4,lbt
+lbt:2423,"121,21,22,61",bus,Ocean & Long Beach NW,33.767029,-118.189957,137,4,lbt
+lbt:2424,"121,21,22,61",bus,Ocean & Pine NE,33.767153,-118.192109,137,4,lbt
+lbt:2427,121,bus,Golden Shore & Ocean SW,33.767015,-118.202015,44,1,lbt
+lbt:2429,51,bus,3rd & Promenade NW,33.770555,-118.191329,61,1,lbt
+lbt:2449,131,bus,Wardlow & Pacific SW,33.818909,-118.193995,28,1,lbt
+lbt:2450,131,bus,Wardlow & Long Beach Blvd SE,33.81877,-118.188929,28,1,lbt
+lbt:2451,131,bus,Wardlow & Atlantic SE,33.818847,-118.18474,28,1,lbt
+lbt:2452,131,bus,Wardlow & California SW,33.818845,-118.180488,28,1,lbt
+lbt:2454,131,bus,Wardlow & Orange SE,33.818851,-118.176607,28,1,lbt
+lbt:2456,131,bus,Wardlow & Walnut SE,33.818893,-118.171721,28,1,lbt
+lbt:2458,131,bus,Spring & Cherry SE,33.811602,-118.166959,28,1,lbt
+lbt:2459,131,bus,Spring & Junipero SW,33.811593,-118.163539,28,1,lbt
+lbt:2460,131,bus,Spring & Temple SE,33.811443,-118.158667,28,1,lbt
+lbt:2461,131,bus,Spring & Redondo SW,33.810518,-118.151538,28,1,lbt
+lbt:2463,131,bus,Redondo & Hill SW,33.796938,-118.151495,28,1,lbt
+lbt:2464,131,bus,Redondo & Willow SW,33.804185,-118.151412,28,1,lbt
+lbt:2465,131,bus,Redondo & Burnett SW,33.801285,-118.151465,28,1,lbt
+lbt:2469,131,bus,Redondo & PCH NW,33.790153,-118.151962,28,1,lbt
+lbt:2470,131,bus,Redondo & 15th SW,33.785597,-118.15252,28,1,lbt
+lbt:2471,131,bus,Redondo & Anaheim NW,33.783298,-118.152487,28,1,lbt
+lbt:2472,131,bus,Redondo & Anaheim SW,33.781274,-118.152535,28,1,lbt
+lbt:2473,131,bus,Redondo & 10th NW,33.779271,-118.152505,28,1,lbt
+lbt:2474,131,bus,Redondo & 8th SW,33.777065,-118.152504,28,1,lbt
+lbt:2475,131,bus,Redondo & 7th SW,33.77491,-118.152507,28,1,lbt
+lbt:2477,131,bus,Redondo & 4th SW,33.771539,-118.152521,28,1,lbt
+lbt:2478,131,bus,Redondo & Hill SE,33.797036,-118.151346,31,1,lbt
+lbt:2479,131,bus,Redondo & 3rd NW,33.768354,-118.152512,28,1,lbt
+lbt:2481,131,bus,Redondo & Broadway NW,33.764741,-118.152531,28,1,lbt
+lbt:2482,131,bus,Redondo & Broadway NE,33.764675,-118.152357,30,1,lbt
+lbt:2484,131,bus,Redondo & 3rd NE,33.76828,-118.152386,30,1,lbt
+lbt:2486,131,bus,Redondo & 4th NE,33.772117,-118.152354,30,1,lbt
+lbt:2488,131,bus,Redondo & 7th NE,33.775608,-118.152347,30,1,lbt
+lbt:2489,131,bus,Redondo & 8th NE,33.777293,-118.152353,30,1,lbt
+lbt:2490,131,bus,Redondo & 10th NE,33.779139,-118.152376,30,1,lbt
+lbt:2491,131,bus,Redondo & 11th NE,33.781563,-118.152361,30,1,lbt
+lbt:2492,131,bus,Redondo & Anaheim NE,33.782964,-118.152354,31,1,lbt
+lbt:2493,131,bus,Redondo & 15th NE,33.785943,-118.152346,31,1,lbt
+lbt:2494,131,bus,Redondo & PCH NE,33.790189,-118.151755,31,1,lbt
+lbt:2496,131,bus,Redondo & Hathway SE,33.794721,-118.151487,31,1,lbt
+lbt:2498,131,bus,Redondo & Burnett SE,33.801359,-118.151321,31,1,lbt
+lbt:2499,131,bus,Spring & Redondo NW,33.810712,-118.151782,31,1,lbt
+lbt:2500,131,bus,Spring & Temple NE,33.811693,-118.158641,31,1,lbt
+lbt:2501,131,bus,Spring & Freeway Access NW,33.811755,-118.165241,31,1,lbt
+lbt:2502,131,bus,Wardlow & Cherry NW,33.81898,-118.168406,31,1,lbt
+lbt:2504,131,bus,Wardlow & Walnut NW,33.818983,-118.172287,31,1,lbt
+lbt:2506,131,bus,Wardlow & Orange NW,33.818982,-118.176682,31,1,lbt
+lbt:2508,131,bus,Wardlow & California NE,33.818976,-118.180564,31,1,lbt
+lbt:2509,131,bus,Wardlow & Atlantic NW,33.818968,-118.185916,31,1,lbt
+lbt:2510,131,bus,Wardlow & Long Beach Blvd NW,33.818996,-118.189083,31,1,lbt
+lbt:2511,131,bus,Wardlow & Pacific NE,33.819069,-118.193564,31,1,lbt
+lbt:2520,"111,112,192",bus,South & Med Center S,33.860105,-118.153522,65,3,lbt
+lbt:2522,192,bus,South & Across Medical Center N,33.860302,-118.154168,32,1,lbt
+lbt:2530,"181,191,192",bus,Broadway & Cedar SE,33.76924,-118.194735,82,3,lbt
+lbt:2600,191,bus,McHelen & Wardlow NW,33.82463,-118.222375,34,1,lbt
+lbt:2680,"171,175",bus,PCH & Cherry NE (Storage Facility),33.789954,-118.166796,52,2,lbt
+lbt:2700,"141,61",bus,Artesia & Long Beach Blvd SE,33.87419,-118.202214,104,2,lbt
+lbt:2701,"141,61",bus,Artesia & Butler SW,33.874137,-118.197625,104,2,lbt
+lbt:2791,"101,103,61",bus,Atlantic & 33rd NW,33.817143,-118.185088,118,3,lbt
+lbt:2827,21,bus,Paramount & Paramount Adult School,33.901269,-118.160314,31,1,lbt
+lbt:2828,21,bus,Alondra & Vermont SE,33.889054,-118.162635,32,1,lbt
+lbt:2829,21,bus,Paramount & Alondra NW,33.889558,-118.159938,32,1,lbt
+lbt:2830,21,bus,Alondra & Vermont NE,33.889235,-118.163038,31,1,lbt
+lbt:2831,21,bus,Paramount & Madison SE,33.891043,-118.159991,32,1,lbt
+lbt:2832,21,bus,Paramount & Madison SW,33.890848,-118.160229,31,1,lbt
+lbt:2833,21,bus,Paramount & Adams NE,33.895032,-118.160026,32,1,lbt
+lbt:2834,21,bus,Paramount & Jefferson NW,33.893046,-118.16023,31,1,lbt
+lbt:2835,21,bus,Paramount & Somerset NE,33.896784,-118.159987,32,1,lbt
+lbt:2836,21,bus,Paramount & Somerset SW,33.895927,-118.16025,31,1,lbt
+lbt:2837,21,bus,Paramount & 3rd NE,33.899343,-118.160056,32,1,lbt
+lbt:2838,21,bus,Paramount & 3rd SW,33.898826,-118.160267,31,1,lbt
+lbt:2839,"21,71",bus,Lakewood & Rosecrans SW,33.903382,-118.143055,56,2,lbt
+lbt:2840,71,bus,Rosecrans & RR-Xing SE,33.903567,-118.163888,27,1,lbt
+lbt:2841,71,bus,Rosecrans & RR-Xing NW,33.903879,-118.164875,27,1,lbt
+lbt:2842,71,bus,Rosecrans & Paramount SW,33.903575,-118.1608,27,1,lbt
+lbt:2843,71,bus,Rosecrans & Paramount NW,33.903774,-118.16076,27,1,lbt
+lbt:2844,"21,71",bus,Rosecrans & Anderson SE,33.903605,-118.155429,59,2,lbt
+lbt:2845,"21,71",bus,Rosecrans & Anderson NE,33.903801,-118.155432,58,2,lbt
+lbt:2846,"21,71",bus,Rosecrans & Downey SE,33.903632,-118.151152,59,2,lbt
+lbt:2847,"21,71",bus,Rosecrans & Downey NW,33.903856,-118.151803,58,2,lbt
+lbt:2848,"21,71",bus,Rosecrans & Castana SE,33.903618,-118.146101,59,2,lbt
+lbt:2849,"21,71",bus,Rosecrans & Castana NE,33.903848,-118.146747,58,2,lbt
+lbt:2851,"21,71",bus,Lakewood & Century NW,33.90257,-118.143032,114,2,lbt
+lbt:2852,21,bus,Paramount & Rosecrans SE,33.90343,-118.159953,32,1,lbt
+lbt:2853,21,bus,Paramount & Rosecrans SW,33.90337,-118.16037,31,1,lbt
+lbt:2994,"121,131",bus,Alamitos Bay & Restrooms - Drop Off Only,33.748244,-118.115201,40,2,lbt
+lbt:2996,"121,131",bus,Alamitos Bay & Aqualink Dock Drop-Off Only,33.748152,-118.115212,40,2,lbt
+lbt:3003,61,bus,Atlantic & Broadway NE,33.769457,-118.184978,72,1,lbt
+lbt:3007,181,bus,Golden & 4th SE,33.771609,-118.201782,15,1,lbt
+lbt:3013,"111,112",bus,Candlewood & Lakewood NW,33.853861,-118.143014,33,2,lbt
+lbt:3014,"111,112",bus,Candlewood & Hayter NE,33.853852,-118.145945,33,2,lbt
+lbt:3016,"111,112",bus,Lakewood & South SW,33.859451,-118.142674,34,2,lbt
+lbt:3017,"111,112",bus,Lakewood & Michelson SW,33.857241,-118.142638,34,2,lbt
+lbt:3018,"121,131",bus,Alamitos Bay Landing SW,33.747639,-118.114268,70,2,lbt
+lbt:3028,"101,103,104",bus,Willow & Santa Fe SE,33.804293,-118.215126,76,3,lbt
+lbt:3030,121,bus,CTLD @ Parking Structure North S,33.76482,-118.199522,44,1,lbt
+lbt:3031,101,bus,Carson & Palo Verde,33.832123,-118.107344,24,1,lbt
+lbt:3032,"121,131",bus,Livingston & Termino NW,33.760652,-118.146181,78,2,lbt
+lbt:3033,"172,173",bus,Studebaker & Reservoir Hill Park NE,33.879308,-118.099933,36,2,lbt
+lbt:3035,94,bus,Bellflower & Stearns (Layover) SE,33.795413,-118.125171,8,1,lbt
+lbt:3039,171,bus,PCH & Marina Shores Ctr NW,33.754693,-118.108297,36,1,lbt
+lbt:3044,"141,61",bus,Artesia & Atlantic SE,33.874267,-118.185776,38,2,lbt
+lbt:3045,141,bus,Artesia & Myrtle SE,33.874405,-118.180903,36,1,lbt
+lbt:3047,141,bus,Artesia & Myrtle NW,33.874754,-118.182527,36,1,lbt
+lbt:3048,"171,175",bus,PCH & Santa Fe NW,33.789942,-118.216301,52,2,lbt
+lbt:3049,"171,175",bus,PCH & Technology Pl NW,33.789935,-118.221507,52,2,lbt
+lbt:3051,"111,112",bus,Paramount & Candlewood NE,33.854046,-118.159728,33,2,lbt
+lbt:3052,"111,112",bus,South & Downey SW,33.860068,-118.152017,67,2,lbt
+lbt:3053,"171,175",bus,PCH & Hayes SW,33.789811,-118.218837,48,2,lbt
+lbt:3054,41,bus,Anaheim & Chestnut SW,33.782526,-118.195846,38,1,lbt
+lbt:3055,141,bus,Artesia & Orange NW,33.874708,-118.177682,36,1,lbt
+lbt:3057,"111,112",bus,Paramount & 55th Way E,33.856845,-118.159744,33,2,lbt
+lbt:3060,"91,93",bus,Bellflower & Alondra SE,33.889182,-118.125216,54,2,lbt
+lbt:3061,"91,93",bus,Alondra & Eucalyptus SE,33.889307,-118.122126,54,2,lbt
+lbt:3062,"91,93",bus,Alondra & Woodruff NE,33.889436,-118.117025,56,2,lbt
+lbt:3063,"91,93",bus,Alondra & Eucalyptus NW,33.889441,-118.122142,56,2,lbt
+lbt:3064,"91,93",bus,Bellflower & Harvard SW,33.888278,-118.125353,56,2,lbt
+lbt:3065,173,bus,Studebaker & Walkerton SW,33.826245,-118.099188,33,1,lbt
+lbt:3067,151,bus,Elm & Broadway NW,33.769401,-118.187768,31,1,lbt
+lbt:3075,"141,61",bus,Artesia & 710 Fwy NE,33.874481,-118.192519,106,2,lbt
+lbt:3077,151,bus,Elm & 3rd (Midblock),33.770234,-118.187615,30,1,lbt
+lbt:3079,101,bus,Carson & Palo Verde NW,33.832369,-118.10833,26,1,lbt
+lbt:3080,141,bus,Artesia & Orange SE,33.874483,-118.177139,36,1,lbt
+lbt:3081,141,bus,Artesia & Walnut SE,33.874506,-118.172872,36,1,lbt
+lbt:3082,141,bus,Artesia & Walnut NE,33.874755,-118.172927,36,1,lbt
+lbt:3083,141,bus,Artesia & RR-Xing SE,33.874491,-118.164224,36,1,lbt
+lbt:3084,141,bus,Artesia & RR-Xing NW,33.874849,-118.164493,36,1,lbt
+lbt:3085,141,bus,Artesia & Cherry SE,33.874517,-118.167702,36,1,lbt
+lbt:3086,141,bus,Artesia & Paramount SE,33.874527,-118.159335,36,1,lbt
+lbt:3087,141,bus,Artesia & Paramount NW,33.874821,-118.160522,36,1,lbt
+lbt:3088,141,bus,Artesia & Obispo SE,33.874534,-118.155339,36,1,lbt
+lbt:3089,141,bus,Artesia & Obispo NW,33.874877,-118.155898,36,1,lbt
+lbt:3090,141,bus,Artesia & Downey SE,33.874593,-118.150912,36,1,lbt
+lbt:3091,141,bus,Artesia & Downey NE,33.874845,-118.151084,36,1,lbt
+lbt:3092,141,bus,Artesia & Coke SE,33.874692,-118.147263,36,1,lbt
+lbt:3093,141,bus,Artesia & Coke NE,33.874856,-118.146941,36,1,lbt
+lbt:3094,141,bus,Artesia & Virginia SW,33.874719,-118.139996,36,1,lbt
+lbt:3095,141,bus,Artesia & Virginia NE,33.874894,-118.139429,36,1,lbt
+lbt:3096,141,bus,Artesia & Lakewood NW,33.874923,-118.143071,36,1,lbt
+lbt:3097,141,bus,Artesia & Lakewood SW,33.874661,-118.142875,36,1,lbt
+lbt:3098,141,bus,Artesia & Clark SE,33.874687,-118.133573,36,1,lbt
+lbt:3099,141,bus,Artesia & Clark NW,33.874914,-118.134261,36,1,lbt
+lbt:3100,141,bus,Artesia & Ardmore SE,33.874706,-118.12885,36,1,lbt
+lbt:3101,141,bus,Artesia & Ardmore NE,33.874928,-118.128957,36,1,lbt
+lbt:3102,141,bus,Artesia & Bellflower SE,33.874708,-118.12483,36,1,lbt
+lbt:3103,141,bus,Artesia & Bellflower NW,33.874938,-118.125737,36,1,lbt
+lbt:3104,141,bus,Artesia & Bixby SW,33.874516,-118.121337,36,1,lbt
+lbt:3105,141,bus,Artesia & Bixby NE,33.874473,-118.120984,36,1,lbt
+lbt:3106,141,bus,Artesia & Woodruff SE,33.872834,-118.116935,36,1,lbt
+lbt:3107,141,bus,Artesia & Woodruff NW,33.872984,-118.117927,36,1,lbt
+lbt:3108,141,bus,Artesia & Cherry NW,33.874767,-118.169303,36,1,lbt
+lbt:3109,141,bus,Artesia & Canehill SE,33.872827,-118.110882,36,1,lbt
+lbt:3112,141,bus,Artesia & Studebaker NW,33.873047,-118.100748,36,1,lbt
+lbt:3113,141,bus,Artesia & Canehill  NE,33.872933,-118.111093,36,1,lbt
+lbt:3140,"171,175,41",bus,PCH & Caspian NE,33.789955,-118.211579,90,3,lbt
+lbt:3150,"171,175",bus,Villages at Cabrillo,33.792724,-118.222183,100,2,lbt
+lbt:4002,"121,46",bus,1st & Shelter B N,33.76816,-118.190667,136,2,lbt
+lbt:4003,"111,112,191,192",bus,1st & Shelter C N,33.768155,-118.191641,200,4,lbt
+lbt:4004,"151,181,182,71",bus,1st & Shelter D N,33.768137,-118.192162,115,4,lbt
+lbt:4005,182,bus,Pacific & Broadway NE,33.769765,-118.193607,15,1,lbt
+lbt:4006,182,bus,Pacific & 3rd NE,33.770893,-118.193592,15,1,lbt
+lbt:4007,182,bus,Pacific & 5th NE,33.773339,-118.193583,15,1,lbt
+lbt:4008,"172,173,174",bus,1st & Shelter F S,33.767997,-118.191296,134,3,lbt
+lbt:4009,"91,92,93,94",bus,1st & Shelter E S,33.767957,-118.192011,173,4,lbt
+lbt:4010,"172,173,174,46,51,91,92,93,94",bus,Long Beach Blvd & 3rd SE,33.770246,-118.189237,262,9,lbt
+lbt:4011,"51,61",bus,1st & Shelter G S,33.768017,-118.190584,265,2,lbt
+lbt:4012,"121,151,181,182,21,22",bus,1st & Shelter H S,33.76802,-118.189732,243,6,lbt
+lbt:4013,"172,173,174,91,92,93,94",bus,Long Beach Blvd & 4th SE,33.771613,-118.189253,152,7,lbt
+lbt:4014,"46,51",bus,Long Beach Blvd & 5th NE,33.773324,-118.189254,110,2,lbt
+lbt:4016,"46,51",bus,Long Beach Blvd & 6th SW,33.77361,-118.18958,107,2,lbt
+lbt:4018,46,bus,Long Beach Blvd & 3rd SW,33.770252,-118.189599,46,1,lbt
+lbt:4021,"191,192",bus,Santa Fe & 21st NE,33.795656,-118.215351,67,2,lbt
+lbt:4022,192,bus,Carson & Via Oro SW,33.831643,-118.212869,32,1,lbt
+lbt:4023,192,bus,Via Oro & 3901 W,33.830425,-118.212679,32,1,lbt
+lbt:4024,"191,192",bus,Santa Fe & Willard SW,33.794101,-118.215574,66,2,lbt
+lbt:4025,41,bus,Anaheim & Magnolia SE,33.782574,-118.197728,38,1,lbt
+lbt:4029,121,bus,Catalina Landing N,33.764015,-118.19984,87,1,lbt
+lbt:4031,"171,175",bus,Los Altos & PCH SE,33.782965,-118.132104,48,2,lbt
+lbt:4033,51,bus,Long Beach Blvd & 32nd NW,33.815633,-118.189445,61,1,lbt
+lbt:4036,171,bus,PCH & 5th SW,33.74592,-118.105046,36,1,lbt
+lbt:4037,171,bus,PCH & Marketplace E,33.756495,-118.109534,37,1,lbt
+lbt:4038,171,bus,PCH & Marvista NE,33.74681,-118.105357,37,1,lbt
+lbt:4039,171,bus,PCH & 1st SE,33.749194,-118.105817,37,1,lbt
+lbt:4040,171,bus,PCH & Studebaker NE,33.754319,-118.107514,37,1,lbt
+lbt:4043,"101,103,61",bus,Atlantic & 27th SW,33.805678,-118.185179,118,3,lbt
+lbt:4044,71,bus,Orange & Mobile Park Home SE,33.884182,-118.177403,27,1,lbt
+lbt:4045,41,bus,Anaheim & Long Beach Blvd NW,33.782676,-118.189777,36,1,lbt
+lbt:4047,"191,192,41",bus,Anaheim & Magnolia NW,33.78266,-118.198287,103,3,lbt
+lbt:4048,"91,92,93,94",bus,7th & Euclid SE,33.775278,-118.148921,85,4,lbt
+lbt:4049,192,bus,Via Oro & 3900 E,33.830399,-118.212473,33,1,lbt
+lbt:4050,192,bus,Carson & Via Oro NW,33.831843,-118.213101,33,1,lbt
+lbt:4051,"91,92,93,94",bus,7th & Euclid NE,33.775418,-118.148961,88,4,lbt
+lbt:4052,"191,4",bus,Carson & Evonda SE,33.831706,-118.219516,57,2,lbt
+lbt:4053,93,bus,Clark & Mayfair Park SE,33.855922,-118.133716,27,1,lbt
+lbt:4054,"121,171,175",bus,PCH & Clark NE,33.784351,-118.134517,148,3,lbt
+lbt:4055,"121,171,175",bus,PCH & Park SE,33.785886,-118.136591,99,3,lbt
+lbt:4056,92,bus,Woodruff & Allington SE,33.865166,-118.11708,24,1,lbt
+lbt:4057,"101,103,93",bus,Carson & Bellflower NW,33.832406,-118.125757,77,3,lbt
+lbt:4058,"101,103,93",bus,Carson & Clark SE,33.832198,-118.133395,76,3,lbt
+lbt:4059,"111,112",bus,Los Coyotes & Ximeno SW,33.791469,-118.140528,33,2,lbt
+lbt:4060,111,bus,Kilroy Airport Way & Devry NW,33.808831,-118.146495,17,1,lbt
+lbt:4062,"103,112,191,93",bus,Del Amo & Clark NW,33.847183,-118.134325,97,4,lbt
+lbt:4063,"103,112,191,93",bus,Del Amo & Graywood NW,33.847208,-118.138708,97,4,lbt
+lbt:4064,104,bus,Lakewood & Spring SW,33.812129,-118.1395,29,1,lbt
+lbt:4065,111,bus,Kilroy Airport Way & Devry SW,33.808727,-118.146288,18,1,lbt
+lbt:4066,111,bus,Kilroy Airport Way & Redondo NE,33.807464,-118.149995,18,1,lbt
+lbt:4067,"111,112",bus,Los Coyotes & Outer Circle NE,33.791057,-118.140666,34,2,lbt
+lbt:4068,"111,112,151,71",bus,1st & Long Beach Blvd NE,33.768162,-118.189222,92,4,lbt
+lbt:4071,71,bus,Ocean & Pine SE,33.76688,-118.191995,27,1,lbt
+lbt:4072,121,bus,Bixby Village & S Greenway E,33.771762,-118.114423,49,1,lbt
+lbt:4073,"121,171",bus,Channel & Bixby Village NE,33.774195,-118.118845,86,2,lbt
+lbt:4074,121,bus,Loynes & Bixby Village NW,33.768169,-118.114194,48,1,lbt
+lbt:4077,171,bus,PCH & 2nd SW,33.757396,-118.110766,36,1,lbt
+lbt:4078,171,bus,PCH & Studebaker SW,33.753282,-118.106973,36,1,lbt
+lbt:4079,171,bus,PCH & 1st SW,33.748947,-118.10607,36,1,lbt
+lbt:4080,172,bus,Palo Verde & Belen SW,33.80885,-118.107979,33,1,lbt
+lbt:4081,"112,191,93",bus,Del Amo & Lakewood SE,33.846984,-118.142019,79,3,lbt
+lbt:4082,"112,191,93",bus,Del Amo & Graywood SE,33.846971,-118.137886,79,3,lbt
+lbt:4083,191,bus,Del Amo & San Gabriel River NW,33.84601,-118.099606,32,1,lbt
+lbt:4084,"191,4",bus,Carson & Evonda NE,33.831822,-118.219214,58,2,lbt
+lbt:4085,172,bus,South & Studebaker SW,33.858284,-118.100029,3,1,lbt
+lbt:4086,"171,175",bus,PCH & Ximeno SE,33.787473,-118.139327,48,2,lbt
+lbt:4087,172,bus,Palo Verde & Garetti School E,33.82861,-118.107669,30,1,lbt
+lbt:4088,172,bus,Palo Verde & Eberle NE,33.849759,-118.108226,30,1,lbt
+lbt:4090,173,bus,Studebaker & Wardlow SW,33.818549,-118.099229,33,1,lbt
+lbt:4091,173,bus,Studebaker & Rosebay SW,33.813749,-118.099236,33,1,lbt
+lbt:4092,173,bus,Studebaker & Spring SW,33.810114,-118.099316,33,1,lbt
+lbt:4093,173,bus,Studebaker & Barrios SW,33.806615,-118.099313,33,1,lbt
+lbt:4094,173,bus,Studebaker & Willow SW,33.802829,-118.099354,33,1,lbt
+lbt:4095,173,bus,Studebaker & Los Arcos SW,33.799726,-118.099337,33,1,lbt
+lbt:4097,173,bus,Studebaker & Stearns SW,33.795311,-118.099391,33,1,lbt
+lbt:4098,121,bus,PCH & Ximeno NE,33.787549,-118.138923,48,1,lbt
+lbt:4100,"141,172,173",bus,Studebaker & 183rd NE,33.86599,-118.099526,70,3,lbt
+lbt:4101,"172,173",bus,Studebaker & Artesia NE,33.873269,-118.099571,34,2,lbt
+lbt:4102,"172,173",bus,Studebaker & Spinnaker SE,33.878124,-118.099637,34,2,lbt
+lbt:4103,"172,173",bus,Studebaker & 166th NE,33.880581,-118.099667,34,2,lbt
+lbt:4104,"172,173",bus,Studebaker & Falcon NE,33.884294,-118.099692,34,2,lbt
+lbt:4105,"172,173",bus,Studebaker & Alondra NE,33.888239,-118.099759,34,2,lbt
+lbt:4106,"172,173",bus,Studebaker & Barnwall NE,33.891441,-118.099795,34,2,lbt
+lbt:4107,"172,173",bus,Studebaker & Excelsior NE,33.895095,-118.099827,34,2,lbt
+lbt:4108,"172,173",bus,Studebaker & Mapledale NE,33.898708,-118.099861,34,2,lbt
+lbt:4109,"172,173",bus,Studebaker & Rosecrans NE,33.902539,-118.09988,34,2,lbt
+lbt:4110,"172,173",bus,Studebaker & Leffingwell SE,33.906486,-118.099405,34,2,lbt
+lbt:4111,"172,173",bus,Studebaker & Foster NE,33.910107,-118.099074,34,2,lbt
+lbt:4112,"172,173",bus,Studebaker & Angell NE,33.912579,-118.09909,34,2,lbt
+lbt:4113,"172,173",bus,Norwalk Station Bay 11,33.912703,-118.103845,70,2,lbt
+lbt:4114,"172,173",bus,Studebaker & Angell SW,33.912563,-118.099402,36,2,lbt
+lbt:4115,"172,173",bus,Studebaker & Foster SW,33.909575,-118.099393,36,2,lbt
+lbt:4116,"172,173",bus,Studebaker & Leffingwell SW,33.906393,-118.099813,36,2,lbt
+lbt:4117,"172,173",bus,Studebaker & Rosecrans SW,33.90181,-118.10017,36,2,lbt
+lbt:4118,"172,173",bus,Studebaker & Mapledale SW,33.898268,-118.100156,36,2,lbt
+lbt:4119,"172,173",bus,Studebaker & Excelsior NW,33.895053,-118.100119,36,2,lbt
+lbt:4120,"172,173",bus,Studebaker & Barnwall NW,33.891368,-118.100085,36,2,lbt
+lbt:4121,"172,173",bus,Studebaker & Alondra SW,33.887304,-118.100059,36,2,lbt
+lbt:4122,"172,173",bus,Studebaker & Melissa SW,33.883683,-118.099987,36,2,lbt
+lbt:4123,"172,173",bus,Studebaker & 166th NW,33.880512,-118.09998,36,2,lbt
+lbt:4124,"141,172,173",bus,Studebaker & Artesia SW,33.872551,-118.099928,72,3,lbt
+lbt:4125,173,bus,Studebaker & Keynote SW,33.822772,-118.099207,33,1,lbt
+lbt:4126,"131,181,182",bus,Wardlow Station Bay 3,33.820289,-118.19676,119,3,lbt
+lbt:4127,41,bus,Wardlow Station Bay 1,33.819689,-118.19635,74,1,lbt
+lbt:4128,8,bus,Wardlow Station Bay 2,33.81995,-118.196526,45,1,lbt
+lbt:4129,"191,192",bus,Del Amo Station Bay 2,33.848423,-118.211367,68,2,lbt
+lbt:4130,"191,192",bus,Del Amo Station Bay 3,33.848265,-118.211289,66,2,lbt
+lbt:4131,"1,4",bus,Del Amo Station Bay 4,33.84811,-118.211224,43,2,lbt
+lbt:4132,"1,4",bus,Del Amo Station Bay 5,33.84794,-118.211153,49,2,lbt
+lbt:4133,"141,61",bus,Artesia & Butler NW,33.874429,-118.197375,106,2,lbt
+lbt:4134,"141,61",bus,Artesia & Atlantic NW,33.874519,-118.186574,106,2,lbt
+lbt:4135,"51,61",bus,Artesia Station Bay 3,33.875786,-118.222748,263,2,lbt
+lbt:4136,141,bus,Artesia Station Bay 2,33.87567,-118.222688,72,1,lbt
+lbt:4137,121,bus,Golden Shore & RV Park SE,33.76416,-118.20184,43,1,lbt
+lbt:4139,121,bus,Golden Shore & RV Park W,33.76455,-118.201907,44,1,lbt
+lbt:4145,41,bus,Anaheim & Pacific NE,33.78268,-118.194108,36,1,lbt
+lbt:4146,92,bus,Woodruff & Alondra SW,33.888709,-118.117518,26,1,lbt
+lbt:4147,41,bus,Anaheim & Pacific SE,33.782538,-118.193445,38,1,lbt
+lbt:5247,"111,405",bus,Long Beach Airport & Donald Douglas Dr NB,33.818041,-118.140238,23,2,lbt
+lbt:5250,405,bus,UCLA Gateway Plaza,34.069347,-118.44526,6,1,lbt
+lbt:5251,405,bus,WIllow Station & 27th St,33.80628,-118.191789,6,1,lbt
+lbt:5252,405,bus,Medical Plaza W,34.065504,-118.445471,3,1,lbt
+lbt:5253,405,bus,Kinross / Lot 36,34.059522,-118.447586,3,1,lbt
+lbt:5254,405,bus,Kinross / Structure 32,34.059558,-118.447726,3,1,lbt
+lbt:5255,405,bus,Medical Plaza E,34.065241,-118.445186,3,1,lbt
+lbt:8481,21,bus,Alondra & Paramount,33.889301,-118.160547,31,1,lbt
+lbt:8512,104,bus,Spring & Studebaker SE,33.810366,-118.098896,30,1,lbt
+lbt:8513,104,bus,Spring & EL Dorado Park SE,33.810238,-118.085091,30,1,lbt
+lbt:8514,104,bus,Spring & Claremore NW,33.810489,-118.078408,29,1,lbt
+lbt:8515,104,bus,Los Alamitos & Cerritos NE,33.810622,-118.071734,30,1,lbt
+lbt:8516,104,bus,Los Alamitos & Cerritos NW,33.810775,-118.072043,29,1,lbt
+lbt:8517,104,bus,Spring & Claremore SE,33.810282,-118.077947,30,1,lbt
+lbt:8518,104,bus,Spring & El Dorado Park NW,33.810592,-118.085834,29,1,lbt

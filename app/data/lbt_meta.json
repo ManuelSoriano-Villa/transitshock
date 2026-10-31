@@ -1,0 +1,14 @@
+{
+ "scores": {
+  "r2": 0.7604393951259591,
+  "spearman": 0.8789803200038161,
+  "top5_overlap": 0.6451612903225806
+ },
+ "timings": {
+  "features_wall_s": 9.828836791995856,
+  "features_cpu_s": 9.793632,
+  "labels_wall_s": 63.41152716600482,
+  "labels_cpu_s": 572.714979
+ },
+ "source_graph": "lbt_20261104.gpickle"
+}

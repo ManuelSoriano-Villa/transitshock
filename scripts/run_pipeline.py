@@ -11,7 +11,7 @@ import time
 
 import pandas as pd
 
-from transitshock.app_data import export_app_data
+from transitshock.app_data import export_app_data, export_network
 from transitshock.build_graph import ROOT, build_graph, graph_summary, save_graph
 from transitshock.features import build_dataset
 from transitshock.load_gtfs import load_feed
@@ -23,6 +23,9 @@ def main() -> None:
     parser.add_argument("--feed", default="lbt", help="feed folder in data/raw/")
     parser.add_argument("--date", default="20261104", help="service date, YYYYMMDD")
     parser.add_argument("--workers", type=int, default=None, help="processes for the simulation (default: all cores)")
+    parser.add_argument("--with-la", action="store_true",
+                        help="also export the combined LBT + LA Metro bus & rail network for the app's toggle "
+                             "(needs data/raw/metro_bus and data/raw/metro_rail)")
     args = parser.parse_args()
 
     processed = ROOT / "data" / "processed"
@@ -49,6 +52,11 @@ def main() -> None:
     t = step("3/3 Export app data (timetable + model predictions with spatial CV)")
     export_app_data(graph_path, prefix=args.feed, tt=tt)
     print(f"({time.perf_counter() - t:.1f}s) -> app/data/{args.feed}_*")
+
+    if args.with_la:
+        t = step("Extra: LBT + LA Metro bus & rail network for the app")
+        export_network([args.feed, "metro_bus", "metro_rail"], args.date, "la")
+        print(f"({time.perf_counter() - t:.1f}s) -> app/data/la_*")
 
 
 if __name__ == "__main__":

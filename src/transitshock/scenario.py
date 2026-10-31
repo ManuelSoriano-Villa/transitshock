@@ -121,15 +121,31 @@ class TimetableBaseline:
     minutes: np.ndarray  # (queries, stops), NaN = unreachable
     metrics: dict
     window_s: tuple[int, int] = (0, 0)  # [start, end) in seconds after midnight
+    sampled: bool = False               # True when only a sample of stops are origins (big networks)
 
 
-def timetable_baseline(tt: Timetable, start: str = "07:00", end: str = "09:00", every_min: int = 15) -> TimetableBaseline:
-    """Route from every stop at every departure time in [start, end). Compute once per window."""
-    sources, t0s = csa.departure_grid(np.arange(tt.n_stops), start, end, every_min)
+def timetable_baseline(
+    tt: Timetable,
+    start: str = "07:00",
+    end: str = "09:00",
+    every_min: int = 15,
+    max_sources: int | None = None,
+    seed: int = 0,
+) -> TimetableBaseline:
+    """Route from every stop (or a random sample of `max_sources` stops) at every departure in [start, end).
+
+    Compute once per window. Sampling keeps big networks (all of LA: ~14K stops)
+    fast and small in memory; the metrics become estimates over sampled origins.
+    """
+    origins = np.arange(tt.n_stops)
+    sampled = max_sources is not None and max_sources < tt.n_stops
+    if sampled:
+        origins = np.sort(np.random.default_rng(seed).choice(tt.n_stops, max_sources, replace=False))
+    sources, t0s = csa.departure_grid(origins, start, end, every_min)
     minutes = csa.travel_times(tt, sources, t0s)
     to_s = lambda hhmm: int(hhmm[:2]) * 3600 + int(hhmm[3:5]) * 60
     return TimetableBaseline(tt, sources, t0s, minutes, csa.summarize(minutes, sources, tt.n_stops),
-                             window_s=(to_s(start), to_s(end)))
+                             window_s=(to_s(start), to_s(end)), sampled=sampled)
 
 
 def timetable_impact(
@@ -160,20 +176,28 @@ def timetable_impact(
     q = np.arange(len(base.sources))
     could[q, base.sources] = can[q, base.sources] = False
 
-    per_query = pd.DataFrame({
-        "source": base.sources,
-        "lost": (could & ~can).sum(axis=1),
-        "could": could.sum(axis=1),
-        "added_sum": np.where(could & can, after - base.minutes, 0).sum(axis=1),
-        "both": (could & can).sum(axis=1),
-    })
-    agg = per_query.groupby("source").sum()
-    added_min = (agg["added_sum"] / agg["both"].where(agg["both"] > 0)).fillna(0).to_numpy()
-    lost_share = (agg["lost"] / agg["could"].clip(lower=1)).to_numpy()
-    n_times = len(base.sources) // tt.n_stops
+    lost = could & ~can
+    both = could & can
+    delta = np.where(both, after - base.minutes, 0)
+    if base.sampled:
+        # Only some stops were origins, so judge every stop by the trips TO it from the sampled origins,
+        # scaled up to the full network.
+        n_queries = len(base.sources)
+        scale = tt.n_stops / n_queries  # per departure time, per origin -> whole network
+        lost_n, could_n, both_n = lost.sum(axis=0), could.sum(axis=0), both.sum(axis=0)
+        added_min = np.divide(delta.sum(axis=0), both_n, out=np.zeros(tt.n_stops), where=both_n > 0)
+        lost_share = lost_n / np.maximum(could_n, 1)
+        lost_destinations = np.round(lost_n * scale, 1)
+    else:
+        per_query = pd.DataFrame({"source": base.sources, "lost": lost.sum(axis=1), "could": could.sum(axis=1),
+                                  "added_sum": delta.sum(axis=1), "both": both.sum(axis=1)})
+        agg = per_query.groupby("source").sum()
+        added_min = (agg["added_sum"] / agg["both"].where(agg["both"] > 0)).fillna(0).to_numpy()
+        lost_share = (agg["lost"] / agg["could"].clip(lower=1)).to_numpy()
+        lost_destinations = (agg["lost"] / (len(base.sources) // tt.n_stops)).round(1).to_numpy()
 
     per_stop = pd.DataFrame({
-        "lost_destinations": (agg["lost"] / n_times).round(1).to_numpy(),
+        "lost_destinations": lost_destinations,
         "added_min": added_min,
         "status": stop_status(removed, lost_share, added_min),
     }, index=pd.Index(tt.stops, name="node"))

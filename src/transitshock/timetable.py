@@ -80,8 +80,12 @@ def build_timetable(
     G: nx.DiGraph,
     walk_radius_m: float = WALK_RADIUS_M,
     walk_speed_m_s: float = WALK_SPEED_M_S,
+    shape_tolerance_m: float = 4.0,
 ) -> Timetable:
-    """Timetable for one feed (load_feed output), with stops indexed in the same order as G's nodes."""
+    """Timetable for one feed (load_feed output), with stops indexed in the same order as G's nodes.
+
+    shape_tolerance_m: how much street shapes are simplified for drawing (bigger = fewer points).
+    """
     stops = list(G.nodes)
     index = {node: i for i, node in enumerate(stops)}
 
@@ -102,24 +106,118 @@ def build_timetable(
 
     trip_info = trips.reindex(trip_ids)[["shape_id", "trip_headsign"]].rename(columns={"trip_headsign": "headsign"})
     trip_info.index = pd.RangeIndex(len(trip_ids), name="trip")
-    return timetable_from_events(events, G, walk_radius_m, walk_speed_m_s,
-                                 trip_info=trip_info, shapes=shape_arrays(data.get("shapes")))
+
+    geometry = shape_geometry(data.get("shapes"))
+    if geometry and events["dist"].isna().all():
+        # Some feeds (LA Metro) don't say how far along the shape each stop is: work it out from coordinates.
+        stop_xy = data["stops"].set_index("stop_id")[["stop_lat", "stop_lon"]]
+        coords = stop_xy.reindex(st.loc[events.index, "stop_id"]).to_numpy()
+        events["dist"] = project_events(events, coords, trip_info["shape_id"], geometry)
+    shapes = {sid: simplify_shape(*geo, shape_tolerance_m) for sid, geo in geometry.items()} if geometry else None
+    return timetable_from_events(events, G, walk_radius_m, walk_speed_m_s, trip_info=trip_info, shapes=shapes)
+
+
+def shape_geometry(shapes: pd.DataFrame | None) -> dict | None:
+    """shapes.txt -> {shape_id: (dist, lat, lon)} at full detail.
+
+    dist is shape_dist_traveled when the feed has it (any unit; stop_times uses the
+    same one), otherwise meters measured along the line.
+    """
+    if shapes is None or shapes.empty:
+        return None
+    out = {}
+    for shape_id, g in shapes.groupby("shape_id", sort=False):
+        lat, lon = g["shape_pt_lat"].to_numpy(), g["shape_pt_lon"].to_numpy()
+        dist = g["shape_dist_traveled"].to_numpy(dtype=float)
+        if np.isnan(dist).any():
+            x, y = local_xy(lat, lon)
+            dist = np.concatenate([[0.0], np.cumsum(np.hypot(np.diff(x), np.diff(y)))])
+        out[shape_id] = (dist, lat, lon)
+    return out
+
+
+def simplify_shape(dist: np.ndarray, lat: np.ndarray, lon: np.ndarray, tolerance_m: float = 4.0) -> tuple:
+    """Drop points that don't change the drawing (keeping each kept point's distance, so stops still line up)."""
+    keep = simplify_mask(lat, lon, tolerance_m)
+    return dist[keep], lat[keep], lon[keep]
 
 
 def shape_arrays(shapes: pd.DataFrame | None, tolerance_m: float = 4.0) -> dict | None:
-    """shapes.txt -> {shape_id: (dist, lat, lon)}, simplified to drop points that don't change the drawing.
+    """shapes.txt -> {shape_id: (dist, lat, lon)}, simplified (see shape_geometry and simplify_shape)."""
+    geometry = shape_geometry(shapes)
+    return {sid: simplify_shape(*geo, tolerance_m) for sid, geo in geometry.items()} if geometry else None
 
-    Simplification keeps each kept point's original shape_dist_traveled, so stops
-    (which are located by that same distance) still land in the right place.
+
+def local_xy(lat: np.ndarray, lon: np.ndarray, lat0: float | None = None) -> tuple[np.ndarray, np.ndarray]:
+    """Lat/lon -> meters on a local flat projection (accurate over a city)."""
+    lat0 = np.radians(np.mean(lat) if lat0 is None else lat0)
+    return np.radians(lon) * np.cos(lat0) * 6_371_000, np.radians(lat) * 6_371_000
+
+
+def project_stops(stop_lat, stop_lon, shape: tuple, near_m: float = 100.0) -> np.ndarray:
+    """How far along the shape each stop is, walking forward so a route that loops back stays in order.
+
+    For each stop (in trip order), look only at shape points from the previous stop
+    onward. Take the first stretch of points within `near_m` of the stop and the
+    closest point in it; if none are that close, take the closest point overall.
     """
-    if shapes is None or shapes.empty or shapes["shape_dist_traveled"].isna().all():
-        return None
-    out = {}
-    for shape_id, g in shapes.dropna(subset=["shape_dist_traveled"]).groupby("shape_id", sort=False):
-        lat, lon = g["shape_pt_lat"].to_numpy(), g["shape_pt_lon"].to_numpy()
-        keep = simplify_mask(lat, lon, tolerance_m)
-        out[shape_id] = (g["shape_dist_traveled"].to_numpy()[keep], lat[keep], lon[keep])
+    dist, lat, lon = shape
+    x, y = local_xy(lat, lon)
+    sx, sy = local_xy(np.asarray(stop_lat), np.asarray(stop_lon), lat0=np.mean(lat))
+    out, j = np.empty(len(sx)), 0
+    for k in range(len(sx)):
+        d = np.hypot(x[j:] - sx[k], y[j:] - sy[k])
+        close = np.flatnonzero(d <= near_m)
+        if close.size:
+            run_end = close[0] + np.argmax(d[close[0]:] > near_m) if (d[close[0]:] > near_m).any() else len(d)
+            best = close[0] + int(np.argmin(d[close[0]:run_end]))
+        else:
+            best = int(np.argmin(d))
+        j += best
+        out[k] = dist[j]
     return out
+
+
+def project_events(events: pd.DataFrame, coords: np.ndarray, trip_shape: pd.Series, geometry: dict) -> np.ndarray:
+    """Distance along the shape for every stop event, computed once per (shape, stop pattern)."""
+    dist = np.full(len(events), np.nan)
+    order = np.lexsort((events["seq"].to_numpy(), events["trip"].to_numpy()))
+    trips = events["trip"].to_numpy()[order]
+    stops = events["stop"].to_numpy()[order]
+    bounds = np.flatnonzero(np.diff(trips)) + 1
+    cache: dict = {}
+    for idx in np.split(np.arange(len(order)), bounds):
+        shape_id = trip_shape.get(trips[idx[0]])
+        if shape_id not in geometry:
+            continue
+        key = (shape_id, tuple(stops[idx]))
+        if key not in cache:
+            c = coords[order[idx]]
+            cache[key] = project_stops(c[:, 0], c[:, 1], geometry[shape_id])
+        dist[order[idx]] = cache[key]
+    return dist
+
+
+def combine_timetables(parts: dict[str, Timetable], G: nx.DiGraph) -> Timetable:
+    """Several agencies' timetables -> one, with route and shape IDs prefixed by feed ("metro_bus:720").
+
+    Each part must already index stops by G's node order (build_timetable with the same G).
+    """
+    events, infos, shapes, offset = [], [], {}, 0
+    for feed, tt in parts.items():
+        ev = tt.events.copy()
+        ev["trip"] += offset
+        ev["route"] = feed + ":" + ev["route"].astype(str)
+        events.append(ev)
+        if tt.trip_info is not None:
+            info = tt.trip_info.copy()
+            info.index = info.index + offset
+            info["shape_id"] = feed + ":" + info["shape_id"].astype(str)
+            infos.append(info)
+        shapes.update({f"{feed}:{sid}": geo for sid, geo in (tt.shapes or {}).items()})
+        offset += tt.n_trips
+    trip_info = pd.concat(infos).rename_axis("trip") if infos else None
+    return timetable_from_events(pd.concat(events, ignore_index=True), G, trip_info=trip_info, shapes=shapes or None)
 
 
 def simplify_mask(lat: np.ndarray, lon: np.ndarray, tolerance_m: float) -> np.ndarray:

@@ -66,3 +66,17 @@ def test_greedy_search_toggle_blocks_k_stops():
     assert not at.exception
     assert len(at.multiselect(key="blocked").value) == 3
     assert at.metric[0].value != "100.0%"
+
+
+@pytest.mark.skipif(not (DATA / "la_nodes.csv").exists(), reason="export the LA network first")
+def test_la_network_toggle():
+    from streamlit.testing.v1 import AppTest
+
+    at = AppTest.from_file(str(APP), default_timeout=300).run()
+    at.toggle(key="include_la").set_value(True).run()
+    assert not at.exception
+    assert at.metric[0].value == "100.0%"
+    assert any("A Line" in label for label in at.multiselect(key="canceled").options)  # rail lines are listed
+    at.multiselect(key="canceled").set_value(["metro_rail:801"]).run()  # cancel the Metro A Line
+    assert not at.exception
+    assert at.metric[0].value != "100.0%"

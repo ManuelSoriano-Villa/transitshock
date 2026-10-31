@@ -1,4 +1,4 @@
-"""TransitShock demo: disrupt the Long Beach Transit network and see who's affected.
+"""TransitShock demo: disrupt Long Beach Transit (optionally all of LA Metro too) and see who's affected.
 
 Run from the repo root:
     streamlit run app/streamlit_app.py
@@ -27,8 +27,13 @@ from transitshock.timetable import disrupt  # noqa: E402
 
 APP_DIR = Path(__file__).resolve().parent
 DATA = APP_DIR / "data"
-PREFIX = "lbt"
+PREFIX = "lbt"  # the critical-stop models are trained on Long Beach Transit only
 TARGET = "efficiency_loss"
+NETWORKS = {
+    # prefix: (display name, origins sampled for routing (None = all), minutes of live map, map zoom)
+    "lbt": ("Long Beach Transit", None, 60, 10.5),
+    "la": ("Long Beach Transit + LA Metro bus & rail", 300, 30, 9.3),
+}
 REPO_URL = "https://github.com/ManuelSoriano-Villa/transitshock"
 
 WINDOWS = {
@@ -50,24 +55,38 @@ st.set_page_config(page_title="TransitShock", page_icon="🚌", layout="wide")
 # ---------- data (cached so it loads once per server) ----------
 
 @st.cache_resource
-def load_network():
-    G = read_graph_csv(DATA, PREFIX)
-    return G, baseline(G), read_timetable(DATA, PREFIX, G)
+def load_network(net: str):
+    """Graph, static baseline (LBT only: all-pairs for LA would need ~1.5 GB), and timetable."""
+    G = read_graph_csv(DATA, net)
+    return G, (baseline(G) if net == "lbt" else None), read_timetable(DATA, net, G)
 
 
 @st.cache_resource
-def load_timetable_baseline(window: str):
-    """Door-to-door times from every stop at every 15 minutes in the window (about 0.2 s)."""
-    return timetable_baseline(TT, *WINDOWS[window])
+def load_timetable_baseline(window: str, net: str):
+    """Door-to-door times for the window, from every stop (LBT, every 15 min) or 300 sampled stops (LA, every 30)."""
+    max_sources = NETWORKS[net][1]
+    return timetable_baseline(TT, *WINDOWS[window], every_min=30 if max_sources else 15, max_sources=max_sources)
+
+
+def network_route_names(G, net: str) -> dict[str, str]:
+    """route ID -> display name. In the combined LA network, IDs are "feed:route" and names say the agency."""
+    names = G.graph["route_names"]
+    if net == "lbt":
+        return names["lbt"]
+    label = {"lbt": lambda n: f"LBT {n}", "metro_rail": lambda n: n,
+             "metro_bus": lambda n: "Metro " + n.replace(" Metro ", " ").removeprefix("Metro ")}
+    return {f"{feed}:{r}": label.get(feed, lambda n: n)(n) for feed, routes in names.items() for r, n in routes.items()}
 
 
 @st.cache_data
-def load_edges(_G) -> pd.DataFrame:
+def load_edges(_G, net: str) -> pd.DataFrame:
     rows = []
     for u, v, d in _G.edges(data=True):
         if d["kind"] == "transit":
             a, b = _G.nodes[u], _G.nodes[v]
-            rows.append({"from": [a["lon"], a["lat"]], "to": [b["lon"], b["lat"]], "routes": d["routes"].split(",")})
+            feed = f"{a['feed']}:" if net != "lbt" else ""
+            rows.append({"from": [a["lon"], a["lat"]], "to": [b["lon"], b["lat"]],
+                         "routes": [feed + r for r in d["routes"].split(",")]})
     return pd.DataFrame(rows)
 
 
@@ -82,29 +101,55 @@ if not (DATA / f"{PREFIX}_nodes.csv").exists():
     st.error("Missing app/data/. From the repo root, run:\n\n```\npython scripts/run_pipeline.py\n```")
     st.stop()
 
-G, STATIC_BASE, TT = load_network()
-EDGES = load_edges(G)
+SCENARIO_KEYS = ["blocked", "closed", "canceled", "reduced", "delayed"]
+
+
+def set_scenario(**values):
+    for key in SCENARIO_KEYS:
+        st.session_state[key] = list(values.get(key, []))
+
+
+# The network toggle comes first: everything below depends on which network is loaded.
+la_available = (DATA / "la_nodes.csv").exists()
+include_la = st.sidebar.toggle(
+    "Include LA Metro bus & rail", key="include_la", disabled=not la_available, on_change=set_scenario,
+    help="Adds LA Metro's 114 bus routes and 6 rail lines (about 14,000 stops) to Long Beach Transit. Routing then "
+         "samples 300 origin stops, so the numbers are estimates. Changing networks clears the scenario.")
+NET = "la" if include_la else "lbt"
+NETWORK_NAME, MAX_SOURCES, LIVE_MINUTES, ZOOM = NETWORKS[NET]
+
+G, STATIC_BASE, TT = load_network(NET)
+EDGES = load_edges(G, NET)
 PRED, META = load_predictions()
 PRED["name"] = [G.nodes[n]["name"] for n in PRED.index]
 PRED["trips_per_day"] = [G.nodes[n]["trips_per_day"] for n in PRED.index]
-ROUTE_NAMES = G.graph["route_names"]["lbt"]
-ROUTES = sorted(ROUTE_NAMES, key=lambda r: (len(r), r))
-STOP_LABELS = {n: f"{G.nodes[n]['name']} ({n.split(':')[1]})" for n in sorted(G, key=lambda n: G.nodes[n]["name"])}
+ROUTE_NAMES = network_route_names(G, NET)
+ROUTES = sorted(ROUTE_NAMES, key=lambda r: (r.split(":")[0] if ":" in r else "", len(r), r))
+AGENCY = {"lbt": "LBT", "metro_bus": "Metro bus", "metro_rail": "Metro rail"}
+STOP_LABELS = {n: f"{G.nodes[n]['name']} ({AGENCY.get(n.split(':')[0], '') + ' ' if NET != 'lbt' else ''}"
+                  f"{n.split(':')[1]})" for n in sorted(G, key=lambda n: G.nodes[n]["name"])}
 LAT = np.array([G.nodes[n]["lat"] for n in TT.stops])
 LON = np.array([G.nodes[n]["lon"] for n in TT.stops])
 
 
 def route_label(route: str) -> str:
-    """Short route label for stop popups: the route number if it starts the name, else the full name."""
+    """Short route label for stop popups: "61" (LBT only), "LBT 61" / "Metro 720" / "Metro A Line" (LA)."""
     name = ROUTE_NAMES.get(route, route)
-    return route if name.split(" ")[0] == route else name
+    words = name.split(" ")
+    if NET == "lbt":
+        return words[0] if words[0] == route else name
+    if words[0] in ("LBT", "Metro") and len(words) > 1 and words[1][:1].isdigit():
+        return " ".join(words[:2])
+    return name
 
 
 @st.cache_data
-def base_live_stops() -> list[dict]:
+def base_live_stops(net: str) -> list[dict]:
     order = lambda r: (len(r), r)
-    return [{"i": i, "name": G.nodes[n]["name"], "position": [round(float(LON[i]), 6), round(float(LAT[i]), 6)],
-             "routes": ", ".join(route_label(r) for r in sorted(str(G.nodes[n]["routes"]).split(","), key=order)),
+    feed = lambda n: f"{G.nodes[n]['feed']}:" if net != "lbt" else ""
+    return [{"i": i, "name": G.nodes[n]["name"], "position": [round(float(LON[i]), 5), round(float(LAT[i]), 5)],
+             "routes": ", ".join(route_label(feed(n) + r)
+                                 for r in sorted(str(G.nodes[n]["routes"]).split(","), key=order)),
              "status": ""} for i, n in enumerate(TT.stops)]
 
 
@@ -115,13 +160,13 @@ def live_stops(status: dict, per_stop: pd.DataFrame) -> list[dict]:
     added_ = per_stop["added_min"].to_numpy()
     return [{**s, "status": status.get(TT.stops[s["i"]], ""), "impact": impact_[s["i"]],
              "lost": round(float(lost[s["i"]]), 1), "added": round(float(added_[s["i"]]), 1)}
-            for s in base_live_stops()]
+            for s in base_live_stops(NET)]
 
 
 @st.cache_data
-def normal_paths(start_s: int) -> list[dict]:
-    """The undisrupted schedule's buses for the hour (to show canceled or late buses as ghosts)."""
-    return trip_paths(TT, LAT, LON, start_s, start_s + 3600, route_names=ROUTE_NAMES)
+def normal_paths(start_s: int, net: str) -> list[dict]:
+    """The undisrupted schedule's buses for the window (to show canceled or late buses as ghosts)."""
+    return trip_paths(TT, LAT, LON, start_s, start_s + LIVE_MINUTES * 60, route_names=ROUTE_NAMES)
 
 
 @st.cache_resource
@@ -147,14 +192,6 @@ def run_greedy(window: str, k: int) -> None:
 
 
 # ---------- sidebar: build a scenario ----------
-
-SCENARIO_KEYS = ["blocked", "closed", "canceled", "reduced", "delayed"]
-
-
-def set_scenario(**values):
-    for key in SCENARIO_KEYS:
-        st.session_state[key] = list(values.get(key, []))
-
 
 for key in SCENARIO_KEYS:
     st.session_state.setdefault(key, [])
@@ -182,7 +219,7 @@ with st.sidebar:
     st.subheader("Presets")
     strand10 = PRED.nsmallest(10, "predicted_rank").index.tolist()     # static-trained model
     slow10 = PRED.nsmallest(10, "tt_predicted_rank").index.tolist()    # timetable-trained model
-    busiest = PRED.nlargest(10, "trips_per_day").index.tolist()
+    busiest = sorted(G, key=lambda n: -G.nodes[n]["trips_per_day"])[:10]
     st.button("Block 10 stops that strand riders (static model)", key="preset_top10", on_click=set_scenario,
               kwargs={"blocked": strand10}, width="stretch",
               help="The static model's top 10: blocking them cuts small areas off completely.")
@@ -199,16 +236,17 @@ with st.sidebar:
     st.button("Clear", key="preset_clear", on_click=set_scenario, width="stretch")
 
     st.subheader("Worst-case search")
-    if st.toggle("Greedy search", key="greedy_on",
+    if st.toggle("Greedy search", key="greedy_on", disabled=NET != "lbt",
                  help="Instead of ranking stops one at a time, pick them one by one, each time taking the stop "
                       "that does the most extra damage given the ones already blocked. Finds a worse combination "
-                      "than any single-stop ranking, but takes 10-20 seconds per search."):
+                      "than any single-stop ranking, but takes 10-20 seconds per search. Long Beach Transit only.") \
+            and NET == "lbt":
         k = st.slider("Stops to block", 3, 15, 10, key="greedy_k")
         if st.button(f"Find and block the worst {k}", key="greedy_run", type="primary", width="stretch"):
             run_greedy(window, k)
 
-    st.caption("Long Beach Transit, weekday schedule for Wed 2026-11-04. "
-               f"{G.number_of_nodes():,} stops, {len(ROUTE_NAMES)} routes, {len(TT):,} scheduled bus hops.")
+    st.caption(f"{NETWORK_NAME}, weekday schedule for Wed 2026-11-04. "
+               f"{G.number_of_nodes():,} stops, {len(ROUTE_NAMES)} routes, {len(TT):,} scheduled stop-to-stop hops.")
 
 scenario = {key: st.session_state[key] for key in SCENARIO_KEYS}
 delays = {r: delay for r in scenario["delayed"]}
@@ -217,7 +255,7 @@ scenario_kwargs = dict(stops=scenario["closed"], canceled_routes=scenario["cance
                        reduced_routes=scenario["reduced"], delays_min=delays, blocked_stops=scenario["blocked"])
 
 # Computed once per rerun and shared by the what-if and live tabs.
-base = load_timetable_baseline(window)
+base = load_timetable_baseline(window, NET)
 with st.spinner("Re-routing every stop at every departure time..."):
     summary, per_stop = timetable_impact(base, **scenario_kwargs)
     routes_impact = route_impacts(base, per_stop, **scenario_kwargs)
@@ -288,7 +326,7 @@ def stop_details(node: str, row: pd.Series, window: str) -> None:
 # ---------- main ----------
 
 st.title("🚌 TransitShock")
-st.markdown("What happens to **Long Beach Transit** when stops are blocked, routes are cut, or buses run late? "
+st.markdown(f"What happens to **{NETWORK_NAME}** when stops are blocked, routes are cut, or buses run late? "
             "Build a scenario in the sidebar.")
 
 tab_whatif, tab_live, tab_critical, tab_about = st.tabs(["What-if map", "Live buses", "Critical stops", "How it works"])
@@ -311,7 +349,10 @@ with tab_whatif:
                        "can go *up* from one pick to the next: blockages compound, so a stop can matter more once "
                        "its neighbors are already blocked.")
 
-    only_static_kinds = not (scenario["closed"] or scenario["reduced"] or scenario["delayed"])
+    if base.sampled:
+        st.caption(f"All of LA: routing from {MAX_SOURCES} randomly sampled origin stops at every 30 minutes, so "
+                   "these numbers are estimates. Each stop's status is judged by the trips *to* it.")
+    only_static_kinds = STATIC_BASE is not None and not (scenario["closed"] or scenario["reduced"] or scenario["delayed"])
     if not nothing_selected and only_static_kinds:
         static_summary, _ = impact(G, STATIC_BASE, scenario["blocked"], scenario["canceled"])
         st.caption(f"Without waiting times (the static model), this scenario would cost "
@@ -338,7 +379,7 @@ with tab_whatif:
         pdk.Layer("ScatterplotLayer", stops, id="stops", get_position=["lon", "lat"], get_fill_color="color",
                   get_radius="radius", radius_min_pixels=3, pickable=True),
     ]
-    view = pdk.ViewState(latitude=float(stops["lat"].median()), longitude=float(stops["lon"].median()), zoom=10.5)
+    view = pdk.ViewState(latitude=float(stops["lat"].median()), longitude=float(stops["lon"].median()), zoom=ZOOM)
     tooltip = {"html": "<b>{name}</b><br/>{status}<br/>destinations lost: {lost_destinations}"
                        "<br/>extra minutes: {added}<br/><i>click for details</i>"}
     event = st.pydeck_chart(pdk.Deck(layers=layers, initial_view_state=view, tooltip=tooltip), height=540,
@@ -372,7 +413,7 @@ with tab_live:
     speed = right.radio("Speed", [30, 60, 120], index=1, horizontal=True, format_func=lambda s: f"{s}×", key="speed")
     start_s = int(start[:2]) * 3600
     live_tt = disrupt(TT, scenario["closed"], scenario["canceled"], scenario["reduced"], delays, scenario["blocked"])
-    paths = trip_paths(live_tt, LAT, LON, start_s, start_s + 3600, highlight_routes=set(scenario["delayed"]),
+    paths = trip_paths(live_tt, LAT, LON, start_s, start_s + LIVE_MINUTES * 60, highlight_routes=set(scenario["delayed"]),
                        route_names=ROUTE_NAMES)
 
     # Ghosts: buses from the normal schedule that this scenario removed (canceled/halved routes), and where
@@ -381,7 +422,7 @@ with tab_live:
     ghosts = [{"name": p["name"], "headsign": p["headsign"], "route": p["route"], "path": p["path"],
                "timestamps": p["timestamps"],
                "kind": "canceled" if p["bus"] not in running else "scheduled"}
-              for p in normal_paths(start_s)
+              for p in normal_paths(start_s, NET)
               if p["bus"] not in running or p["route"] in delays]
 
     status = {**{n: "closed" for n in scenario["closed"]}, **{n: "blocked" for n in scenario["blocked"]}}
@@ -395,22 +436,29 @@ with tab_live:
                 .replace("__GHOSTS__", as_js(ghosts)).replace("__ROUTES__", as_js(route_json))
                 .replace("__WINDOW__", as_js(window.lower())).replace("__DELAYS__", as_js(delays))
                 .replace("__START__", str(start_s)).replace("__SPEED__", str(speed))
+                .replace("__LOOP__", str(LIVE_MINUTES * 60)).replace("__ZOOM__", str(ZOOM + 0.4))
                 .replace("__CENTER__", as_js([float(np.median(LON)), float(np.median(LAT))])))
     st.iframe(html, height=640)
 
     shown = summarize_paths(paths)
     canceled_now = sum(g["kind"] == "canceled" for g in ghosts)
     st.caption(
-        f"One hour of the {'disrupted' if not nothing_selected else 'normal'} schedule from {start}, "
+        f"{'One hour' if LIVE_MINUTES == 60 else f'{LIVE_MINUTES} minutes'} of the "
+        f"{'disrupted' if not nothing_selected else 'normal'} schedule from {start}, "
         f"played at {speed}×: {shown['trips shown']} trips on {shown['routes']} routes"
         + (f", **{canceled_now} trips removed** by the scenario" if canceled_now else "")
-        + f". {buses_running(paths, 1800)} buses on the road at {hhmm(start_s + 1800)}. Buses follow the street "
+        + f". {buses_running(paths, LIVE_MINUTES * 30)} buses on the road at {hhmm(start_s + LIVE_MINUTES * 30)}. "
+        "Buses follow the street "
         "shapes from the GTFS feed. **Click a bus** for its route's impact and next stops; **click a stop** for "
         "its impact and the next buses due. Stops are colored by impact (red: cut off, orange: slower); hollow "
         "gray rings are canceled buses, orange rings show where late buses should be."
     )
 
 with tab_critical:
+    if NET != "lbt":
+        st.info("The critical-stop models are trained on Long Beach Transit only (the exhaustive labels take "
+                "minutes for 1,853 stops; for 14,000 they'd take hours). The rankings below are for LBT stops, "
+                "measured within the LBT network.")
     t = META["timings"]
     measure = st.radio("Measure damage", ["With waiting (timetable)", "Without waiting (static graph)"],
                        horizontal=True, key="crit_measure")
@@ -449,13 +497,17 @@ with tab_critical:
 
 with tab_about:
     st.markdown(f"""
-**Data.** Long Beach Transit's public GTFS schedule for one weekday: {len(TT):,} scheduled stop-to-stop bus hops.
+**Data.** Public GTFS schedules for one weekday (Wed 2026-11-04): Long Beach Transit, plus LA Metro bus and rail
+when the toggle is on. The current network has {G.number_of_nodes():,} stops and {len(TT):,} scheduled stop-to-stop
+hops. LA Metro's feeds don't say how far along the street each stop is, so stops are projected onto the route
+shapes in order (walking forward, so routes that loop back stay in sequence).
 
 **Routing with waiting.** The what-if map uses the **Connection Scan Algorithm**. For a rider who shows up at a stop
 at a given time, it scans every scheduled bus hop in departure order and finds the earliest arrival at every other stop,
 including the wait for the first bus and for each transfer. Walking transfers up to 200 m (1.3 m/s) are allowed.
 Each scenario re-routes from every stop at every 15 minutes in the chosen window: about 15,000 queries, compiled
-with numba so it takes well under a second.
+with numba so it takes well under a second. With LA Metro included (about 14,000 stops), it routes from 300 sampled
+stops every 30 minutes instead, about 1 second per scenario, and judges each stop by the trips *to* it.
 
 **Disruptions.**
 - *Blocked* stops can't be passed, so trips are cut in two there.

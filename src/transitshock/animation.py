@@ -43,7 +43,7 @@ def street_path(stop_dist, stop_times, stop_lat, stop_lon, shape) -> tuple[list,
     lon = np.interp(dist, d_shape, lon_shape)
     # The ends snap to the stops themselves, so the bus starts and ends at the pole.
     lat[0], lon[0], lat[-1], lon[-1] = stop_lat[0], stop_lon[0], stop_lat[-1], stop_lon[-1]
-    return np.column_stack([lon, lat]).round(6).tolist(), np.round(times, 1).tolist()
+    return np.column_stack([lon, lat]).round(5).tolist(), np.round(times).astype(int).tolist()  # ~1 m, 1 s
 
 
 def trip_paths(
@@ -80,8 +80,11 @@ def trip_paths(
         if info is not None and tt.shapes is not None and "dist" in g:
             shape = tt.shapes.get(info["shape_id"])
         street = street_path(g["dist"].to_numpy(dtype=float), times, lat[stops], lon[stops], shape) if shape else None
-        path, stamps = street if street else (np.column_stack([lon[stops], lat[stops]]).round(6).tolist(),
+        path, stamps = street if street else (np.column_stack([lon[stops], lat[stops]]).round(5).tolist(),
                                               times.tolist())
+        path, stamps = clip_to_window(path, stamps, end_s - start_s)
+        # Stops for the click panels: those inside the window, plus where the trip ends.
+        in_window = [[int(s_), int(t_)] for s_, t_ in zip(stops, times) if -60 <= t_ <= end_s - start_s]
         headsign = info["headsign"] if info is not None and isinstance(info["headsign"], str) else ""
         paths.append({
             "bus": bus,
@@ -90,11 +93,29 @@ def trip_paths(
             "headsign": headsign.title(),
             "path": path,
             "timestamps": stamps,
-            "stops": [[int(s), int(t)] for s, t in zip(stops, times)],
+            "stops": in_window,
+            "end": [int(stops[-1]), int(times[-1])],
+            "street": street is not None,
             "color": LATE_COLOR if route in highlight_routes else color[route],
             "late": route in highlight_routes,
         })
     return paths
+
+
+def clip_to_window(path: list, stamps: list, length_s: int) -> tuple[list, list]:
+    """Keep only the part of a path inside the animation window [0, length_s], plus one point either side.
+
+    Long trips mostly run outside the hour shown; sending only the visible part
+    keeps the browser payload small (it matters for all of LA).
+    """
+    t = np.asarray(stamps)
+    inside = np.flatnonzero((t >= 0) & (t <= length_s))
+    if inside.size == 0:  # passes through the window between two points
+        i = int(np.searchsorted(t, 0))
+        lo, hi = max(i - 1, 0), min(i, len(t) - 1)
+    else:
+        lo, hi = max(inside[0] - 1, 0), min(inside[-1] + 1, len(t) - 1)
+    return path[lo:hi + 1], stamps[lo:hi + 1]
 
 
 def hhmm(seconds: int) -> str:
@@ -112,5 +133,5 @@ def summarize_paths(paths: list[dict]) -> pd.Series:
         "trips shown": len(paths),
         "routes": len({p["route"] for p in paths}),
         "points": sum(len(p["path"]) for p in paths),
-        "following streets": sum(len(p["path"]) > len(p["stops"]) for p in paths),
+        "following streets": sum(p["street"] for p in paths),
     })

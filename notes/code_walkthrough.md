@@ -304,14 +304,42 @@ for each connection c, in departure order (starting at t0):
 
 ---
 
-## 10. Tests (`tests/`)
+## 10. All of LA: the multi-agency toggle
+
+**Combining agencies** (`timetable.combine_timetables`):
+- Each feed's timetable is built against the *same* combined graph, so stop indexes line up.
+- Trip IDs are offset so they don't collide.
+- Route and shape IDs are prefixed (`metro_bus:720`, `lbt:61`), because two agencies can both have a "route 1".
+
+**Stops without distances** (`timetable.project_stops`, `project_events`):
+- LBT's feed says how far along the shape each stop is, but LA Metro's doesn't.
+- So distance is measured along each shape from its coordinates (`shape_geometry`), and each stop is snapped to the shape **walking forward**: it only looks at points after the previous stop, and takes the first stretch within 100 m. That keeps routes that loop back near their start in order. A test covers an out-and-back route.
+- Results are cached per (shape, stop pattern), since thousands of trips share a few hundred patterns.
+
+**Scaling routing** (`scenario.timetable_baseline(max_sources=...)`):
+- At about 14,000 stops, routing from every stop is fine for speed (0.56 ms per query) but not for memory: a stops × stops matrix per departure time.
+- So LA samples 300 origins every 30 minutes, which is 1,200 queries and about 66 MB as float32.
+- With sampled origins, each stop's status is judged by the trips **to** it (column-wise), scaled up to the full network.
+
+**Keeping the live map light** (`animation.clip_to_window`):
+- Only the part of each bus path inside the window is sent, plus one point on each side so buses glide in and out.
+- LA shapes are simplified at 12 m instead of 4 m, and LA shows 30 minutes instead of 60.
+- One frame of all of LA goes from about 12.7 MB of JSON to about 2.5 MB, animating about 1,300 buses at once.
+
+**In the app:**
+- **The toggle is drawn first**, since everything else depends on which network is loaded. Each network is cached separately, and switching clears the scenario.
+- **The static model and its all-pairs baseline are LBT-only.** All-pairs for 14,000 stops would need about 1.5 GB. The same goes for the critical-stop models and greedy search.
+
+---
+
+## 11. Tests (`tests/`)
 
 Each test file builds a **tiny graph or feed by hand** where you can work out the right answer on paper, for example "a line A–B–C where removing B disconnects A from C".
 
 - **Why tiny fake data instead of the real feeds?** `data/raw` isn't committed, so anyone who clones the repo can still run `pytest`. Tiny cases also make failures easy to understand.
 - **Run them:** `pytest` (about 4 s).
 
-## 11. Notebooks (`notebooks/`)
+## 12. Notebooks (`notebooks/`)
 
 The notebooks *use* the package and don't define logic of their own. If you find yourself writing a long function in a notebook, it probably belongs in `src/transitshock/` with a test.
 

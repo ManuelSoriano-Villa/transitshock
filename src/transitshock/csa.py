@@ -91,7 +91,8 @@ def travel_times(tt: Timetable, sources: np.ndarray, t0s: np.ndarray, horizon_s:
     t0s = np.asarray(t0s, dtype=np.int32)
     best = _many(tt.dep, tt.arr, tt.from_stop, tt.to_stop, tt.trip, tt.n_trips,
                  tt.foot_ptr, tt.foot_to, tt.foot_time, sources, t0s, np.int32(horizon_s))
-    minutes = (best - t0s[:, None]) / 60.0
+    # float32 halves memory; minute-level precision is plenty. Matters for big networks (LA: ~14K stops).
+    minutes = ((best - t0s[:, None]) / 60.0).astype(np.float32)
     minutes[best == NEVER] = np.nan
     return minutes
 

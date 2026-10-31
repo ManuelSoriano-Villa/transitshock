@@ -123,12 +123,39 @@ def export_app_data(graph_path: Path, out_dir: Path = APP_DATA, prefix: str = "l
     (out_dir / f"{prefix}_meta.json").write_text(json.dumps(meta, indent=1))
 
 
+def export_network(feeds: list[str], date: str, prefix: str, out_dir: Path = APP_DATA,
+                   shape_tolerance_m: float = 12.0) -> None:
+    """A multi-agency network for the app (graph + combined timetable; no model predictions).
+
+    e.g. export_network(["lbt", "metro_bus", "metro_rail"], "20261104", "la")
+    Street shapes are simplified more than for LBT alone (12 m vs 4 m), because the
+    live map sends every bus path in view to the browser and LA has ~7x the buses.
+    """
+    from transitshock.build_graph import build_graph
+    from transitshock.load_gtfs import load_feed
+    from transitshock.timetable import build_timetable, combine_timetables
+
+    data = {feed: load_feed(ROOT / "data" / "raw" / feed, date) for feed in feeds}
+    G = build_graph(data)
+    write_graph_csv(G, out_dir, prefix)
+    parts = {feed: build_timetable(d, feed, G, shape_tolerance_m=shape_tolerance_m) for feed, d in data.items()}
+    write_timetable(combine_timetables(parts, G), out_dir, prefix)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Export the demo's data files to app/data/.")
-    parser.add_argument("graph", help="path to a .gpickle (its _dataset.csv and _timings.csv must exist)")
+    parser.add_argument("graph", nargs="?", help="path to a .gpickle (its _dataset.csv and _timings.csv must exist)")
     parser.add_argument("--prefix", default="lbt", help="feed name (also the data/raw/ folder for --date)")
     parser.add_argument("--date", help="YYYYMMDD: also export the timetable, built from data/raw/<prefix>")
+    parser.add_argument("--feeds", nargs="+",
+                        help="instead: export a multi-agency network from these data/raw/ folders "
+                             "(e.g. --feeds lbt metro_bus metro_rail --prefix la --date 20261104)")
     args = parser.parse_args()
+    if args.feeds:
+        export_network(args.feeds, args.date, args.prefix)
+        for f in sorted(APP_DATA.glob(f"{args.prefix}_*")):
+            print(f"{f.relative_to(ROOT)}  {f.stat().st_size / 1024:.0f} KB")
+        return
     tt = None
     if args.date:
         from transitshock.load_gtfs import load_feed

@@ -53,7 +53,7 @@
 </div>
 <div id="panel" class="card"><button id="close" title="Close">×</button><div id="panel-body"></div></div>
 <script>
-  const TRIPS = __TRIPS__;     // [{bus, route, name, headsign, path, timestamps, stops: [[stopIndex, t]], color, late}]
+  const TRIPS = __TRIPS__;     // [{bus, route, name, headsign, path, timestamps, stops: [[stopIndex, t]], end, color, late}]
   const STOPS = __STOPS__;     // [{i, name, position, routes, status, impact, lost, added}]
   const GHOSTS = __GHOSTS__;   // normal-schedule buses removed ("canceled") or where late buses should be ("scheduled")
   const ROUTES = __ROUTES__;   // {route: {stops, closed, cut_off, slower, added_min, trips_before, trips_after, delay_min, change}}
@@ -62,13 +62,15 @@
   const START = __START__;     // seconds after midnight at animation time 0
   const SPEED = __SPEED__;     // simulated seconds per real second
   const CENTER = __CENTER__;
-  const LOOP = 3600;
+  const LOOP = __LOOP__;       // seconds of schedule shown before looping
 
   const pad = n => String(n).padStart(2, "0");
   const clock = t => { const s = Math.floor(START + t) % 86400; return `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s % 3600 / 60))}`; };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
   const rgb = c => `rgb(${c[0]},${c[1]},${c[2]})`;
   const onRoad = (p, t) => p.timestamps[0] <= t && t <= p.timestamps[p.timestamps.length - 1];
+  // Some feeds (LA Metro) have no headsigns: fall back to where the trip ends.
+  const dest = p => p.headsign || (p.end ? STOPS[p.end[0]].name : "—");
 
   // Where is bus p at time t? Binary search the timestamps, then interpolate along the path.
   function position(p, t) {
@@ -86,12 +88,12 @@
     container: "map",
     map: maplibregl,
     mapStyle: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    initialViewState: { longitude: CENTER[0], latitude: CENTER[1], zoom: 11, pitch: 0, bearing: 0 },
+    initialViewState: { longitude: CENTER[0], latitude: CENTER[1], zoom: __ZOOM__, pitch: 0, bearing: 0 },
     controller: true,
     pickingRadius: 6,  // stops are tiny; let clicks within 6 px count
     getTooltip: ({object, layer}) => {
       if (!object || !layer) return null;
-      if (layer.id === "buses") return `${object.p.name}\n→ ${object.p.headsign || "—"}`;
+      if (layer.id === "buses") return `${object.p.name}\n→ ${dest(object.p)}`;
       if (layer.id === "ghosts") return object.p.kind === "canceled"
         ? `Canceled: ${object.p.name}` : `Scheduled position: ${object.p.name} (running ${DELAYS[object.p.route]} min late)`;
       if (layer.id === "trails" || layer.id === "stops") return object.name;
@@ -143,7 +145,7 @@
     if (!pieces.length) return null;
     const p = pieces.find(q => onRoad(q, time)) || pieces[0];
     const next = p.stops.find(([, t]) => t >= time);
-    const lastStop = p.stops[p.stops.length - 1];
+    const lastStop = p.end;
     const status = !onRoad(p, time)
       ? (time < p.timestamps[0] ? `Not started yet: leaves ${clock(p.timestamps[0])}` : "Finished this trip")
       : next ? `Next stop: <b>${esc(STOPS[next[0]].name)}</b> at ${clock(next[1])}` : "Arriving at last stop";
@@ -151,7 +153,7 @@
     const upcoming = p.stops.filter(([, t]) => t >= time).slice(0, 8)
       .map(([s, t]) => `<tr><td class="t">${clock(t)}</td><td>${esc(STOPS[s].name)}</td></tr>`).join("");
     return `<h3><span class="swatch" style="background:${rgb(p.color)}"></span>${esc(p.name)}</h3>
-      <div class="sub">→ ${esc(p.headsign || "—")}</div>${late}
+      <div class="sub">→ ${esc(dest(p))}</div>${late}
       <div>${status}</div>
       <div class="sub" style="margin-top:4px">Ends at ${esc(STOPS[lastStop[0]].name)}, ${clock(lastStop[1])}</div>
       ${routeImpact(p.route)}
@@ -167,7 +169,7 @@
     arrivals.sort((a, b) => a.t - b.t);
     const rows = arrivals.slice(0, 8).map(({p, t}) =>
       `<tr><td class="t">${clock(t)}</td><td><span class="swatch" style="background:${rgb(p.color)}"></span>${esc(p.name)}
-       <span style="color:#a0a0a8">→ ${esc(p.headsign || "—")}</span>${p.late ? ' <span style="color:#ff7a50">late</span>' : ""}</td></tr>`).join("");
+       <span style="color:#a0a0a8">→ ${esc(dest(p))}</span>${p.late ? ' <span style="color:#ff7a50">late</span>' : ""}</td></tr>`).join("");
     const none = s.status ? "No buses stop here in this scenario." : "No more buses this hour.";
     const impactColor = {"cut off": "#ff6b6b", "slower": "#f5a623"}[s.impact] || "inherit";
     const impact = s.status ? "" : `<div style="margin-top:2px;font-weight:600">Impact <span class="label">(${esc(WINDOW)})</span></div>

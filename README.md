@@ -4,7 +4,7 @@
 
 TransitShock turns Long Beach Transit's public schedule (GTFS) into a graph of 1,853 stops and a timetable of 89,782 scheduled bus hops. It simulates disruptions and trains a model that ranks how damaging each stop's closure would be.
 
-A Streamlit app lets you block stops, cancel or thin out routes, or make buses run late. It shows who gets cut off, using real door-to-door times that include waiting. It also animates the disrupted buses along the actual streets, showing canceled buses as ghosts and coloring stops by impact. Click any bus for its route's impact and next stops, or any stop for its impact and the next buses due. An optional **greedy search** finds the worst combination of stops to block.
+A Streamlit app lets you block stops, cancel or thin out routes, or make buses run late. It shows who gets cut off, using real door-to-door times that include waiting. It also animates the disrupted buses along the actual streets, showing canceled buses as ghosts and coloring stops by impact. Click any bus for its route's impact and next stops, or any stop for its impact and the next buses due. An optional **greedy search** finds the worst combination of stops to block, and a toggle expands the network to **all of LA Metro's buses and rail** (about 14,000 stops).
 
 **Live demo:** https://transitshock-7skwnhd9xngwvzgy53urnz.streamlit.app/
 
@@ -25,6 +25,9 @@ A Streamlit app lets you block stops, cancel or thin out routes, or make buses r
 | Compute vs. exhaustive simulation | **≈58× less** (≈10 s vs. 573 CPU-s) |
 | Timetable routing speed (Connection Scan Algorithm + numba) | 0.05 ms per query; a 15,000-query scenario in ≈0.2 s |
 | Model retrained on timetable damage (held-out neighborhoods) | ρ **0.73**, finds **60%** of critical stops; the static-trained model manages 0.59 and 39% on the same labels |
+| LA-wide network (LBT + Metro bus + Metro rail) | 13,847 stops, 155 routes, 957K scheduled hops; average door-to-door trip ≈ **95 min** (morning peak, sampled) |
+| Canceling the Metro A Line (morning peak, all of LA) | **−4.9%** efficiency, +3.1 min average trip, ≈800 stops cut off |
+| Canceling all 6 Metro rail lines | **−18%** efficiency, +7.5 min average trip |
 | Greedy search for the worst 10 stops to block (lazy/CELF) | **−8.5%** efficiency, 46 cut off, 1,272 slower; beats the true single-stop top 10 (−7.6%) with 96 scenario evaluations |
 | Random failures vs. targeting busy stops | Random failures halve efficiency after removing 10% of stops; targeting busy stops takes 20% |
 
@@ -53,6 +56,7 @@ GTFS feeds ──► load_gtfs ──► build_graph ──► metrics / simulat
 | **Model** | A random forest predicts the log of single-stop damage from 14 graph features. It's evaluated with **spatial cross-validation**, holding out whole neighborhoods, so neighboring stops can't leak between training and testing. |
 | **Timetable routing** | The **Connection Scan Algorithm** scans every scheduled bus hop in departure order to find earliest arrivals, including waits and transfers. It's compiled with numba and runs in parallel. Disruptions (blocked or closed stops, canceled or halved routes, delays) edit the timetable, which is then re-scanned. |
 | **Live map** | A deck.gl `TripsLayer` animates one hour of the (disrupted) schedule in the browser. Buses follow the GTFS street shapes (simplified with Douglas-Peucker), timed by distance traveled. Canceled buses appear as ghosts, and stops are colored by impact. Clicking a bus shows its route's impact numbers; clicking a stop shows its own. |
+| **All of LA (toggle)** | LBT, Metro bus and Metro rail are combined into one timetable, with route IDs prefixed by agency. Metro's feeds don't give stop distances along shapes, so stops are projected onto the shapes in order. Routing samples 300 origin stops every 30 minutes, and the live map shows 30 minutes at a time with paths clipped to the visible window, keeping the browser payload around 2.5 MB. |
 | **Worst-case search** | Greedy selection with lazy (CELF) evaluation: pick the stop that adds the most damage given those already blocked, re-measuring only the current leader. |
 
 ## Repo layout
@@ -65,7 +69,7 @@ notebooks/          01 explore GTFS · 02 graph stats · 03 robustness · 04 mod
                     · 06 timetable-trained model
 notes/              gtfs_notes.md (data quirks) · code_walkthrough.md (module-by-module guide)
 scripts/            download_data.sh · run_pipeline.py
-tests/              83 pytest tests on small hand-built networks and timetables + app smoke tests
+tests/              89 pytest tests on small hand-built networks and timetables + app smoke tests
 ```
 
 ## Run it
@@ -82,7 +86,7 @@ To rebuild everything from the raw schedules (about 6 minutes on 10 cores):
 
 ```bash
 ./scripts/download_data.sh
-python scripts/run_pipeline.py --feed lbt --date 20261104
+python scripts/run_pipeline.py --feed lbt --date 20261104 --with-la   # --with-la: also the LA-wide network
 ```
 
 ## Limitations
@@ -90,6 +94,8 @@ python scripts/run_pipeline.py --feed lbt --date 20261104
 - **The greedy search is a heuristic.** Lazy evaluation (CELF) is exact only when damage has diminishing returns, and blockages here sometimes compound. It also only searches the models' top candidates.
 - **Riders are spread evenly** across stops and departure times, because stop-level ridership data isn't public.
 - **The schedule is assumed to run perfectly** apart from the scenario. The agency interpolates about 86% of bus times, and there's no real-time data.
+- **The LA-wide numbers are estimates.** They route from 300 sampled origin stops, and each stop is judged by trips *to* it. The critical-stop models and greedy search are LBT-only, because exhaustive labels for 14,000 stops would take hours.
+- **Memory.** With both networks loaded, the app uses about 1.3 GB. That fits Streamlit Community Cloud but doesn't leave much headroom.
 - **Fares aren't modeled.** Travel time is the only cost.
 - **One agency (LBT).** The next test is whether the model transfers to LA Metro, which is 6× larger.
 

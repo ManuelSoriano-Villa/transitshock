@@ -1,4 +1,5 @@
 """Tests for the timetable and Connection Scan Algorithm on a hand-written schedule."""
+import networkx as nx
 import numpy as np
 import pandas as pd
 import pytest
@@ -270,3 +271,70 @@ def test_route_impacts(tt):
     _, per_stop = timetable_impact(base, delays_min={"1": 7})
     late = route_impacts(base, per_stop, delays_min={"1": 7})
     assert late.loc["1", "change"] == "late" and late.loc["1", "delay_min"] == 7
+
+
+def test_project_stops_on_straight_line():
+    from transitshock.timetable import project_stops, shape_geometry
+
+    shapes = pd.DataFrame({"shape_id": "s", "shape_pt_lat": np.linspace(33.0, 33.01, 11),
+                           "shape_pt_lon": -118.0, "shape_pt_sequence": range(11),
+                           "shape_dist_traveled": np.nan})
+    geo = shape_geometry(shapes)["s"]
+    assert geo[0][-1] == pytest.approx(1112, rel=0.01)  # ~1.1 km measured along the line
+    d = project_stops([33.002, 33.0055, 33.009], [-118.0001] * 3, geo)
+    assert d.tolist() == sorted(d.tolist())
+    assert d[0] == pytest.approx(222, abs=10) and d[2] == pytest.approx(1000, abs=10)
+
+
+def test_project_stops_keeps_order_on_a_loop():
+    from transitshock.timetable import project_stops
+
+    # Out and back on the same street: the return stop is near the start but must land at the end.
+    lat = np.concatenate([np.linspace(33.0, 33.01, 11), np.linspace(33.01, 33.0, 11)[1:]])
+    lon = np.concatenate([np.full(11, -118.0), np.full(10, -118.0001)])
+    dist = np.arange(len(lat), dtype=float)
+    d = project_stops([33.0005, 33.01, 33.0005], [-118.0, -118.0, -118.0001], (dist, lat, lon))
+    assert d[0] < d[1] < d[2]
+    assert d[2] >= 19  # matched on the way back, not the first point
+
+
+def test_combine_timetables_prefixes_routes_and_shapes(tt):
+    from dataclasses import replace
+
+    from transitshock.timetable import combine_timetables
+
+    G = nx.DiGraph()
+    for i, n in enumerate(STOPS):
+        G.add_node(n, lat=33.0 + i * 0.01, lon=-118.0)
+    a = replace(tt, trip_info=pd.DataFrame({"shape_id": ["s1"] * tt.n_trips, "headsign": ""}),
+                shapes={"s1": (np.array([0.0, 1.0]), np.array([33.0, 33.1]), np.array([-118.0, -118.0]))})
+    both = combine_timetables({"lbt": a, "metro": a}, G)
+    assert both.n_trips == 2 * tt.n_trips
+    assert set(both.events["route"]) == {"lbt:1", "lbt:2", "metro:1", "metro:2"}
+    assert set(both.shapes) == {"lbt:s1", "metro:s1"}
+    assert both.trip_info.loc[tt.n_trips, "shape_id"] == "metro:s1"
+    assert len(both) == 2 * len(tt)
+
+
+def test_sampled_baseline_covers_every_stop(tt):
+    from transitshock.scenario import timetable_baseline, timetable_impact
+
+    base = timetable_baseline(tt, "07:55", "07:56", max_sources=2, seed=0)
+    assert base.sampled and len(set(base.sources)) == 2
+    summary, per_stop = timetable_impact(base, blocked_stops=["C"])
+    assert len(per_stop) == len(STOPS)  # every stop gets a status, judged by trips to it
+    assert per_stop.loc["C", "status"] == "closed"
+    full = timetable_baseline(tt, "07:55", "07:56")
+    assert not full.sampled
+
+
+def test_clip_to_window_keeps_one_point_each_side():
+    from transitshock.animation import clip_to_window
+
+    path = [[i, 0] for i in range(6)]
+    stamps = [-200, -100, 50, 120, 400, 900]
+    p, t = clip_to_window(path, stamps, 300)
+    assert t == [-100, 50, 120, 400]
+    assert p == [[1, 0], [2, 0], [3, 0], [4, 0]]
+    p, t = clip_to_window([[0, 0], [1, 0]], [-100, 500], 300)  # no point inside: keep the segment across it
+    assert t == [-100, 500]

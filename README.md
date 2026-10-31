@@ -4,7 +4,7 @@
 
 TransitShock turns Long Beach Transit's public schedule (GTFS) into a weighted graph of 1,853 stops. It simulates closures and trains a model that ranks how damaging each stop's closure would be. A Streamlit app lets you close stops or routes and see who gets cut off.
 
-**Live demo:** _add your Streamlit Cloud link here_
+**Live demo:** https://transitshock-7skwnhd9xngwvzgy53urnz.streamlit.app/
 
 ![TransitShock demo: closing the model's top 10 critical stops cuts off 44 stops](figures/app_screenshot.jpg)
 

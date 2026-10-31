@@ -16,7 +16,7 @@ jobs:
           cache: pip
       - name: Install
         run: |
-          pip install pandas numpy scipy networkx scikit-learn streamlit pydeck pytest
+          pip install pandas numpy scipy networkx numba scikit-learn streamlit pydeck pytest
           pip install -e .
       - name: Run tests
         run: pytest -q

@@ -20,3 +20,27 @@ def test_graph_csv_round_trip(tmp_path):
     assert {(u, v): d for u, v, d in H.edges(data=True)} == {(u, v): d for u, v, d in G.edges(data=True)}
     assert H.graph == G.graph
     assert H.nodes["lbt:0004"]["routes"] == "1"  # stays a string, not the number 1
+
+
+def test_timetable_round_trip(tmp_path):
+    import numpy as np
+    import pandas as pd
+
+    from transitshock.app_data import read_timetable, write_timetable
+    from transitshock.timetable import timetable_from_events
+
+    G = nx.DiGraph()
+    for i, n in enumerate(["lbt:0002", "lbt:0004", "lbt:0006"]):
+        G.add_node(n, lat=33.70 + i * 0.001, lon=-118.1)  # ~110 m apart: walkable
+    events = pd.DataFrame({
+        "trip": [0, 0, 1, 1], "stop": [0, 1, 1, 2], "seq": [1, 2, 1, 2],
+        "arr_s": [28800, 28900, 29000, 29100], "dep_s": [28800, 28900, 29000, 29100], "route": ["01", "01", "7", "7"],
+    }).astype({"trip": np.int32, "stop": np.int32, "seq": np.int32, "arr_s": np.int32, "dep_s": np.int32})
+    tt = timetable_from_events(events, G)
+
+    write_timetable(tt, tmp_path, "t")
+    back = read_timetable(tmp_path, "t", G)
+    for field in ["dep", "arr", "from_stop", "to_stop", "trip", "foot_ptr", "foot_to", "foot_time"]:
+        np.testing.assert_array_equal(getattr(back, field), getattr(tt, field))
+    assert back.events["route"].tolist() == ["01", "01", "7", "7"]  # leading zero kept
+    assert len(tt.foot_to) > 0

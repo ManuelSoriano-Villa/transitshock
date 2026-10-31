@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- Animated buses for the Streamlit "Live buses" tab. __PLACEHOLDERS__ are filled in by streamlit_app.py. -->
+<script src="https://unpkg.com/deck.gl@8.9.36/dist.min.js"></script>
+<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; background: #0e1117; font-family: system-ui, sans-serif; }
+  #map { position: absolute; inset: 0; border-radius: 8px; overflow: hidden; }
+  #hud {
+    position: absolute; top: 12px; left: 12px; z-index: 2; padding: 8px 12px; border-radius: 8px;
+    background: rgba(14, 17, 23, 0.85); color: #fafafa; font-size: 14px; line-height: 1.4;
+  }
+  #clock { font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  button {
+    margin-top: 6px; padding: 4px 10px; border: 1px solid #555; border-radius: 6px;
+    background: #262730; color: #fafafa; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="hud">
+  <div id="clock">--:--</div>
+  <div id="count">0 buses running</div>
+  <button id="toggle">Pause</button>
+</div>
+<script>
+  const TRIPS = __TRIPS__;
+  const MARKED = __MARKED__;
+  const START = __START__;   // seconds after midnight at animation time 0
+  const SPEED = __SPEED__;   // simulated seconds per real second
+  const CENTER = __CENTER__;
+  const LOOP = 3600;
+
+  const pad = n => String(n).padStart(2, "0");
+  const clock = t => { const s = Math.floor(START + t) % 86400; return `${pad(Math.floor(s / 3600))}:${pad(Math.floor(s % 3600 / 60))}`; };
+  const running = t => new Set(TRIPS.filter(p => p.timestamps[0] <= t && t <= p.timestamps[p.timestamps.length - 1])
+                                    .map(p => p.bus)).size;
+
+  const deckgl = new deck.DeckGL({
+    container: "map",
+    map: maplibregl,
+    mapStyle: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    initialViewState: { longitude: CENTER[0], latitude: CENTER[1], zoom: 11, pitch: 0, bearing: 0 },
+    controller: true,
+  });
+
+  let time = 0, playing = true, last = performance.now();
+  document.getElementById("toggle").onclick = e => {
+    playing = !playing;
+    e.target.textContent = playing ? "Pause" : "Play";
+    last = performance.now();
+  };
+
+  function render() {
+    deckgl.setProps({
+      layers: [
+        new deck.TripsLayer({
+          id: "buses",
+          data: TRIPS,
+          getPath: d => d.path,
+          getTimestamps: d => d.timestamps,
+          getColor: d => d.color,
+          widthMinPixels: 3,
+          capRounded: true,
+          jointRounded: true,
+          trailLength: 240,
+          fadeTrail: true,
+          currentTime: time,
+        }),
+        new deck.ScatterplotLayer({
+          id: "disrupted-stops",
+          data: MARKED,
+          getPosition: d => d.position,
+          getFillColor: d => d.kind === "blocked" ? [0, 0, 0] : [130, 130, 130],
+          getLineColor: [255, 255, 255],
+          lineWidthMinPixels: 2,
+          stroked: true,
+          radiusMinPixels: 6,
+        }),
+      ],
+    });
+    document.getElementById("clock").textContent = clock(time);
+    document.getElementById("count").textContent = `${running(time)} buses running`;
+  }
+
+  function tick(now) {
+    if (playing) {
+      time = (time + (now - last) / 1000 * SPEED) % LOOP;
+      render();
+    }
+    last = now;
+    requestAnimationFrame(tick);
+  }
+  render();
+  requestAnimationFrame(tick);
+</script>
+</body>
+</html>

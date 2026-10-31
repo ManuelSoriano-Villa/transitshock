@@ -6,7 +6,7 @@ this module writes those as plain CSV/JSON into app/data/ (well under 1 MB)
 and reads them back without scikit-learn or the raw data.
 
 Export (run after build_graph and features):
-    python -m transitshock.app_data data/processed/lbt_20261104.gpickle
+    python -m transitshock.app_data data/processed/lbt_20261104.gpickle --date 20261104
 """
 import argparse
 import json
@@ -17,6 +17,7 @@ import numpy as np
 import pandas as pd
 
 from transitshock.build_graph import load_graph
+from transitshock.timetable import Timetable, timetable_from_events
 
 ROOT = Path(__file__).resolve().parents[2]
 APP_DATA = ROOT / "app" / "data"
@@ -47,6 +48,21 @@ def read_graph_csv(out_dir: Path, prefix: str) -> nx.DiGraph:
     return G
 
 
+def write_timetable(tt: Timetable, out_dir: Path, prefix: str) -> None:
+    """Stop events -> <prefix>_events.csv.gz (stops by node ID, so the file doesn't depend on node order)."""
+    events = tt.events.assign(stop=[tt.stops[i] for i in tt.events["stop"]])
+    events.to_csv(out_dir / f"{prefix}_events.csv.gz", index=False)
+
+
+def read_timetable(out_dir: Path, prefix: str, G: nx.DiGraph) -> Timetable:
+    """Inverse of write_timetable; walking transfers are rebuilt from G's coordinates."""
+    events = pd.read_csv(out_dir / f"{prefix}_events.csv.gz", dtype={"route": str})
+    index = {node: i for i, node in enumerate(G.nodes)}
+    events["stop"] = events["stop"].map(index).astype(np.int32)
+    return timetable_from_events(events.astype({"trip": np.int32, "seq": np.int32,
+                                                "arr_s": np.int32, "dep_s": np.int32}), G)
+
+
 def critical_table(dataset: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     """Out-of-fold (spatial CV) predictions for every stop, plus the overall scores."""
     from transitshock.model import MODELS, TARGET, out_of_fold_predictions, score, spatial_groups
@@ -64,13 +80,16 @@ def critical_table(dataset: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     return table, scores
 
 
-def export_app_data(graph_path: Path, out_dir: Path = APP_DATA, prefix: str = "lbt") -> None:
+def export_app_data(graph_path: Path, out_dir: Path = APP_DATA, prefix: str = "lbt", tt: Timetable | None = None) -> None:
+    """Write everything the app needs. Pass `tt` (build_timetable output) to include the timetable."""
     graph_path = Path(graph_path)
     G = load_graph(graph_path)
     dataset = pd.read_csv(graph_path.with_name(graph_path.stem + "_dataset.csv"), index_col="node")
     timings = pd.read_csv(graph_path.with_name(graph_path.stem + "_timings.csv"), index_col=0)["seconds"]
 
     write_graph_csv(G, out_dir, prefix)
+    if tt is not None:
+        write_timetable(tt, out_dir, prefix)
     table, scores = critical_table(dataset)
     table.to_csv(out_dir / f"{prefix}_critical.csv")
     meta = {"scores": scores, "timings": timings.to_dict(), "source_graph": graph_path.name}
@@ -80,9 +99,16 @@ def export_app_data(graph_path: Path, out_dir: Path = APP_DATA, prefix: str = "l
 def main() -> None:
     parser = argparse.ArgumentParser(description="Export the demo's data files to app/data/.")
     parser.add_argument("graph", help="path to a .gpickle (its _dataset.csv and _timings.csv must exist)")
-    parser.add_argument("--prefix", default="lbt")
+    parser.add_argument("--prefix", default="lbt", help="feed name (also the data/raw/ folder for --date)")
+    parser.add_argument("--date", help="YYYYMMDD: also export the timetable, built from data/raw/<prefix>")
     args = parser.parse_args()
-    export_app_data(Path(args.graph), prefix=args.prefix)
+    tt = None
+    if args.date:
+        from transitshock.load_gtfs import load_feed
+        from transitshock.timetable import build_timetable
+        tt = build_timetable(load_feed(ROOT / "data" / "raw" / args.prefix, args.date), args.prefix,
+                             load_graph(args.graph))
+    export_app_data(Path(args.graph), prefix=args.prefix, tt=tt)
     for f in sorted(APP_DATA.glob(f"{args.prefix}_*")):
         print(f"{f.relative_to(ROOT)}  {f.stat().st_size / 1024:.0f} KB")
 

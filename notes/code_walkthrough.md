@@ -21,6 +21,14 @@ Directed weighted graph (networkx DiGraph), saved to data/processed/*.gpickle
             │  features.node_features(G) → cheap per-stop numbers (Week 4 inputs)
             ▼
        model.compare(...) / model.fit(...) → predict damage without simulating  (Week 4)
+
+Clean tables ──► timetable.build_timetable(...) → every scheduled bus hop      (Week 7)
+                    │  timetable.disrupt(...)   → blocked/closed stops, canceled/halved/late routes
+                    ▼
+                 csa.travel_times(...)          → door-to-door minutes, including waiting
+                    │
+                    ▼
+                 scenario.timetable_impact(...) → what the app's what-if map shows
 ```
 
 Every module does one job and hands a plain data structure (a DataFrame, a graph, or a dict) to the next. That's why each one can be tested on its own with tiny fake inputs.
@@ -175,7 +183,8 @@ Numbers are converted only where needed.
 |---|---|
 | `baseline(G)` | Computes the intact network **once**: node order, matrix, all-pairs travel times, and metrics. The app caches it. |
 | `damaged_matrix(G, base, routes)` | Removes the segments only those routes serve. It reuses `simulate.route_edges`. |
-| `impact(G, base, stops, routes)` | Closes the stops, recomputes all fastest paths (about 0.5 s), and compares each stop's trips with the baseline. |
+| `impact(G, base, stops, routes)` | Removes the stops (they can't be passed, i.e. *blocked*), recomputes all fastest paths (about 0.5 s), and compares each stop's trips with the baseline. |
+| `timetable_baseline` / `timetable_impact` | The same idea on the timetable, with waiting counted (section 8). **This is what the app's what-if map now uses.** |
 
 `impact` gives each stop a **status**:
 - **closed:** you closed it.
@@ -186,24 +195,77 @@ Numbers are converted only where needed.
 The per-stop math works on whole matrices: `could` = reachable before, `can` = reachable now. `lost = could & ~can` counts destinations lost, and the average of `dist_after − dist_before` over pairs reachable in both gives the extra minutes. No Python loops over stops.
 
 **`streamlit_app.py`** is deliberately thin. All the logic lives in the package, and the app only handles input and display:
-- **Caching:** `@st.cache_resource` (the graph and baseline) and `@st.cache_data` (edges and model predictions) mean the slow work happens once per session, not on every click.
-- **Sidebar:** multiselects for stops and routes, plus preset buttons. The presets use `on_click` callbacks that write to `st.session_state`, which is how a button can change another widget's value.
-- **What-if tab:** metric cards plus a pydeck map. Stops are colored by status, and closed route segments are drawn in purple.
+- **Caching:** `@st.cache_resource` (the graph, timetable, and one timetable baseline per time-of-day window) and `@st.cache_data` (edges and model predictions) mean the slow work happens once, not on every click.
+- **Sidebar:** time of day, stops to block or close, routes to cancel, halve, or delay, plus preset buttons. The presets use `on_click` callbacks that write to `st.session_state`, which is how a button can change another widget's value.
+- **What-if tab:** metric cards plus a pydeck map. Stops are colored by status; canceled route segments are purple and halved or late routes are blue. When the scenario is something the static model can also represent, a caption shows its estimate for comparison.
+- **Live buses tab:** the animated map (section 9).
 - **Critical stops tab:** the model's ranking. Predictions are **out-of-fold** (spatial CV), so no stop's prediction comes from a model trained on that stop or its neighborhood.
-- **Smoke tests:** `tests/test_app.py` uses Streamlit's `AppTest` to run the whole app headless, click a preset, and set a route outage. It's skipped if the data hasn't been built.
+- **Smoke tests:** `tests/test_app.py` uses Streamlit's `AppTest` to run the whole app headless: it clicks a preset, sets a route outage, a frequency cut, a delay, and the evening window. It's skipped if `app/data/` is missing.
 
-**Demo talking point:** compare "close the 10 busiest stops" (−1.4% efficiency, 0 stops cut off) with "close the model's top 10" (−4.7%, 44 stops cut off).
+**Demo talking point:**
+- Compare "block the 10 busiest stops" (−2.5% efficiency with waiting, 0 stops cut off) with "block the model's top 10" (−5.8%, 44 stops cut off).
+- Then switch to the evening window: the same blockage cuts off 99 stops.
 
 ---
 
-## 8. Tests (`tests/`)
+## 8. `timetable.py` + `csa.py`: routing with waiting (Week 7)
+
+**Why:** the static graph gives each stop pair one *median* travel time, so it never waits for a bus. Real trips include waiting for the first bus and for every transfer. With waiting counted, the average trip goes from 28.6 to 56.6 minutes.
+
+**`timetable.py`**: every scheduled bus hop as a **connection**: `(departure time, arrival time, from stop, to stop, trip)`.
+
+| Function | What it does |
+|---|---|
+| `build_timetable(data, feed, G)` | Turns stop_times into **events** (one per trip × stop), then connections, with stops numbered in the same order as `G`'s nodes. |
+| `connections_from_events(events)` | The same `groupby(trip).shift(-1)` trick as `trip_segments`: each visit plus the next visit on the same trip makes one connection. Sorted by departure time, which CSA relies on. |
+| `footpaths_csr(...)` | Walking transfers in **CSR form** (`ptr`, `to`, `time` arrays). Stop `s`'s neighbors are `to[ptr[s]:ptr[s+1]]`. Plain arrays are what numba can loop over fast. |
+| `disrupt(tt, ...)` | Edits the **events**, then rebuilds connections, so the bus's path stays consistent. |
+
+What each disruption does to the events:
+- **closed:** drop the stop's events. The next connection jumps over it, so the bus skips it.
+- **blocked:** drop the stop's events *and* give each trip a new ID after that point, so nobody can ride through. A `bus` column remembers the original trip for the animation.
+- **canceled:** drop the route's trips.
+- **halved:** drop every other trip in each direction.
+- **late:** add N minutes to the route's times.
+
+**`csa.py`**: the **Connection Scan Algorithm** (Dibbelt et al.):
+
+```
+best[source] = t0; best[everything else] = never
+for each connection c, in departure order (starting at t0):
+    if I'm already on c's bus, or best[c.from] <= c.departure:   # can I catch it?
+        mark c's trip as boarded
+        if c.arrival < best[c.to]: improve it, and improve stops within walking distance
+```
+
+- **Why it's fast:** one pass over the array, no priority queue (unlike Dijkstra), and it stops at a 3-hour horizon. With `@njit` from numba it compiles to machine code, at 0.05 ms per query. `_many` runs queries in parallel with `prange`.
+- **Fallback:** if numba isn't installed, the same Python code runs, just slower. A test checks that the compiled and pure-Python versions give identical results.
+- `travel_times(tt, sources, t0s)` → minutes matrix (queries × stops), with NaN where a stop isn't reachable.
+- `departure_grid(...)` builds "every stop × every 15 minutes".
+- `summarize(...)` gives the same metrics as `metrics.evaluate`, so the static and timetable results can be compared directly.
+
+**`scenario.timetable_impact`** mirrors `impact`, but it compares minutes matrices before and after the disruption. It averages each stop's numbers over all departure times in the window.
+
+**Interview angle:**
+- "The static model doubled as a sanity check. It identified exactly the same 44 cut-off stops as the timetable under blockage, which validated both."
+- "Then the timetable showed what the static model couldn't: frequency cuts, night service, and the difference between a stop being *closed* and a road being *blocked*."
+
+## 9. `animation.py` + `app/live_buses.html`: the live map
+
+- **`trip_paths(tt, lat, lon, start, end)`:** every trip active in the hour becomes `{path: [[lon, lat], ...], timestamps: [...], color, bus}`, with timestamps in seconds since the start of the hour. Late routes are drawn red.
+- **`live_buses.html`:** a small standalone page. **deck.gl's `TripsLayer`** draws each bus as a fading trail, interpolating its position between stops from the timestamps. A `requestAnimationFrame` loop advances the clock **in the browser**, so the animation is smooth and doesn't trigger Streamlit reruns. The basemap is MapLibre with Carto's free dark style.
+- **How the app fills it in:** it replaces `__TRIPS__`, `__START__` and the other placeholders with JSON and renders the page with `st.components.v1.html`.
+
+---
+
+## 10. Tests (`tests/`)
 
 Each test file builds a **tiny graph or feed by hand** where you can work out the right answer on paper, for example "a line A–B–C where removing B disconnects A from C".
 
 - **Why tiny fake data instead of the real feeds?** `data/raw` isn't committed, so anyone who clones the repo can still run `pytest`. Tiny cases also make failures easy to understand.
 - **Run them:** `pytest` (about 4 s).
 
-## 9. Notebooks (`notebooks/`)
+## 11. Notebooks (`notebooks/`)
 
 The notebooks *use* the package and don't define logic of their own. If you find yourself writing a long function in a notebook, it probably belongs in `src/transitshock/` with a test.
 
@@ -213,3 +275,4 @@ The notebooks *use* the package and don't define logic of their own. If you find
 | `02_graph_stats` | What does the network look like as a graph? |
 | `03_robustness` | How does it fail? |
 | `04_model` | Can a model predict which stops matter? |
+| `05_timetable` | What changes when waiting for buses counts? |

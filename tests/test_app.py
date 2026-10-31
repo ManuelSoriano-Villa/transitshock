@@ -19,9 +19,9 @@ def test_app_runs_and_applies_preset():
     assert not at.exception
     assert at.metric[0].value == "100.0%"  # nothing closed yet
 
-    at.button(key="preset_top10").click().run()  # "Close the model's top 10 critical stops"
+    at.button(key="preset_top10").click().run()  # "Block the model's top 10 critical stops"
     assert not at.exception
-    assert len(at.multiselect[0].value) == 10
+    assert len(at.multiselect(key="blocked").value) == 10
     assert at.metric[0].value != "100.0%"
 
 
@@ -29,6 +29,18 @@ def test_route_outage_scenario():
     from streamlit.testing.v1 import AppTest
 
     at = AppTest.from_file(str(APP), default_timeout=120).run()
-    at.multiselect(key="routes").set_value(["71"]).run()
+    at.multiselect(key="canceled").set_value(["71"]).run()
     assert not at.exception
     assert at.metric[0].value != "100.0%"
+
+
+def test_frequency_cut_and_delay_scenarios():
+    from streamlit.testing.v1 import AppTest
+
+    at = AppTest.from_file(str(APP), default_timeout=120).run()
+    at.multiselect(key="reduced").set_value(["61"]).run()
+    assert not at.exception
+    assert at.metric[0].value != "100.0%"
+    at.multiselect(key="delayed").set_value(["71"]).run()
+    at.selectbox(key="window").set_value("Evening (8–10 PM)").run()
+    assert not at.exception

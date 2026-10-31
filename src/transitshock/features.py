@@ -9,6 +9,7 @@ Run as a script to build the training dataset (features + labels) for a graph:
 import argparse
 import resource
 import time
+from collections import defaultdict
 from pathlib import Path
 
 import networkx as nx
@@ -27,7 +28,7 @@ FEATURES = [
     # local structure
     "transit_in", "transit_out", "walk_degree", "is_terminus",
     # chain structure: can riders get around this stop if it closes?
-    "nearest_stop_m", "bypass_gap_m",
+    "nearest_stop_m", "bypass_gap_m", "stranded_share",
     # global structure
     "betweenness", "harmonic_in", "harmonic_out", "pagerank",
     # geography
@@ -68,6 +69,49 @@ def bypass_gap(G: nx.DiGraph, xy: dict) -> dict:
     return gaps
 
 
+def stranded_share(G: nx.DiGraph, n_roots: int | None = 200, seed: int = 0) -> dict:
+    """Estimated share of stop pairs a closure disconnects, beyond the stop's own pairs.
+
+    Uses dominator trees (a classic compiler algorithm). From a starting stop r,
+    stop v *dominates* stop x if every path r -> x passes through v. So if v
+    closes, a rider starting at r loses exactly the stops v dominates. Summing
+    that over every starting stop gives the number of (start, destination) pairs
+    the closure disconnects, without running any removals.
+
+    n_roots: how many starting stops to sample (None = all of them, which gives the
+    exact value and matches `simulate.single_removal_damage`'s reachable_loss minus
+    the 2 / n every removal loses). Sampling 200 is about 10x faster and still
+    correlates ~0.9 with the exact value on LBT.
+    """
+    nodes = list(G)
+    n = len(nodes)
+    if n_roots is None or n_roots >= n:
+        roots = nodes
+    else:
+        roots = list(np.random.default_rng(seed).choice(nodes, size=n_roots, replace=False))
+
+    stranded = dict.fromkeys(nodes, 0)
+    for root in roots:
+        idom = nx.immediate_dominators(G, root)  # each reachable stop -> its closest dominator
+        children = defaultdict(list)
+        for stop, parent in idom.items():
+            if stop != root:
+                children[parent].append(stop)
+
+        # Breadth-first order, so every stop comes after its dominator...
+        order = [root]
+        for stop in order:
+            order.extend(children[stop])
+        # ...then walk it backwards to count each stop's dominator subtree from the leaves up.
+        subtree = {}
+        for stop in reversed(order):
+            subtree[stop] = 1 + sum(subtree[c] for c in children[stop])
+        for stop in order[1:]:
+            stranded[stop] += subtree[stop] - 1  # stops cut off from root, not counting itself
+
+    return {v: stranded[v] / (len(roots) * (n - 1)) for v in nodes}
+
+
 def node_features(G: nx.DiGraph) -> pd.DataFrame:
     """One row per node with every column in FEATURES (plus lat/lon/name for plotting).
 
@@ -102,6 +146,7 @@ def node_features(G: nx.DiGraph) -> pd.DataFrame:
     df["is_terminus"] = ((df["transit_in"] == 0) | (df["transit_out"] == 0)).astype(int)
     df["nearest_stop_m"] = nearest[:, 1]
     df["bypass_gap_m"] = pd.Series(bypass_gap(G, xy))
+    df["stranded_share"] = pd.Series(stranded_share(G))
     df["betweenness"] = pd.Series(nx.betweenness_centrality(G, weight="weight"))
     df["harmonic_out"] = inv.sum(axis=1) / (n - 1)
     df["harmonic_in"] = inv.sum(axis=0) / (n - 1)

@@ -128,12 +128,22 @@ Numbers are converted only where needed.
 |---|---|---|
 | Service | `trips_per_day`, `n_routes` | Busy stops *might* matter more (Week 3 said: not much). |
 | Local structure | `transit_in`, `transit_out`, `walk_degree`, `is_terminus` | How many ways in and out. |
-| **Chain structure** | `nearest_stop_m`, `bypass_gap_m` | **Can riders get around this stop?** `bypass_gap_m` is the shortest distance from any stop *before* it to any stop *after* it on a route. A big gap means closing this stop cuts the route. This was designed from Week 3's finding. |
+| **Chain structure** | `nearest_stop_m`, `bypass_gap_m`, `stranded_share` | **Can riders get around this stop?** `bypass_gap_m` is the shortest distance from any stop *before* it to any stop *after* it on a route; a big gap means closing this stop cuts the route (designed from Week 3's finding). `stranded_share` is the share of stop pairs that closing this stop disconnects (see below). |
 | Global structure | `betweenness`, `harmonic_in`, `harmonic_out`, `pagerank` | Position in the whole network. Harmonic closeness = the average of 1/travel time to (out) or from (in) everyone else. |
 | Geography | `dist_center_km` | Edge-of-network stops behave differently. |
 
 - **`build_dataset(G)`** = features + exhaustive labels + timings (wall time and CPU time).
 - **`main()`** is the command-line entry point. It writes `<graph>_dataset.csv` and `<graph>_timings.csv`.
+
+**`stranded_share` and dominator trees.** This feature was added after the first model missed most of the critical stops that *cut other stops off*. The idea comes from compilers:
+- From a starting stop `r`, stop `v` **dominates** stop `x` if *every* path from `r` to `x` goes through `v`.
+- So if `v` closes, a rider starting at `r` loses exactly the stops `v` dominates.
+- `nx.immediate_dominators(G, r)` returns each stop's closest dominator. Those links form a tree, and the size of `v`'s subtree is the number of stops it strands for riders starting at `r`.
+- The code builds the tree's children lists, orders stops breadth-first, then walks that order backwards to add up subtree sizes from the leaves.
+- Summing over every starting stop gives the exact number of disconnected pairs, which is what the simulation measures, but without removing anything. A unit test checks that the two match exactly.
+- Using all 1,853 starting stops takes about 21 s. Sampling 200 takes about 2 s and is close enough, which is the default.
+
+**Interview angle:** "I looked at *which* critical stops the model missed, saw they were the ones that strand others, and found a graph algorithm that computes stranding exactly. Critical stops found went from 51% to 65%."
 
 **A bug the tests caught:** the first `bypass_gap` paired a stop's predecessor with the *same* stop as successor on two-way segments (A→B→A), which gave a gap of 0. The fix compares only *different* stops. Worth mentioning in an interview as an example of why you write tests.
 
@@ -146,9 +156,9 @@ Numbers are converted only where needed.
 | `MODELS` | Three regressors: **Ridge** (linear baseline), **Random Forest**, and **Histogram Gradient Boosting** (sklearn's equivalent of LightGBM). |
 | `score(y_true, y_pred)` | Three metrics: **R²** (are the values right), **Spearman ρ** (is the ranking right), **top-5% overlap** (did it find the critical stops). |
 | `spatial_groups(df)` | K-means on lat/lon → 10 neighborhoods. |
-| `out_of_fold_predictions(df, model, groups)` | K-fold cross-validation, so **every stop is predicted by a model that never saw it**. With `groups`, whole neighborhoods are held out. |
+| `out_of_fold_predictions(df, model, groups, features)` | K-fold cross-validation, so **every stop is predicted by a model that never saw it**. With `groups`, whole neighborhoods are held out. Pass `features` (a subset) to measure what one feature adds. |
 | `compare(df, groups)` | Scores single-feature heuristics vs. trained models on the same stops. |
-| `fit(df)` | Final model trained on all stops. |
+| `fit(df)` | Final model (random forest by default, the best on held-out neighborhoods) trained on all stops. |
 
 **Three ideas worth understanding:**
 1. **Log target:** damage is skewed (a few stops matter a lot). Training on `log(damage)` stops those few from dominating the fit, and `np.exp` converts predictions back.

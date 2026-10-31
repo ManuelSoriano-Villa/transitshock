@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from transitshock.features import FEATURES, bypass_gap, node_features
+from transitshock.features import FEATURES, bypass_gap, node_features, stranded_share
 from transitshock.model import out_of_fold_predictions, score, spatial_groups, top_k_overlap
 from transitshock.simulate import single_removal_damage
 
@@ -97,3 +97,22 @@ def test_out_of_fold_predictions_learn_simple_relationship():
     assert score(df["efficiency_loss"], preds)["spearman"] > 0.9
     grouped = out_of_fold_predictions(df, MODELS["ridge"], groups=spatial_groups(df, n_groups=5))
     assert len(grouped) == 200
+
+
+def test_stranded_share_matches_simulation_exactly(line):
+    """With every stop as a root, dominator trees reproduce the simulated stranding."""
+    exact = pd.Series(stranded_share(line, n_roots=None))
+    damage = single_removal_damage(line, workers=1)
+    n = line.number_of_nodes()
+    pd.testing.assert_series_equal(
+        exact.loc[damage.index], damage["reachable_loss"] - 2 / n, check_names=False, atol=1e-12
+    )
+    # Removing B strands A and W from C and D (and vice versa): 8 of 20 ordered pairs.
+    assert exact["B"] == pytest.approx(8 / 20)
+    assert exact["D"] == 0  # dead end: removing it strands nobody else
+
+
+def test_stranded_share_sampled_is_bounded(line):
+    sampled = stranded_share(line, n_roots=2, seed=1)
+    assert set(sampled) == set(line)
+    assert all(0 <= v <= 1 for v in sampled.values())

@@ -167,14 +167,43 @@ Numbers are converted only where needed.
 
 ---
 
-## 7. Tests (`tests/`)
+## 7. `scenario.py` + `app/streamlit_app.py`: the demo
+
+**`scenario.py`** is the engine for "what if these stops or routes close?"
+
+| Function | What it does |
+|---|---|
+| `baseline(G)` | Computes the intact network **once**: node order, matrix, all-pairs travel times, and metrics. The app caches it. |
+| `damaged_matrix(G, base, routes)` | Removes the segments only those routes serve. It reuses `simulate.route_edges`. |
+| `impact(G, base, stops, routes)` | Closes the stops, recomputes all fastest paths (about 0.5 s), and compares each stop's trips with the baseline. |
+
+`impact` gives each stop a **status**:
+- **closed:** you closed it.
+- **cut off:** it can no longer reach 10%+ of the stops it could reach before.
+- **slower:** its trips take 2+ minutes longer on average.
+- **unaffected:** everything else.
+
+The per-stop math works on whole matrices: `could` = reachable before, `can` = reachable now. `lost = could & ~can` counts destinations lost, and the average of `dist_after − dist_before` over pairs reachable in both gives the extra minutes. No Python loops over stops.
+
+**`streamlit_app.py`** is deliberately thin. All the logic lives in the package, and the app only handles input and display:
+- **Caching:** `@st.cache_resource` (the graph and baseline) and `@st.cache_data` (edges and model predictions) mean the slow work happens once per session, not on every click.
+- **Sidebar:** multiselects for stops and routes, plus preset buttons. The presets use `on_click` callbacks that write to `st.session_state`, which is how a button can change another widget's value.
+- **What-if tab:** metric cards plus a pydeck map. Stops are colored by status, and closed route segments are drawn in purple.
+- **Critical stops tab:** the model's ranking. Predictions are **out-of-fold** (spatial CV), so no stop's prediction comes from a model trained on that stop or its neighborhood.
+- **Smoke tests:** `tests/test_app.py` uses Streamlit's `AppTest` to run the whole app headless, click a preset, and set a route outage. It's skipped if the data hasn't been built.
+
+**Demo talking point:** compare "close the 10 busiest stops" (−1.4% efficiency, 0 stops cut off) with "close the model's top 10" (−4.7%, 44 stops cut off).
+
+---
+
+## 8. Tests (`tests/`)
 
 Each test file builds a **tiny graph or feed by hand** where you can work out the right answer on paper, for example "a line A–B–C where removing B disconnects A from C".
 
 - **Why tiny fake data instead of the real feeds?** `data/raw` isn't committed, so anyone who clones the repo can still run `pytest`. Tiny cases also make failures easy to understand.
 - **Run them:** `pytest` (about 4 s).
 
-## 8. Notebooks (`notebooks/`)
+## 9. Notebooks (`notebooks/`)
 
 The notebooks *use* the package and don't define logic of their own. If you find yourself writing a long function in a notebook, it probably belongs in `src/transitshock/` with a test.
 

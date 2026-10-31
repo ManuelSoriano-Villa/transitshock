@@ -153,3 +153,11 @@ def test_summary_and_round_trip(tmp_path, bus_feed):
     path = tmp_path / "g.gpickle"
     save_graph(G, path)
     assert graph_summary(load_graph(path)).equals(summary)
+
+
+def test_route_names_stored_per_feed(bus_feed, rail_feed):
+    rail_feed["routes"]["route_long_name"] = ["Metro A Line"]
+    rail_feed["routes"]["route_short_name"] = [""]
+    G = build_graph({"bus": bus_feed, "rail": rail_feed})
+    assert G.graph["route_names"]["rail"] == {"L": "Metro A Line"}
+    assert G.graph["route_names"]["bus"] == {"R1": "R1", "R2": "R2"}  # no names given: fall back to ID

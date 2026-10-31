@@ -86,6 +86,14 @@ def node_table(data: dict[str, pd.DataFrame], segments: pd.DataFrame, feed: str)
     return nodes.rename(columns={"stop_name": "name", "stop_lat": "lat", "stop_lon": "lon"})
 
 
+def route_names(routes: pd.DataFrame) -> dict[str, str]:
+    """route_id -> display name like "1 Del Amo Blvd" (falls back to whichever name exists)."""
+    short = routes.get("route_short_name", pd.Series("", index=routes.index)).fillna("")
+    long = routes.get("route_long_name", pd.Series("", index=routes.index)).fillna("")
+    names = (short + " " + long).str.strip()
+    return dict(zip(routes["route_id"], names.where(names != "", routes["route_id"])))
+
+
 def walking_pairs(nodes: pd.DataFrame, radius_m: float = WALK_RADIUS_M) -> pd.DataFrame:
     """All ordered node pairs within `radius_m`, using a grid so we never compare all pairs.
 
@@ -123,6 +131,7 @@ def build_graph(
     G = nx.DiGraph(walk_radius_m=walk_radius_m, walk_speed_m_s=walk_speed_m_s, min_travel_s=min_travel_s)
 
     for feed, data in feeds.items():
+        G.graph.setdefault("route_names", {})[feed] = route_names(data["routes"])
         segments = trip_segments(data, feed)
         for node, attrs in node_table(data, segments, feed).iterrows():
             G.add_node(node, **attrs.to_dict())

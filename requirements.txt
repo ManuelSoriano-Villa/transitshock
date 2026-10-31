@@ -5,5 +5,7 @@ networkx
 scikit-learn
 matplotlib
 folium
+streamlit
+pydeck
 jupyter
 pytest

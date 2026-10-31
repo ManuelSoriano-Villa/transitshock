@@ -3,7 +3,11 @@
 - Node attacks: remove the top-k stops by some ranking (or at random) and
   measure what's left, giving a robustness curve per strategy.
 - Route outages: stop running one route and measure the damage.
+- Single-stop removal: remove each stop on its own and record the damage
+  (the "ground truth" labels the Week 4 model learns to predict).
 """
+from concurrent.futures import ProcessPoolExecutor
+
 import networkx as nx
 import numpy as np
 import pandas as pd
@@ -124,3 +128,55 @@ def route_outages(G: nx.DiGraph, max_sources: int | None = 2000, seed: int = 0) 
             "added_min": result["mean_time_min"] - baseline["mean_time_min"],
         })
     return pd.DataFrame(rows).sort_values("efficiency_rel").reset_index(drop=True)
+
+
+# Worker processes get the matrix once (via the initializer) instead of once per task.
+_WORKER: dict = {}
+
+
+def _init_worker(matrix, sources) -> None:
+    _WORKER["matrix"], _WORKER["sources"] = matrix, sources
+
+
+def _remove_one(i: int) -> dict[str, float]:
+    matrix = _WORKER["matrix"]
+    removed = np.zeros(matrix.shape[0], dtype=bool)
+    removed[i] = True
+    return evaluate(matrix, removed=removed, sources=_WORKER["sources"])
+
+
+def single_removal_damage(
+    G: nx.DiGraph,
+    max_sources: int | None = None,
+    workers: int | None = None,
+    seed: int = 0,
+) -> pd.DataFrame:
+    """Damage from removing each stop on its own, one row per node.
+
+    This is the exhaustive (slow) computation: one full network evaluation per stop.
+    Runs in parallel across `workers` processes (None = all CPU cores, 1 = no parallelism).
+
+    Columns:
+        efficiency_loss  1 - efficiency / intact efficiency
+        reachable_loss   share of original stop pairs that can no longer connect
+        added_min        change in mean travel time over still-reachable pairs
+    Note: removing a stop always loses its own pairs (2 / n of all pairs), so
+    reachable_loss is never below 2 / n, and efficiency_loss is never 0.
+    """
+    nodes, matrix = to_matrix(G)
+    sources = sample_sources(len(nodes), max_sources, seed)
+    _init_worker(matrix, sources)
+    baseline = evaluate(matrix, sources=sources)
+
+    if workers == 1:
+        results = [_remove_one(i) for i in range(len(nodes))]
+    else:
+        with ProcessPoolExecutor(workers, initializer=_init_worker, initargs=(matrix, sources)) as pool:
+            results = list(pool.map(_remove_one, range(len(nodes)), chunksize=16))
+
+    df = pd.DataFrame(results, index=pd.Index(nodes, name="node"))
+    return pd.DataFrame({
+        "efficiency_loss": 1 - df["efficiency"] / baseline["efficiency"],
+        "reachable_loss": baseline["reachable_share"] - df["reachable_share"],
+        "added_min": df["mean_time_min"] - baseline["mean_time_min"],
+    })

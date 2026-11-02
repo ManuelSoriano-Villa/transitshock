@@ -1,0 +1,149 @@
+route_id,route_name,agency,mode,efficiency_loss_pct,stops_cut_off
+lbt:1,1 Del Amo Blvd,Long Beach Transit,bus,0.0849,6
+lbt:101,101 Carson St,Long Beach Transit,bus,0.1714,0
+lbt:103,103 Lakewood Mall,Long Beach Transit,bus,0.1337,2
+lbt:104,104 Spring Via Airport,Long Beach Transit,bus,0.2469,31
+lbt:111,111 Broadway / Lakewood,Long Beach Transit,bus,0.1559,17
+lbt:112,112 Broadway / Clark,Long Beach Transit,bus,0.3198,16
+lbt:121,121 Ocean Blvd - CSULB - Outer Circle,Long Beach Transit,bus,0.1657,26
+lbt:131,131 Redondo Ave,Long Beach Transit,bus,0.3354,34
+lbt:141,141 Artesia Blvd,Long Beach Transit,bus,0.5852,18
+lbt:151,151 4th Street,Long Beach Transit,bus,0.1123,20
+lbt:171,171 PCH / Seal Beach,Long Beach Transit,bus,0.155,10
+lbt:172,172 PCH / Palo Verde,Long Beach Transit,bus,0.3114,44
+lbt:173,173 PCH / Studebaker,Long Beach Transit,bus,0.5171,75
+lbt:174,174 PCH / Ximeno,Long Beach Transit,bus,-0.0,0
+lbt:175,175 PCH / CSULB,Long Beach Transit,bus,0.0261,1
+lbt:181,181 Magnolia Ave,Long Beach Transit,bus,0.3803,25
+lbt:182,182 Pacific Ave,Long Beach Transit,bus,0.1209,20
+lbt:191,191 Santa Fe Ave / Del Amo Blvd,Long Beach Transit,bus,0.7411,32
+lbt:192,192 Santa Fe Ave / South St,Long Beach Transit,bus,0.2801,29
+lbt:2,2 Carson - CSUDH,Long Beach Transit,bus,0.4832,17
+lbt:21,21 Cherry Ave / Paramount,Long Beach Transit,bus,0.3191,31
+lbt:22,22 Cherry Ave / Downey,Long Beach Transit,bus,0.4399,35
+lbt:4,4 Carson St,Long Beach Transit,bus,0.147,21
+lbt:405,405 UCLA Westwood Express,Long Beach Transit,bus,0.001,2
+lbt:41,41 Anaheim St / Easy Ave,Long Beach Transit,bus,0.5532,29
+lbt:46,46 Anaheim St,Long Beach Transit,bus,0.0701,0
+lbt:51,51 Long Beach Blvd,Long Beach Transit,bus,1.1972,51
+lbt:61,61 Atlantic Ave,Long Beach Transit,bus,0.6412,30
+lbt:71,71 Orange Ave,Long Beach Transit,bus,1.0532,64
+lbt:8,8 223rd St / Wardlow Rd,Long Beach Transit,bus,0.3524,7
+lbt:91,91 7th St to Bellflower Blvd,Long Beach Transit,bus,0.1635,19
+lbt:92,92 7th St to Woodruff Ave,Long Beach Transit,bus,0.3021,47
+lbt:93,93 7th St to Clark Ave,Long Beach Transit,bus,0.4589,16
+lbt:94,94 7th St to Bellflower at Stearns,Long Beach Transit,bus,-0.0,0
+metro_bus:10-13201,10/48 Metro Local Line,LA Metro Bus,bus,1.4429,122
+metro_bus:102-13201,102 Metro Local Line,LA Metro Bus,bus,1.2229,66
+metro_bus:105-13201,105 Metro Local Line,LA Metro Bus,bus,1.9064,74
+metro_bus:108-13201,108 Metro Local Line,LA Metro Bus,bus,2.15,149
+metro_bus:110-13201,110 Metro Local Line,LA Metro Bus,bus,1.3642,110
+metro_bus:111-13201,111 Metro Local Line,LA Metro Bus,bus,1.0018,74
+metro_bus:115-13201,115 Metro Local Line,LA Metro Bus,bus,1.6611,128
+metro_bus:117-13201,117 Metro Local Line,LA Metro Bus,bus,1.1171,80
+metro_bus:120-13201,120 Metro Local Line,LA Metro Bus,bus,0.8697,90
+metro_bus:125-13201,125 Metro Local Line,LA Metro Bus,bus,1.1737,133
+metro_bus:127-13201,127 Metro Local Line,LA Metro Bus,bus,1.2951,85
+metro_bus:128-13201,128 Metro Local Line,LA Metro Bus,bus,0.6996,55
+metro_bus:134-13201,134 Metro Local Line,LA Metro Bus,bus,0.1941,80
+metro_bus:14-13201,14/37 Metro Local Line,LA Metro Bus,bus,1.6912,73
+metro_bus:150-13201,150 Metro Local Line,LA Metro Bus,bus,0.6392,67
+metro_bus:152-13201,152 Metro Local Line,LA Metro Bus,bus,1.4816,92
+metro_bus:154-13201,154 Metro Local Line,LA Metro Bus,bus,0.2762,40
+metro_bus:155-13201,155 Metro Local Line,LA Metro Bus,bus,0.806,85
+metro_bus:158-13201,158 Metro Local Line,LA Metro Bus,bus,0.7208,83
+metro_bus:16-13201,16 Metro Local Line,LA Metro Bus,bus,1.0241,61
+metro_bus:161-13201,161 Metro Local Line,LA Metro Bus,bus,0.3913,117
+metro_bus:162-13201,162 Metro Local Line,LA Metro Bus,bus,1.7928,112
+metro_bus:164-13201,164 Metro Local Line,LA Metro Bus,bus,1.1664,124
+metro_bus:165-13201,165 Metro Local Line,LA Metro Bus,bus,1.3174,96
+metro_bus:166-13201,166 Metro Local Line,LA Metro Bus,bus,0.4652,79
+metro_bus:167-13201,167 Metro Local Line,LA Metro Bus,bus,0.9772,83
+metro_bus:169-13201,169 Metro Local Line,LA Metro Bus,bus,1.8912,138
+metro_bus:179-13201,179 Metro Local Line,LA Metro Bus,bus,0.8407,43
+metro_bus:18-13201,18 Metro Local Line,LA Metro Bus,bus,1.7421,66
+metro_bus:180-13201,180 Metro Local Line,LA Metro Bus,bus,0.3569,34
+metro_bus:182-13201,182 Metro Local Line,LA Metro Bus,bus,1.3962,90
+metro_bus:2-13201,2 Metro Local Line,LA Metro Bus,bus,1.0324,107
+metro_bus:20-13201,20 Metro Local Line,LA Metro Bus,bus,0.915,60
+metro_bus:202-13201,202 Metro Local Line,LA Metro Bus,bus,0.5412,43
+metro_bus:204-13201,204 Metro Local Line,LA Metro Bus,bus,0.6888,73
+metro_bus:205-13201,205 Metro Local Line,LA Metro Bus,bus,1.9886,143
+metro_bus:206-13201,206 Metro Local Line,LA Metro Bus,bus,1.0223,68
+metro_bus:207-13201,207 Metro Local Line,LA Metro Bus,bus,1.1485,59
+metro_bus:209-13201,209 Metro Local Line,LA Metro Bus,bus,0.8376,44
+metro_bus:210-13201,210 Metro Local Line,LA Metro Bus,bus,1.0734,66
+metro_bus:211-13201,211/215 Metro Local Line,LA Metro Bus,bus,0.686,65
+metro_bus:212-13201,212 Metro Local Line,LA Metro Bus,bus,1.4702,67
+metro_bus:217-13201,217 Metro Local Line,LA Metro Bus,bus,2.4914,38
+metro_bus:218-13201,218 Metro Local Line,LA Metro Bus,bus,0.1104,16
+metro_bus:222-13201,222 Metro Local Line,LA Metro Bus,bus,0.6684,51
+metro_bus:224-13201,224 Metro Local Line,LA Metro Bus,bus,0.522,67
+metro_bus:230-13201,230 Metro Local Line,LA Metro Bus,bus,1.1031,65
+metro_bus:232-13201,232 Metro Local Line,LA Metro Bus,bus,1.2952,120
+metro_bus:233-13201,233 Metro Local Line,LA Metro Bus,bus,1.0262,85
+metro_bus:234-13201,234 Metro Local Line,LA Metro Bus,bus,0.7914,95
+metro_bus:236-13201,235/236 Metro Local Line,LA Metro Bus,bus,0.9671,140
+metro_bus:237-13201,237 Metro Local Line,LA Metro Bus,bus,0.9607,113
+metro_bus:240-13201,240 Metro Local Line,LA Metro Bus,bus,2.6761,143
+metro_bus:242-13201,242/243 Metro Local Line,LA Metro Bus,bus,0.3607,86
+metro_bus:244-13201,244 Metro Local Line,LA Metro Bus,bus,0.1649,40
+metro_bus:246-13201,246 Metro Local Line,LA Metro Bus,bus,0.5674,73
+metro_bus:251-13201,251 Metro Local Line,LA Metro Bus,bus,0.8786,74
+metro_bus:258-13201,258 Metro Local Line,LA Metro Bus,bus,1.8985,101
+metro_bus:260-13201,260/261 Metro Local Line,LA Metro Bus,bus,1.6441,81
+metro_bus:265-13201,265 Metro Local Line,LA Metro Bus,bus,0.7142,56
+metro_bus:266-13201,266 Metro Local Line,LA Metro Bus,bus,1.5272,105
+metro_bus:267-13201,267 Metro Local Line,LA Metro Bus,bus,1.5828,81
+metro_bus:268-13201,268 Metro Local Line,LA Metro Bus,bus,0.5586,61
+metro_bus:28-13201,28 Metro Local Line,LA Metro Bus,bus,0.5193,51
+metro_bus:287-13201,287 Metro Local Line,LA Metro Bus,bus,0.6863,79
+metro_bus:294-13201,294 Metro Local Line,LA Metro Bus,bus,0.0467,5
+metro_bus:296-13201,296 Metro Local Line,LA Metro Bus,bus,0.5536,42
+metro_bus:30-13201,30 Metro Local Line,LA Metro Bus,bus,0.2791,29
+metro_bus:33-13201,33 Metro Local Line,LA Metro Bus,bus,1.0808,105
+metro_bus:344-13201,344 Metro Limited Line,LA Metro Bus,bus,0.7704,82
+metro_bus:35-13201,35/38 Metro Local Line,LA Metro Bus,bus,1.3747,75
+metro_bus:4-13201,4 Metro Local Line,LA Metro Bus,bus,0.8816,99
+metro_bus:40-13201,40 Metro Local Line,LA Metro Bus,bus,0.3983,43
+metro_bus:45-13201,45 Metro Local Line,LA Metro Bus,bus,0.5689,48
+metro_bus:460-13201,460 Metro Express Line,LA Metro Bus,bus,0.7142,99
+metro_bus:487-13201,487/489 Metro Express Line,LA Metro Bus,bus,0.3634,50
+metro_bus:501-13201,501 Metro Express Line,LA Metro Bus,bus,0.2218,2
+metro_bus:51-13201,51 Metro Local Line,LA Metro Bus,bus,1.7836,94
+metro_bus:53-13201,53 Metro Local Line,LA Metro Bus,bus,1.0906,76
+metro_bus:55-13201,55 Metro Local Line,LA Metro Bus,bus,0.417,41
+metro_bus:550-13201,550 Metro Express Line,LA Metro Bus,bus,0.117,0
+metro_bus:577-13201,577 Metro Express Line,LA Metro Bus,bus,0.1289,6
+metro_bus:60-13201,60 Metro Local Line,LA Metro Bus,bus,1.1005,76
+metro_bus:601-13201,601 Metro Local Line,LA Metro Bus,bus,0.0425,8
+metro_bus:602-13201,602 Metro Local Line,LA Metro Bus,bus,0.3782,93
+metro_bus:605-13201,605 Metro Local Line,LA Metro Bus,bus,0.1556,18
+metro_bus:611-13201,611 Metro Local Line,LA Metro Bus,bus,0.3295,52
+metro_bus:617-13201,617 Metro Local Line,LA Metro Bus,bus,0.5698,54
+metro_bus:62-13201,62 Metro Local Line,LA Metro Bus,bus,1.2571,77
+metro_bus:66-13201,66 Metro Local Line,LA Metro Bus,bus,0.996,65
+metro_bus:660-13201,660 Metro Local Line,LA Metro Bus,bus,0.1656,28
+metro_bus:662-13201,662 Metro Local Line,LA Metro Bus,bus,1.3828,97
+metro_bus:665-13201,665 Metro Local Line,LA Metro Bus,bus,0.2389,30
+metro_bus:690-13201,690 Metro Local Line,LA Metro Bus,bus,0.1937,57
+metro_bus:70-13201,70 Metro Local Line,LA Metro Bus,bus,1.363,87
+metro_bus:720-13201,720 Metro Rapid Line,LA Metro Bus,bus,0.2565,15
+metro_bus:74-13201,74 Metro Local Line,LA Metro Bus,bus,0.653,68
+metro_bus:754-13201,754 Metro Rapid Line,LA Metro Bus,bus,0.1501,1
+metro_bus:76-13201,76 Metro Local Line,LA Metro Bus,bus,1.8035,78
+metro_bus:761-13201,761 Metro Rapid Line,LA Metro Bus,bus,0.2041,65
+metro_bus:78-13201,78 Metro Local Line,LA Metro Bus,bus,2.5932,62
+metro_bus:81-13201,81 Metro Local Line,LA Metro Bus,bus,0.7063,80
+metro_bus:90-13201,90 Metro Local Line,LA Metro Bus,bus,1.9697,169
+metro_bus:901-13201,Metro G Line (Orange) 901,LA Metro Bus,bus,0.7514,233
+metro_bus:910-13201,Metro J Line (Silver) 910/950,LA Metro Bus,bus,2.2435,179
+metro_bus:92-13201,92 Metro Local Line,LA Metro Bus,bus,0.9789,112
+metro_bus:93-13201,93 Metro Local Line,LA Metro Bus,bus,0.4617,35
+metro_bus:94-13201,94 Metro Local Line,LA Metro Bus,bus,1.0463,44
+metro_rail:801,Metro A Line,LA Metro Rail,rail,4.8825,797
+metro_rail:802,Metro B Line,LA Metro Rail,rail,8.5293,5404
+metro_rail:803,Metro C Line,LA Metro Rail,rail,1.3793,4
+metro_rail:804,Metro E Line,LA Metro Rail,rail,0.8373,96
+metro_rail:805,Metro D Line,LA Metro Rail,rail,0.8694,2
+metro_rail:807,Metro K Line,LA Metro Rail,rail,0.2139,11
